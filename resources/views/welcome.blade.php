@@ -26,8 +26,8 @@
                     }
         </style>
     </head>
-    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
-        <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
+    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col mt-10">
+        <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden ">
             @if (Route::has('login'))
                 <nav class="flex items-center justify-end gap-4">
                     @auth
@@ -56,28 +56,7 @@
                 </nav>
             @endif
         </header>
-<div class="container mx-auto px-4">
-    <div class="w-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        @foreach($notes as $note)
-            <a href="{{ route('notes.show', $note) }}" aria-label="View Note">
-                <div class="p-6 border border-black rounded-md bg-white dark:bg-zinc-800 shadow-sm hover:shadow-md hover:bg-zinc-50 dark:hover:bg-zinc-700 transition">
-                    <h2 class="text-md font-semibold text-gray-800 dark:text-white mb-1">{{ $note->title }}</h2>
-                    <p class="text-sm text-zinc-600 dark:text-zinc-300 line-clamp-3">{{ $note->content }}</p>
 
-<br>
-<br>
-                     <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-3">Published {{ $note->created_at->diffForHumans() }}</p>
-
-                     <a href="" @click.prevent="likeIt">
-                        <small>0</small>
-                        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                     </a>
-                </div>
-           
-            </a>
-        @endforeach
-    </div>
-</div>
         @if (Route::has('login'))
             <div class="h-14.5 hidden lg:block"></div>
         @endif

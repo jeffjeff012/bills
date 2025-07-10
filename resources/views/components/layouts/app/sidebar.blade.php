@@ -13,8 +13,15 @@
 
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                    <flux:navlist.item icon="notebook-open" :href="route('notes')" :current="request()->routeIs('notes')" wire:navigate>{{ __('Bills') }}</flux:navlist.item>
+                    
+                @if (auth()->user()->role === App\Enums\UserRole::Admin)
+                    <flux:navlist.item icon="home" :href="route('admin.dashboard')" :current="request()->routeIs('dashboard') || request()->routeIs('admin.dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                    <flux:navlist.item icon="notebook-open" :href="route('notes')" :current="request()->routeIs('notes')" wire:navigate>{{ __('Bills') }}</flux:navlist.item> 
+                @endif
+
+                @if (auth()->user()->role === App\Enums\UserRole::User)
+                    <flux:navlist.item icon="list-bullet" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                @endif
                 </flux:navlist.group>
             </flux:navlist>
 
