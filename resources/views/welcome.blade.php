@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
+    <head class="mt-4">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -27,7 +27,7 @@
         </style>
     </head>
     <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col mt-10">
-        <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden ">
+        <header class="mt-40 w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden ">
             @if (Route::has('login'))
                 <nav class="flex items-center justify-end gap-4">
                     @auth
@@ -56,7 +56,29 @@
                 </nav>
             @endif
         </header>
+<div class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200    dark:border-neutral-700 bg-white dark:bg-zinc-800 shadow-sm hover:shadow-md transition">
+                    <div class="p-6">    
+        <section class="text-center p-10 bg-gray-100 dark:bg-zinc-800">
+    <h3 class="text-5xl font-bold mb-4 text-gray-900 dark:text-white">Welcome to the Bills & Ordinance Tracker</h3>
+ <flux:separator variant="subtle" />
 
+            <p class="text-gray-700 dark:text-zinc-300 max-w-xl mx-auto">
+                This platform allows you to browse, track, and participate in the legislative process. Stay informed about local ordinances and municipal bills that affect your community.
+            </p>
+   
+    <section class="p-10 bg-blue-50 dark:bg-zinc-900">
+    <h2 class="text-2xl font-semibold text-center text-blue-900 dark:text-white">How It Works</h2>
+    <ol class="mt-6 space-y-4 text-center text-gray-700 dark:text-zinc-300">
+        <li>📥 Bill Proposal Submission</li>
+        <li>👥 Committee Review</li>
+        <li>🗳️ Public Feedback</li>
+        <li>✅ Approval & Publication</li>
+    </ol>
+</section>
+
+</section>
+                    </div>
+                </div>
         @if (Route::has('login'))
             <div class="h-14.5 hidden lg:block"></div>
         @endif

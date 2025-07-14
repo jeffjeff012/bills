@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
     <head>
+        
         @include('partials.head')
     </head>
     <body class="min-h-screen bg-white dark:bg-zinc-800">
@@ -15,12 +16,19 @@
                 <flux:navlist.group :heading="__('Platform')" class="grid">
                     
                 @if (auth()->user()->role === App\Enums\UserRole::Admin)
+                     <flux:navlist.item icon="list-bullet" :href="route('dashboard')" :current="request()->routeIs('dashboard')  " wire:navigate>{{ __('Read Bills') }}</flux:navlist.item>
                     <flux:navlist.item icon="home" :href="route('admin.dashboard')" :current="request()->routeIs('dashboard') || request()->routeIs('admin.dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                     <flux:navlist.item icon="notebook-open" :href="route('notes')" :current="request()->routeIs('notes')" wire:navigate>{{ __('Bills') }}</flux:navlist.item> 
                 @endif
 
+                @if (auth()->user()->role === App\Enums\UserRole::SbStaff)
+                     <flux:navlist.item icon="list-bullet" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Read Bills') }}</flux:navlist.item>
+                    <flux:navlist.item icon="home" :href="route('staff.dashboard')" :current="request()->routeIs('dashboard') || request()->routeIs('staff.dashboard')" wire:navigate>{{ __('SB Dashboard') }}</flux:navlist.item>
+                    <flux:navlist.item icon="notebook-open" :href="route('notes')" :current="request()->routeIs('notes')" wire:navigate>{{ __('Bills') }}</flux:navlist.item> 
+                @endif
+
                 @if (auth()->user()->role === App\Enums\UserRole::User)
-                    <flux:navlist.item icon="list-bullet" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                    <flux:navlist.item icon="list-bullet" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Read Bills') }}</flux:navlist.item>
                 @endif
                 </flux:navlist.group>
             </flux:navlist>

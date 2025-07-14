@@ -41,8 +41,11 @@
                     <td class="px-4 py-2">{{ $note->title }}</td>
                     <td class="px-4 py-2">{{ str($note->content)->words(8) }}</td>
                     <td class="px-4 py-2 text-center space-x-2">
+                        @can('update', note)
                         <flux:button wire:click="edit({{ $note->id }})">Edit</flux:button>
+                        @endcan
                         <flux:button variant="danger" wire:click="delete({{ $note->id }})">Delete</flux:button>
+                        @endcan
                     </td>
                 </tr>
             @empty

@@ -7,9 +7,9 @@ use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Appearance;
 use Illuminate\Support\Facades\Route;
-use App\Controllers\UserController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserController as ControllersUserController;
-
+use App\Models\User;
 
 
 Route::get('/notes/{note}', NoteShow::class)->name('notes.show');
@@ -22,13 +22,23 @@ Route::get('/user/post', function () {
     return view('user.post');
 })->middleware(['auth', 'verified'])->name('post');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::get('dashboard', function () {
+    $notes = Note::latest()->get();
+    return view('dashboard', compact('notes'));
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::view('admin/dashboard', 'admin.dashboard')
-    ->middleware(['auth', 'verified', 'admin'])
-    ->name('admin.dashboard');
+
+Route::view('admin/dashboard', 'admin.dashboard', [
+    'userCount' => \App\Models\User::count(),
+    'noteCount' => Note::count(),
+])->middleware(['auth', 'verified', 'admin'])->name('admin.dashboard');
+
+Route::get('staff/dashboard', function () {
+    return view('staff.dashboard', [
+        'userCount' => \App\Models\User::count(),
+        'noteCount' => \App\Models\Note::count(),
+    ]);
+})->name('staff.dashboard');
 
 Route::middleware(['auth', 'admin'])->group(function () {
     //Notes Route

@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Note;
+use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Bill;
+
+
+class UserController extends Controller
+{
+    public function index()
+    {
+    $notes = Note::all(); // or paginate() if needed
+    return view('user.post', compact('notes'));
+    }
+
+ 
+    public function dashboard()
+    {
+    $userCount = User::count();
+    $billCount = Bill::count();
+
+    return view('admin.dashboard', compact('userCount', 'billCount'));
+    }
+}

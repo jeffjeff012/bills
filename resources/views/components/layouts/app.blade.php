@@ -9,3 +9,6 @@
         {{ $slot }}
     </flux:main>
 </x-layouts.app.header> --}}
+@livewireStyles
+...
+@livewireScripts

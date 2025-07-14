@@ -30,14 +30,14 @@ class CreateNote extends Component
         Note::create([
             "title" => $this->title,
             "content" => $this->content,
-            
+            "user_id" => auth()->id(),
         ]);
 
         $this->reset();
 
         Flux::modal('create-note')->close();
 
-        session()->flash('success', 'Note Created Successfully');
+        session()->flash('success', 'Bill created successfully');
 
         $this->redirectRoute('notes', navigate: true);
     }

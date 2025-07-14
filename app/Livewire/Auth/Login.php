@@ -47,6 +47,7 @@ class Login extends Component
         if(auth()->user()->role === UserRole::Admin){
             return redirect()->route("admin.dashboard")->with("success", "Logged in successfully");
         }
+        
 
         $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
     }
