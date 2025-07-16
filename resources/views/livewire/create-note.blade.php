@@ -4,7 +4,7 @@
         <div class="space-y-6">
             <div>
                 <flux:heading size="lg">Create Note</flux:heading>
-                <flux:text class="mt-2">Populate your Bill.</flux:text>
+                <flux:text class="mt-2">This information will be displayed publicly.</flux:text>
             </div>
 
             <flux:input label="Title" 

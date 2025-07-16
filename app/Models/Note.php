@@ -8,7 +8,7 @@ class Note extends Model
 {
     public function user()
     {
-    return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
     protected $fillable = [
         'title',
@@ -16,7 +16,11 @@ class Note extends Model
         'user_id'
     ];
 
-   
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
 
 }
 

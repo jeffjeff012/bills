@@ -48,6 +48,10 @@ class Login extends Component
             return redirect()->route("admin.dashboard")->with("success", "Logged in successfully");
         }
         
+         
+        if(auth()->user()->role === UserRole::SbStaff){
+            return redirect()->route("staff.dashboard")->with("success", "Logged in successfully");
+        }
 
         $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
     }

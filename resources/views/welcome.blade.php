@@ -68,12 +68,15 @@
    
     <section class="p-10 bg-blue-50 dark:bg-zinc-900">
     <h2 class="text-2xl font-semibold text-center text-blue-900 dark:text-white">How It Works</h2>
-    <ol class="mt-6 space-y-4 text-center text-gray-700 dark:text-zinc-300">
+    <ol class="mt-6 mr-10 space-y-4 text-center text-gray-700 dark:text-zinc-300">
         <li>📥 Bill Proposal Submission</li>
         <li>👥 Committee Review</li>
         <li>🗳️ Public Feedback</li>
         <li>✅ Approval & Publication</li>
     </ol>
+
+
+    
 </section>
 
 </section>

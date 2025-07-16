@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('notes', function (Blueprint $table) {
-        $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
+        Schema::create('comments', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('user_id')->constrained()->onDelete('cascade');
+        $table->foreignId('note_id')->constrained()->onDelete('cascade'); // if comments are on notes
+        $table->text('content');
+        $table->timestamps();
     });
+
     }
 
 

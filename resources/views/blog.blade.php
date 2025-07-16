@@ -1,36 +1,28 @@
-<x-layouts.app :title="__('Bills')">
-<div class="relative mb-6 w-full">
-<flux:heading size="xl" level="1">{{ __('Bills') }}</flux:heading>
-        <flux:subheading size="lg" class="mb-6">{{ __('Review bills') }}</flux:subheading>
-        <flux:separator variant="subtle" />
-</div>
+ <x-layouts.app >
+ <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <!-- Your content -->
+<a href="/dashboard" class="flex underlined">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+    </svg><small class="mt-1 ml-2">Back</small>
+</a>
 
-    <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
-        <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-            @foreach ($notes as $note)
-        <div>
-           <a href="{{ route('blog', $note->id) }}">
-                <div class=" h-80 w-110 relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 shadow-sm hover:shadow-md transition">
-                    <div class="p-6">
-                        <h2 class="text-md font-semibold text-gray-800 dark:text-white mb-1">
+                    <div class="p-6 center">
+                       <div class="max-w-3xl mx-auto mt-10 p-6 bg-white dark:bg-zinc-800 rounded-xl shadow-md space-y-4">
+                        
+                        <h1 class="text-3xl font-bold text-center text-gray-800 dark:text-white">
                             {{ $note->title }}
-                        </h2>
-                        <p class="text-sm text-zinc-600 dark:text-zinc-300 line-clamp-3">
+                        </h1>
+                    <flux:separator />
+                        <p class="text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed">
                             {{ $note->content }}
                         </p>
-                        <br>
-                        <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-3">
-                            Published {{ $note->created_at->diffForHumans() }}
-                           
-                        </p>
-                       
-                        <br>
-                        <br>
 
-                         </a>
-                
-                       {{-- like button --}}
-                       <flux:button class="w-20 mr-4">
+                        <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-6">
+                            Published {{ $note->created_at->diffForHumans() }}
+                        </p>
+                             {{-- like button --}}
+                       <flux:button class="w-20">
                         <svg
                             name="like"
                             class="w-10 h-10 text-gray-500 hover:text-blue-500 hover:scale-110 transform transition duration-200 ease-in-out"
@@ -68,13 +60,19 @@
                         </svg>
                           <span class="text-base lg:text-lg xl:text-xl font-semibold ">0</span>
                     </flux:button>
-                           {{-- display comments in dashboard --}}  
-                <p><small><em>{{ $note->title }} has {{ $note->comments_count }} comments </em></small></p>
                     </div>
-                    </div>
-                </div>
-
-            @endforeach
-        </div>
+                {{-- Comment Area --}}
+                
+                                
+                </div>              
+                        <br>
+                        <br>
+                <livewire:comment-section :note="$note" />
+                    
+                      
+               
     </div>
+    
+
+</div>
 </x-layouts.app>

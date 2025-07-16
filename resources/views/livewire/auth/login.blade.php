@@ -50,6 +50,10 @@
             <flux:link :href="route('register')" wire:navigate>{{ __('Sign up') }}</flux:link>
         </div>
     @endif
+
+    <div class="h-10 pt-2 " style="text-align:center; background-color: skyblue;">
+        <a href="{{ url('auth/facebook') }}">Login with Facebook</a>
+    </div>
 </div>
 
 
