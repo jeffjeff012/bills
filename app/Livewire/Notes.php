@@ -6,51 +6,65 @@ use Flux\Flux;
 use App\Models\Note;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Livewire\User;
-use Illuminate\Support\Facades\Gate;
+use App\Enums\UserRole;
 
 class Notes extends Component
 {
     use WithPagination;
 
+    public $noteIdBeingDeleted = null;
     public $noteId;
+    public $showDeleteModal = false;
+
     public function render()
     {
         $notes = Note::orderBy('created_at', 'desc')->paginate(5);
-        // $notes = Note::orderBy('created_at', 'desc')->paginate(5);
-        return view('livewire.notes',[
+
+        return view('livewire.notes', [
             'notes' => $notes
         ]);
     }
 
-    public function edit ($id)
+    public function edit($id)
     {
-        // dd($id);
-         $this->dispatch('edit-note', $id); 
+        $this->dispatch('edit-note', $id);
     }
 
-   public function delete($id)
+    public function confirmDelete($noteId)
     {
-    $note = Note::findOrFail($id);
+        $note = Note::with('user')->findOrFail($noteId);
 
-    Gate::authorize('delete', $note);
+        if (
+            auth()->user()->role === UserRole::SbStaff &&
+            $note->user &&
+            $note->user->role === UserRole::Admin
+        ) {
+            abort(403, 'Unauthorized: Staff cannot delete bills created by Admin.');
+        }
 
-    $note->delete();
-
-    session()->flash('success', 'Bill deleted successfully.');
-
-    $this->redirectRoute('notes', navigate: true);
+        $this->noteIdBeingDeleted = $noteId;
+        $this->showDeleteModal = true;
     }
 
     public function deleteNote()
     {
+        $note = Note::with('user')->findOrFail($this->noteIdBeingDeleted);
 
+        if (
+            auth()->user()->role === UserRole::SbStaff &&
+            $note->user &&
+            $note->user->role === UserRole::Admin
+        ) {
+            abort(403, 'Unauthorized: Staff cannot delete bills created by Admin.');
+        }
 
-        Note::find($this->noteId)->delete();
-        Flux::modal('delete-note')->close();
-        session()->flash('success', 'Deleted successfully');
+        $note->delete();
+
+        $this->noteIdBeingDeleted = null;
+        $this->showDeleteModal = false;
+
+        session()->flash('success', 'Note deleted successfully.');
+
         $this->redirectRoute('notes', navigate: true);
     }
-
- 
 }
