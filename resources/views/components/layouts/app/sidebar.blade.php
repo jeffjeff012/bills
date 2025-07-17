@@ -33,7 +33,7 @@
 
             <flux:spacer />
 
-            @include('partials.theme')
+            {{-- @include('partials.theme') --}}
 
 
             <!-- Desktop User Menu -->
