@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 
-
 class FacebookController extends Controller
 {
     public function facebookpage()
@@ -23,20 +22,25 @@ class FacebookController extends Controller
             $finduser = User::where('facebook_id', $user->id)->first();
 
             if ($finduser) {
-            Auth::login($finduser);
-            return redirect()->intended('dashboard');
-            } else {
-            $newUser = User::create([
-            'name' => $user->name,
-            'facebook_id'=> $user->id,
-            'password' => encrypt('123456dummy')
+                Auth::login($finduser);
+                return redirect()->intended('dashboard');
+            } 
+            else 
+            {
+                $newUser = User::create([
+                'name' => $user->name,
+                'email' => $user->email,
+                'facebook_id'=> $user->id,
+                'password' => Hash::make('Password@1234')
             ]);
 
             Auth::login($newUser);
             return redirect()->intended('dashboard');
             }
-            } catch (Exception $e) {
-            dd($e->getMessage());
-        }
+        } 
+        catch (Exception $e) 
+            {
+                dd($e->getMessage());
+            }
     }
 }
