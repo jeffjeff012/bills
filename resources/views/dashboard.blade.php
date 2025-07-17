@@ -29,6 +29,8 @@
 
                          </a>
                 
+                        
+        
                        {{-- like button --}}
                        <flux:button class="w-20 mr-4">
                         <svg
@@ -50,7 +52,7 @@
                      </flux:button>
                     
                      {{-- //dislike button --}}
-                     <flux:button class="w-20">
+                     <flux:button class="w-20 ">
                         <svg
                             name="dislike"
                             xmlns="http://www.w3.org/2000/svg"
@@ -68,11 +70,12 @@
                         </svg>
                           <span class="text-base lg:text-lg xl:text-xl font-semibold ">0</span>
                     </flux:button>
+              
                            {{-- display comments in dashboard --}}  
                 <p><small><em>{{ $note->title }} has {{ $note->comments_count }} comments </em></small></p>
                     </div>
                     </div>
-                </div>
+                      </div>
 
             @endforeach
         </div>

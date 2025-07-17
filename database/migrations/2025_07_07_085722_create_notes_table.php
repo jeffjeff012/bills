@@ -17,8 +17,8 @@ return new class extends Migration
             $table->text('content');
             $table->integer('posted_by')->nullable();
             $table->string('image')->nullable();
-            $table->integer('likes')->default(0);
-            $table->integer('dislikes')->default(0);
+            $table->unsignedInteger('likes')->default(0);
+            $table->unsignedInteger('dislikes')->default(0);
             $table->timestamps();
         });
     }

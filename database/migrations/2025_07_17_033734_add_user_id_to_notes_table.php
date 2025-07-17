@@ -9,16 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::table('comments', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+        Schema::table('notes', function (Blueprint $table) {
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
         });
     }
 
-    public function down(): void
+    public function down()
     {
-        Schema::table('comments', function (Blueprint $table) {
+        Schema::table('notes', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropColumn('user_id');
         });
