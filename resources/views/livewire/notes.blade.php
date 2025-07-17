@@ -42,7 +42,7 @@
                     <td class="px-4 py-2">{{ str($note->content)->words(8) }}</td>
                     <td class="px-4 py-2 text-center space-x-2">
                         <flux:button wire:click="edit({{ $note->id }})">Edit</flux:button>
-                        <flux:button variant="danger" wire:click="delete({{ $note->id }})">Delete</flux:button>
+                        <flux:button variant="danger" wire:click="confirmDelete({{ $note->id }})">Delete</flux:button>
                     </td>
                 </tr>
             @empty
@@ -61,7 +61,7 @@
 
     {{-- Delete --}}
 
-<flux:modal name="delete-note" class="min-w-[22rem]">
+<flux:modal name="delete-note" class="min-w-[22rem]" wire:model="showDeleteModal">
     <div class="space-y-6">
         <div>
             <flux:heading size="lg">Delete note?</flux:heading>
@@ -79,7 +79,7 @@
                 <flux:button variant="ghost">Cancel</flux:button>
             </flux:modal.close>
 
-            <flux:button type="submit" variant="danger" wire:click="deleteNote()">Delete note</flux:button>
+            <flux:button type="button" variant="danger" wire:click="deleteNote()">Delete note</flux:button>
         </div>
     </div>
 </flux:modal>

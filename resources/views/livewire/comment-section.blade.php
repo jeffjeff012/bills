@@ -34,12 +34,17 @@
                   
                     
                     {{-- Only show edit/delete if comment belongs to user --}}
-                    @if($comment->user_id === auth()->id())
+                    
                         <div class="mt-10 space-x-2">
+                            @can('update', $comment)
                             <button wire:click="startEditing({{ $comment->id }})" class="text-blue-500">Edit</button>
+                            @endcan
+
+                            @can('delete', $comment)
                             <button wire:click="confirmCommentDeletion({{ $comment->id }})" class="text-red-500">Delete</button>
+                            @endcan
                         </div>
-                    @endif
+                    
 
                      <flux:modal name="delete-comment" class="min-w-[22rem]" wire:model="confirmingCommentDeletion">
         <div class="space-y-6">
