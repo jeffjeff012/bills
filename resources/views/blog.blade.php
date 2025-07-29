@@ -22,7 +22,7 @@
                         <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-6">
                             Published {{ $note->created_at->diffForHumans() }}
                         </p>
-                            {{$note->likes}} <em>people liked this</em>
+                            <em>{{$note->likes}} people liked this</em>
                 {{-- Comment Area --}}
                 
                                 

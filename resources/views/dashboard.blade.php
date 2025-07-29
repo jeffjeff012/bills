@@ -6,8 +6,8 @@
 </div>
     <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
         <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-            @foreach ($notes as $note)
-    <div>
+        @foreach ($notes as $note)
+         <div>
         <a href="{{ route('blog', $note->id) }}">
             <div class="h-80 w-110 relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 shadow-sm 
                         hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer">
@@ -23,7 +23,7 @@
                     <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-3">
                         Published {{ $note->created_at->diffForHumans() }}
                     </p>
-
+                    </a>
                     <br>
                     <br>
                     <livewire:note-like-dislike :note="$note" :key="$note->id" />
@@ -37,7 +37,7 @@
                     </p>
                 </div>
             </div>
-        </a>
+       
     </div>
 @endforeach
 

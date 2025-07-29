@@ -76,7 +76,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
 });
 
+//Routes for redirecting users and admin to comment
 Route::get('/blog/{note}', [BlogController::class, 'show'])->name('blog');
+Route::get('/inactive-blog/{note}', [BlogController::class, 'showInactive'])
+    ->name('inactive-blog');
+
 
 Route::get('/auth/facebook', [FacebookController::class, 'facebookpage']);
 Route::get('/auth/facebook/callback', [FacebookController::class, 'facebookredirect']);

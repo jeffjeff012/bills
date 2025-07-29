@@ -13,4 +13,10 @@ class BlogController extends Controller
         return view('blog', compact('note'));
     }
 
+    public function showInactive(Note $note)
+    {
+        $note->load(['comments.user']);
+        return view('inactive-blog', compact('note'));
+    }
+
 }
