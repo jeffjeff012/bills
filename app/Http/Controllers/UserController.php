@@ -17,11 +17,17 @@ class UserController extends Controller
     }
 
  
+
     public function dashboard()
     {
-    $userCount = User::count();
-    $billCount = Bill::count();
+        $userCount = User::count();
+        $billCount = Bill::count();
+        $totalLikes = Note::sum('likes');
+        $totalDislikes = Note::sum('dislikes');
 
-    return view('admin.dashboard', compact('userCount', 'billCount'));
+        return view('admin.dashboard', compact('userCount', 'billCount', 'totalLikes', 'totalDislikes'));
     }
+
+   
+
 }

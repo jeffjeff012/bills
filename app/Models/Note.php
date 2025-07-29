@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Like;
 
 class Note extends Model
 {
@@ -13,7 +14,8 @@ class Note extends Model
     protected $fillable = [
         'title',
         'content', 
-        'user_id'
+        'user_id',
+        'due_date',
     ];
 
     public function comments()
@@ -21,6 +23,10 @@ class Note extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 
 }
 

@@ -11,6 +11,8 @@ class CreateNote extends Component
 {
     public $title;
     public $content;
+    public $due_date;
+
     protected function rules()
     {
         return
@@ -26,10 +28,10 @@ class CreateNote extends Component
         $this->validate();
         // dd('ok');
         //STORE NOTE
-       
         Note::create([
             "title" => $this->title,
             "content" => $this->content,
+            'due_date' => $this->due_date,
             "user_id" => auth()->id(),
         ]);
 
@@ -41,6 +43,7 @@ class CreateNote extends Component
 
         $this->redirectRoute('notes', navigate: true);
     }
+
     public function render()
     {
         return view('livewire.create-note');

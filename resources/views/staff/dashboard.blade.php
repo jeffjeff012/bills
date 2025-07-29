@@ -21,13 +21,13 @@
     </div>
 
     <div class="bg-yellow-500 text-white p-6 rounded-lg shadow-lg text-center flex-1 min-w-[200px]">
-        <h2 class="text-lg font-bold">Orders</h2>
-        <p class="text-2xl font-semibold">200</p>
+        <h2 class="text-lg font-bold">Likes</h2>
+        <p class="text-2xl font-semibold">{{ $totalLikes }}</p>
     </div>
 
     <div class="bg-red-500 text-white p-6 rounded-lg shadow-lg text-center flex-1 min-w-[200px]">
-        <h2 class="text-lg font-bold">Sales</h2>
-        <p class="text-2xl font-semibold">300</p>
+        <h2 class="text-lg font-bold">Dislikes</h2>
+        <p class="text-2xl font-semibold">{{ $totalDislikes }}</p>
     </div>
 </div>
 

@@ -26,7 +26,23 @@
                 @endif
 
                 @if (auth()->user()->role === App\Enums\UserRole::User)
-                    <flux:navlist.item icon="list-bullet" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Read Bills') }}</flux:navlist.item>
+                    <flux:navlist.item 
+                        icon="list-bullet" 
+                        :href="route('dashboard')" 
+                        :current="request()->routeIs('dashboard')" 
+                        wire:navigate>
+                        {{ __('Active Bills') }}
+                    </flux:navlist.item>
+
+                    <flux:separator variant="subtle" />
+
+                    <flux:navlist.item 
+                        icon="bell-slash" 
+                        :href="route('inactive-bills')" 
+                        :current="request()->routeIs('inactive-bills')" 
+                        wire:navigate>
+                        {{ __('Inactive Bills') }}
+                    </flux:navlist.item>
                 @endif
                 </flux:navlist.group>
             </flux:navlist>

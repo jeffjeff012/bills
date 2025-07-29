@@ -51,7 +51,7 @@
         </div>
     @endif
 
-    <div class="h-10 pt-2 " style="text-align:center; background-color: skyblue;">
+    <div class="h-10 pt-2 " style="border-radius: 10px; text-align:center; background-color: skyblue;">
     <i class="fa-brands fa-facebook"></i>
         <a href="{{ url('/auth/facebook') }}">Login with Facebook</a>
     </div>

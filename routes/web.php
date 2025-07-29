@@ -12,6 +12,8 @@ use App\Http\Controllers\UserController as ControllersUserController;
 use App\Models\User;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\NoteController;
+use Illuminate\Support\Carbon;
 
 Route::get('/notes/{note}', NoteShow::class)->name('notes.show');
 
@@ -20,20 +22,40 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('dashboard', function () {
-    $notes = Note::withCount('comments')->latest()->get();
+    $notes = Note::where(function ($query) {
+            $query->whereNull('due_date')
+                  ->orWhereDate('due_date', '>=', Carbon::today());
+        })
+        ->withCount('comments')
+        ->latest()
+        ->get();
+
     return view('dashboard', compact('notes'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('inactive-bills', function () {
+    $notes = \App\Models\Note::whereDate('due_date', '<', Carbon::today())
+        ->latest()
+        ->get();
+
+    return view('inactive-bills', compact('notes'));
+})->middleware(['auth', 'verified'])->name('inactive-bills');
+
+
 
 Route::view('admin/dashboard', 'admin.dashboard', [
-    'userCount' => \App\Models\User::count(),
+    'userCount' => User::count(),
     'noteCount' => Note::count(),
+    'totalLikes' => Note::sum('likes'),
+    'totalDislikes' => Note::sum('dislikes'),
 ])->middleware(['auth', 'verified', 'admin'])->name('admin.dashboard');
 
-Route::get('staff/dashboard',  function () {
+Route::get('staff/dashboard', function () {
     return view('staff.dashboard', [
-        'userCount' => \App\Models\User::count(),
-        'noteCount' => \App\Models\Note::count(),
+        'userCount' => User::count(),
+        'noteCount' => Note::count(),
+        'totalLikes' => Note::sum('likes'),
+        'totalDislikes' => Note::sum('dislikes'),
     ]);
 })->name('staff.dashboard');
 
@@ -43,14 +65,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('settings/password', Password::class)->name('settings.password');
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
 });
-// Route::middleware(['auth', 'verified', 'admin'])
-//     ->prefix('admin')
-//     ->name('admin.')
-//     ->group(function () {
-//         Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
-//         Route::get('/notes', Notes::class)->name('notes');
-//     });
-
 
 Route::middleware(['auth'])->group(function () {
     //Notes Route

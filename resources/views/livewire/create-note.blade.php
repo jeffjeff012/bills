@@ -1,5 +1,4 @@
 <div>
-  
     <flux:modal name="create-note" class="md:w-900">
         <div class="space-y-6">
             <div>
@@ -7,18 +6,25 @@
                 <flux:text class="mt-2">This information will be displayed publicly.</flux:text>
             </div>
 
-            <flux:input label="Title" 
-            wire:model="title"
-            placeholder="Your title"/>
+            <flux:input 
+                label="Title" 
+                wire:model="title"
+                placeholder="Your title" />
 
-            <flux:textarea label="Content" 
-            wire:model="content"
-            placeholder="Your content"/>
+            <flux:textarea 
+                label="Content" 
+                wire:model="content"
+                placeholder="Your content" />
 
-           
+            <!-- ✅ Add this Due Date input -->
+            <flux:input 
+                label="Due Date"
+                type="date"
+                wire:model="due_date"
+            />
+
             <div class="flex">
                 <flux:spacer />
-
                 <flux:button type="submit" variant="primary" wire:click="save">Save</flux:button>
             </div>
         </div>
