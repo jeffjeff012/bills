@@ -21,26 +21,15 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('dashboard', function () {
-    $notes = Note::where(function ($query) {
-            $query->whereNull('due_date')
-                  ->orWhereDate('due_date', '>=', Carbon::today());
-        })
-        ->withCount('comments')
-        ->latest()
-        ->get();
+use App\Http\Controllers\DashboardController;
 
-    return view('dashboard', compact('notes'));
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
-Route::get('inactive-bills', function () {
-    $notes = \App\Models\Note::whereDate('due_date', '<', Carbon::today())
-        ->latest()
-        ->get();
-
-    return view('inactive-bills', compact('notes'));
-})->middleware(['auth', 'verified'])->name('inactive-bills');
-
+Route::get('inactive-bills', [DashboardController::class, 'inactiveBills'])
+    ->middleware(['auth', 'verified'])
+    ->name('inactive-bills');
 
 
 Route::view('admin/dashboard', 'admin.dashboard', [
