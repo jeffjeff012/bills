@@ -26,9 +26,8 @@
             </p>
         </div>
     </a>
+    <br>
 @endforeach
-
-        </a>
 
         </div>
     @endif
