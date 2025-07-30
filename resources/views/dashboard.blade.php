@@ -29,7 +29,12 @@
                     <livewire:note-like-dislike :note="$note" :key="$note->id" />
                     <br>
                     <p class="text-xs text-red-400 mt-2">
-                        Due: {{ \Carbon\Carbon::parse($note->due_date)->format('F j, Y') }}
+                        Due: 
+                        @if (\Carbon\Carbon::parse($note->due_date)->isToday())
+                            Today
+                        @else
+                            {{ \Carbon\Carbon::parse($note->due_date)->format('F j, Y') }}
+                        @endif
                     </p>
 
                     <p class="text-right text-sm text-white-600 mt-2">
