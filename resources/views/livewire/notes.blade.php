@@ -41,11 +41,11 @@
                 <tr class="border-t">
                     <td class="px-4 py-2">{{ $note->title }}</td>
                     <td class="px-4 py-2">{{ str($note->content)->words(8) }}</td>
-                    <td class="px-4 py-2 align-center">
-                        @if (\Carbon\Carbon::parse($note->due_date)->isPast())
-                            <flux:badge color="red" size="lg" pill>Inactive</flux:badge>
-                        @else
+                   <td class="px-4 py-2 align-center">
+                        @if (\Carbon\Carbon::parse($note->due_date)->lt(\Carbon\Carbon::tomorrow()))
                             <flux:badge color="lime" size="lg" pill>Active</flux:badge>
+                        @else
+                            <flux:badge color="red" size="lg" pill>Inactive</flux:badge>
                         @endif
                     </td>
                         <td class="px-4 py-2 text-center space-x-2">
