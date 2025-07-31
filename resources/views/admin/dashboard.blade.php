@@ -1,6 +1,6 @@
 <x-layouts.app :title="__('Admin Dashboard')">
     <div class="relative mb-6 w-full">
-        <flux:heading size="xl" level="1">{{ __('Manage') }}</flux:heading>
+        <flux:heading size="xl" level="1">{{ __('Administrator') }}</flux:heading>
         <flux:subheading size="lg" class="mb-6">{{ __('what to put here') }}</flux:subheading>
         <flux:separator variant="subtle" />
     </div>
@@ -8,28 +8,50 @@
 @session('success')
     <p class="text-green-600">{{ $value }}</p>
 @endsession
-    <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
-        <div class="flex justify-between gap-4 p-4">
-    <div class="bg-blue-500 text-white p-6 rounded-lg shadow-lg text-center flex-1 min-w-[200px]">
-        <h2 class="text-lg font-bold">Users</h2>
-        <p class="text-2xl font-semibold">{{ $userCount}}</p>
+   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+    <!-- Users -->
+    <div class="bg-gradient-to-br from-blue-500 to-cyan-600 border border-blue-500 text-white p-6 rounded-xl shadow-md shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out">
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-sm font-medium uppercase">Users</h2>
+                <p class="text-3xl font-bold mt-2">{{ $userCount }}</p>
+            </div>
+            <div class="text-4xl">👥</div>
+        </div>
     </div>
 
-    <div class="bg-green-500 text-white p-6 rounded-lg shadow-lg text-center flex-1 min-w-[200px]">
-        <h2 class="text-lg font-bold">Bills Created</h2>
-        <p class="text-2xl font-semibold">{{ $noteCount }}</p>
+    <!-- Bills Created -->
+    <div class="bg-gradient-to-br from-purple-500 to-blue-600 border border-blue-500 text-white p-6 rounded-xl shadow-md shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out">
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-sm font-medium uppercase">Bills Created</h2>
+                <p class="text-3xl font-bold mt-2">{{ $noteCount }}</p>
+            </div>
+            <div class="text-4xl">📄</div>
+        </div>
     </div>
 
-    <div class="bg-yellow-500 text-white p-6 rounded-lg shadow-lg text-center flex-1 min-w-[200px]">
-        <h2 class="text-lg font-bold">Likes</h2>
-        <p class="text-2xl font-semibold">{{ $totalLikes}}</p>
+    <!-- Likes -->
+    <div class="bg-gradient-to-br from-purple-400 to-pink-200 border border-blue-500 text-white p-6 rounded-xl shadow-md shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out">
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-sm font-medium uppercase">Likes</h2>
+                <p class="text-3xl font-bold mt-2">{{ $totalLikes }}</p>
+            </div>
+            <div class="text-4xl">👍</div>
+        </div>
     </div>
 
-    <div class="bg-red-500 text-white p-6 rounded-lg shadow-lg text-center flex-1 min-w-[200px]">
-        <h2 class="text-lg font-bold">Dislikes</h2>
-        <p class="text-2xl font-semibold">{{ $totalDislikes}}</p>
+    <!-- Dislikes -->
+    <div class="bg-gradient-to-br from-orange-500 to-teal-600 border border-blue-500 text-white p-6 rounded-xl shadow-md shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out">
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-sm font-medium uppercase">Dislikes</h2>
+                <p class="text-3xl font-bold mt-2">{{ $totalDislikes }}</p>
+            </div>
+            <div class="text-4xl">👎</div>
+        </div>
     </div>
 </div>
 
-    </div>
 </x-layouts.app>

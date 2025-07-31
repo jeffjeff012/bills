@@ -7,28 +7,27 @@
 
     @if ($notes->isEmpty())
         <p class="text-gray-500">No inactive bills found.</p>
-    @else
-        
+    @else  
         <div class="space-y-4">
-       @foreach ($notes as $note)
-    <a href="{{ route('inactive-blog', $note->id) }}">
-        <div class="p-6 rounded-lg border-2 border-yellow-500 bg-gray shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out">
-            <h2 class="font-bold text-xl text-white">{{ $note->title }}</h2>
-            <p class="text-base text-white mt-1">{{ $note->content }}</p>
+        @foreach ($notes as $note)
+                <a href="{{ route('inactive-blog', $note->id) }}">
+                    <div class="p-6 rounded-lg border-2 border-yellow-500 bg-gray shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out">
+                        <h2 class="font-bold text-xl text-black dark:text-white">{{ $note->title }}</h2>
+                        <p class="text-base text-black dark:text-white mt-1">{{ $note->content }}</p>
 
-            <div class="flex gap-x-4 mt-3">
-                <p class="text-sm text-white">{{ $note->likes }} liked this</p>
-                <p class="text-sm text-white">{{ $note->dislikes }} disliked this</p>
-            </div>
+                        <div class="flex gap-x-4 mt-3">
+                            <p class="text-sm text-black dark:text-white">{{ $note->likes }} liked this</p>
+                            <p class="text-sm text-black dark:text-white">{{ $note->dislikes }} disliked this</p>
+                        </div>
 
-            <p class="text-xs text-red-400 mt-3">
-                Due: {{ \Carbon\Carbon::parse($note->due_date)->format('F j, Y') }}
-            </p>
-        </div>
-    </a>
-    <br>
-@endforeach
-
+                        <p class="text-xs text-red-600 dark:text-red-400 mt-3">
+                            Ended in {{ \Carbon\Carbon::parse($note->due_date)->format('F j, Y') }}
+                            {{-- Due: {{ \Carbon\Carbon::parse($note->due_date)->format('F j, Y') }} --}}
+                        </p>
+                    </div>
+                </a>
+                <br>
+            @endforeach
         </div>
     @endif
 </x-layouts.app>

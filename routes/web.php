@@ -14,14 +14,14 @@ use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\NoteController;
 use Illuminate\Support\Carbon;
+use App\Http\Controllers\DashboardController;
+
 
 Route::get('/notes/{note}', NoteShow::class)->name('notes.show');
 
-Route::get('/', function () {
+Route::get('', function () {
     return view('welcome');
 })->name('home');
-
-use App\Http\Controllers\DashboardController;
 
 Route::get('dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])

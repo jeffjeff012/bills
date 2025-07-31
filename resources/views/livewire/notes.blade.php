@@ -27,41 +27,43 @@
 
 
     {{-- Notes Table --}}
-    <table class="table-auto w-full bg-slate-800 shadow-md rounded-md mt-5">
-        <thead class="bg-slate-900">
-            <tr>
-                <th class="px-4 py-2 text-left">Title</th>
-                <th class="px-4 py-2 text-left">Content</th>
-                <th class="px-4 py-2 text-left">Status</th>
-                <th class="px-4 py-2 text-center">Actions</th>
+    <table class="table-auto w-full bg-black dark:bg-slate-800 text-white dark:text-white shadow-md rounded-md mt-5">
+    <thead class="bg-neutral-800 dark:bg-slate-900">
+        <tr>
+            <th class="px-4 py-2 text-left">Title</th>
+            <th class="px-4 py-2 text-left">Content</th>
+            <th class="px-4 py-2 text-left">Status</th>
+            <th class="px-4 py-2 text-center">Actions</th>
+        </tr>
+    </thead>
+    <tbody >
+        @forelse ( $notes as $note )
+            <tr class="border-t border-gray-700">
+                <td class="px-4 py-2 text-white dark:text-white">{{ $note->title }}</td>
+                <td class="px-4 py-2 text-white dark:text-white">{{ str($note->content)->words(8) }}</td>
+
+                <td class="px-4 py-2 align-center">
+                    @if (\Carbon\Carbon::parse($note->due_date)->gte(\Carbon\Carbon::today()))
+                        <flux:badge color="lime" size="lg" pill>Active</flux:badge>
+                    @else
+                        <flux:badge color="red" size="lg" pill>Inactive</flux:badge>
+                    @endif
+                </td>
+
+                <td class="px-4 py-2 text-center space-x-2">
+                    <flux:button wire:click="edit({{ $note->id }})">Edit</flux:button>
+                    <flux:button variant="danger" wire:click="confirmDelete({{ $note->id }})">Delete</flux:button>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @forelse ( $notes as $note )
-                <tr class="border-t">
-                    <td class="px-4 py-2">{{ $note->title }}</td>
-                    <td class="px-4 py-2">{{ str($note->content)->words(8) }}</td>
-                   <td class="px-4 py-2 align-center">
-                        @if (\Carbon\Carbon::parse($note->due_date)->lt(\Carbon\Carbon::tomorrow()))
-                            <flux:badge color="lime" size="lg" pill>Active</flux:badge>
-                        @else
-                            <flux:badge color="red" size="lg" pill>Inactive</flux:badge>
-                        @endif
-                    </td>
-                        <td class="px-4 py-2 text-center space-x-2">
-                        <flux:button wire:click="edit({{ $note->id }})">Edit</flux:button>
-                        <flux:button variant="danger" wire:click="confirmDelete({{ $note->id }})">Delete</flux:button>
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="3" class="px-4 text-center text-gray-500">
-                        No notes yet!
-                    </td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+        @empty
+            <tr>
+                <td colspan="4" class="px-4 py-3 text-center text-black dark:text-gray-400">
+                    No notes yet!
+                </td>
+            </tr>
+        @endforelse
+    </tbody>
+</table>
 
     <div class="mt-4">
         {{ $notes->links() }}

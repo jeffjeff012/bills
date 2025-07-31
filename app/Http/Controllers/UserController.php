@@ -12,8 +12,8 @@ class UserController extends Controller
 {
     public function index()
     {
-    $notes = Note::all(); // or paginate() if needed
-    return view('user.post', compact('notes'));
+        $notes = Note::all(); // or paginate() if needed
+        return view('user.post', compact('notes'));
     }
 
  

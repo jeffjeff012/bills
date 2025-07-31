@@ -9,12 +9,12 @@
         <link rel="icon" href="/favicon.ico" sizes="any">
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
+        <script src="https://cdn.tailwindcss.com"></script>
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+        
         <!-- Styles -->
         <style>
             /*! tailwindcss v4.0.14 | MIT License | https://tailwindcss.com */
@@ -22,105 +22,104 @@
 
         </style>
     </head>
-    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col mt-10">
-        <header class="mt-40 w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden ">
-            @if (Route::has('login'))
-                <nav class="flex items-center justify-end gap-4">
-                    @auth
-                        <a
-                            href="{{ url('/dashboard') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
-                        >
-                            Dashboard
-                        </a>
-                    @else
-                        <a
-                            href="{{ route('login') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
-                        >
-                            Log in
-                        </a>
-
-                        @if (Route::has('register'))
-                            <a
-                                href="{{ route('register') }}"
-                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
-                                Register
-                            </a>
-                        @endif
-                    @endauth
-                </nav>
-            @endif
-        </header>
-    <div class="flex">
-        <section class="mb-10 p-10 bg-black dark:bg-zinc-900">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            <div class="overflow-hidden rounded-xl bg-black/30 border border-white/20 backdrop-blur-md shadow-xl p-6 text-center">
-            <div class="text-3xl mb-2">📥</div>
-            <h3 class="font-semibold text-black">Bill Proposal Submission</h3>
-            </div>
-
-            <div class="overflow-hidden rounded-xl bg-black/30 border border-white/20 backdrop-blur-md shadow-xl p-6 text-center">
-            <div class="text-3xl mb-2">👥</div>
-            <h3 class="font-semibold text-black">Committee Review</h3>
-            </div>
-
-            <div class="overflow-hidden rounded-xl bg-black/30 border border-white/20 backdrop-blur-md shadow-xl p-6 text-center">
-            <div class="text-3xl mb-2">🗳️</div>
-            <h3 class="font-semibold text-black">Public Feedback</h3>
-            </div>
-
-            <div class="overflow-hidden rounded-xl bg-black/30 border border-white/20 backdrop-blur-md shadow-xl p-6 text-center">
-            <div class="text-3xl mb-2">✅</div>
-            <h3 class="font-semibold text-black">Approval & Publication</h3>
-            </div>
-        </div>
-</section>
-
-<div class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 shadow-sm hover:shadow-md transition" style="background-image: url('images/meeting.jpg'); background-size: cover; background-position: center;">
-
-    <div class="p-6">    
-    <section class="text-center p-10 bg-white/10 dark:bg-zinc-800/50">
-        <h3 class="text-5xl font-bold mb-4 text-white dark:text-white">Welcome to the Bills Tracker</h3>
-
-        <p class="text-white dark:text-zinc-300 max-w-xl mx-auto">
-         
-        </p>
-    <div class="flex">
-    <h2 class="text-2xl font-semibold text-center text-white dark:text-white mb-2 "></h2>
-    
-<section class="relative isolate overflow-hidden bg-white/10 backdrop-blur-md px-6 py-24 sm:py-32 lg:px-8 rounded-xl  border-white/20 shadow-xl">
-  <!-- Optional: remove or lower the intensity of the white gradient -->
-  <div class="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,var(--color-indigo-100),transparent)] opacity-10"></div>
-
-  <!-- Optional skew background — reduce its impact or remove if needed -->
-  <div class="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white/10 shadow-xl ring-1 ring-white/10 sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center"></div>
-
-  <div class="mx-auto max-w-2xl lg:max-w-4xl">
-    <img src="https://tailwindcss.com/plus-assets/img/logos/workcation-logo-indigo-600.svg" alt="" class="mx-auto h-12" />
-
-    <figure class="mt-10">
-      <blockquote class="text-center text-xl/8 font-semibold text-white sm:text-2xl/9">
-        <p>   This platform allows you to browse, track, and participate in the legislative process. Stay informed about local ordinances and municipal bills that affect your community.</p>
-      </blockquote>
-      <figcaption class="mt-10">
-        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="mx-auto size-10 rounded-full" />
-        <div class="mt-4 flex items-center justify-center space-x-3 text-base text-black">
-          <div class="font-semibold">BPSO</div>
-          <svg viewBox="0 0 2 2" width="3" height="3" aria-hidden="true" class="fill-white">
-            <circle r="1" cx="1" cy="1" />
-          </svg>
-          <div class="text-black-300">Bills</div>
-        </div>
-      </figcaption>
-    </figure>
-  </div>
-</section>
+<body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
+<div class="w-full bg-white dark:bg-[#0a0a0a]">
+  <header class="top-0 z-50 mx-auto w-full max-w-7xl px-4 text-sm mb-6 not-has-[nav]:hidden">
+    @if (Route::has('login'))
+      <nav class="flex items-center justify-end gap-4 py-2">
+        @auth
+          <a href="{{ url('/dashboard') }}" class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">Dashboard</a>
+        @else
+        <a 
+            href="{{ route('login') }}" 
+            class="inline-block px-5 py-1.5 text-[#1b1b18] dark:text-[#EDEDEC] 
+                border border-gray-400 
+                text-xl leading-normal transition-all duration-200 
+                hover:bg-yellow-300 hover:rounded-lg hover:border-yellow-600"
+        >
+            Log in
+        </a>
+          @if (Route::has('register'))
+        <a 
+            href="{{ route('register') }}"
+            class="inline-block px-5 py-1.5 text-white bg-blue-600 hover:bg-blue-700 dark:text-white rounded-lg text-xl leading-normal transition-colors duration-200"
+        >
+            Register
+        </a>
+        @endif
+        @endauth
+      </nav>
+    @endif
+  </header>
 </div>
+<div class="">
+  <div class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 shadow-sm hover:shadow-md transition" style="background-image: url('images/meeting.jpg'); background-size: cover; background-position: center;">
+    <div class="p-6 flex">    
+      <section class="text-center p-10 bg-white/10 dark:bg-zinc-800/50">
+        <h3 class="text-5xl font-bold mb-4 text-white dark:text-white">Welcome to the Bills Tracker</h3>
+        
+        <div class="flex mt-15">
+          <section class="relative isolate overflow-hidden bg-white/10 backdrop-blur-md px-6 sm:py-10 lg:px-8 rounded-xl border-white/20 shadow-xl max-h-[550px] max-w-[420px] mx-auto mr-20">
+            <p class="text-white text-lg">
+                This platform allows you to browse, track, and participate in the legislative process.
+                Stay informed about local municipal bills that affect your community.
+            </p>
+            <figure class="mt-10">
+                <figcaption class="mt-10">
+                    <div class="w-fit mx-auto">
+                        <img src="/images/meeting.jpg" alt="" class="max-w-[350px] h-auto rounded-lg" />
+                        <div class="mt-4 bg-gray-100 text-gray-800 font-medium text-base rounded-lg px-6 py-2 border border-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-500 w-full">
+                        <div class="font-semibold text-center">Public Meetings</div>
+                        </div>
                     </div>
-                </div>
+                </figcaption>
+            </figure>
+            </section>
+            
+
+            <section class="relative isolate overflow-hidden bg-white/10 backdrop-blur-md px-6 sm:py-10 lg:px-8 rounded-xl border-white/20 shadow-xl max-h-[550px] max-w-[420px] mx-auto mr-20">
+            <p class="text-white text-lg">
+                This platform allows you to browse, track, and participate in the legislative process.
+                Stay informed about local municipal bills that affect your community.
+            </p>
+            <figure class="mt-10">
+                <figcaption class="mt-10">
+                    <div class="w-fit mx-auto">
+                        <img src="/images/help.jpg" alt="" class="max-w-[350px] h-auto rounded-lg" />
+                        <div class="mt-4 bg-gray-100 text-gray-800 font-medium text-base rounded-lg px-6 py-2 border border-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-500 w-full">
+                        <div class="font-semibold text-center">Disaster Ready</div>
+                        </div>
+                    </div>
+                </figcaption>
+            </figure>
+            </section>
+
+            <section class="relative isolate overflow-hidden bg-white/10 backdrop-blur-md px-6 sm:py-10 lg:px-8 rounded-xl border-white/20 shadow-xl max-h-[550px] max-w-[420px] mx-auto mr-20">
+            <p class="text-white text-lg">
+                This platform allows you to browse, track, and participate in the legislative process.
+                Stay informed about local municipal bills that affect your community.
+            </p>
+            <figure class="mt-10">
+                <figcaption class="mt-10">
+                    <div class="w-fit mx-auto">
+                        <img src="/images/mayor.jpg" alt="" class="max-w-[350px] h-auto rounded-lg" />
+                        <div class="mt-4 bg-gray-100 text-gray-800 font-medium text-base rounded-lg px-6 py-2 border border-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-500 w-full">
+                        <div class="font-semibold text-center">Municipal Responsibility</div>
+                        </div>
+                    </div>
+                </figcaption>
+            </figure>
+            </section>
+            
+
+
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
         @if (Route::has('login'))
             <div class="h-14.5 hidden lg:block"></div>
         @endif
-    </body>
+</body>
 </html>
