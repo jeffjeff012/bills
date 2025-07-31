@@ -25,37 +25,48 @@
 <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
 <div class="w-full bg-white dark:bg-[#0a0a0a]">
   <header class="top-0 z-50 mx-auto w-full max-w-7xl px-4 text-sm mb-6 not-has-[nav]:hidden">
-    @if (Route::has('login'))
-      <nav class="flex items-center justify-end gap-4 py-2">
-        @auth
-          <a href="{{ url('/dashboard') }}" class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">Dashboard</a>
-        @else
-        <a 
-            href="{{ route('login') }}" 
-            class="inline-block px-5 py-1.5 text-[#1b1b18] dark:text-[#EDEDEC] 
-                border border-gray-400 
-                text-xl leading-normal transition-all duration-200 
-                hover:bg-yellow-300 hover:rounded-lg hover:border-yellow-600"
-        >
-            Log in
-        </a>
-          @if (Route::has('register'))
-        <a 
-            href="{{ route('register') }}"
-            class="inline-block px-5 py-1.5 text-white bg-blue-600 hover:bg-blue-700 dark:text-white rounded-lg text-xl leading-normal transition-colors duration-200"
-        >
-            Register
-        </a>
+    <div class="flex items-center justify-between ">
+        <!-- Logo (Left side) -->
+        <div class="flex items-center gap-2">
+            <img src="/images/logo.jpg" alt="Logo" class="h-[110px] w-auto" />
+            <!-- Optional: add site title next to logo -->
+            <!-- <span class="text-lg font-semibold">YourSite</span> -->
+        </div>
+
+        <!-- Navigation / Auth Buttons (Right side) -->
+        @if (Route::has('login'))
+            <nav class="flex items-center gap-4">
+                @auth
+                    <a href="{{ url('/dashboard') }}" class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">Dashboard</a>
+                @else
+                    <a 
+                        href="{{ route('login') }}" 
+                        class="inline-block px-5 py-1.5 text-[#1b1b18] dark:text-[#EDEDEC] 
+                               border border-gray-400 rounded-lg 
+                               text-xl leading-normal transition-all duration-200 
+                               hover:bg-yellow-300 hover:border-yellow-600"
+                    >
+                        Log in
+                    </a>
+                    @if (Route::has('register'))
+                        <a 
+                            href="{{ route('register') }}"
+                            class="inline-block px-5 py-1.5 text-white bg-blue-600 hover:bg-blue-700 dark:text-white rounded-lg text-xl leading-normal transition-colors duration-200"
+                        >
+                            Register
+                        </a>
+                    @endif
+                @endauth
+            </nav>
         @endif
-        @endauth
-      </nav>
-    @endif
-  </header>
+    </div>
+</header>
+
 </div>
 <div class="">
   <div class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 shadow-sm hover:shadow-md transition" style="background-image: url('images/meeting.jpg'); background-size: cover; background-position: center;">
-    <div class="p-6 flex">    
-      <section class="text-center p-10 bg-white/10 dark:bg-zinc-800/50">
+    <div class=" flex">    
+      <section class="text-center p-10  dark:bg-zinc-800/50">
         <h3 class="text-5xl font-bold mb-4 text-white dark:text-white">Welcome to the Bills Tracker</h3>
         
         <div class="flex mt-15">
