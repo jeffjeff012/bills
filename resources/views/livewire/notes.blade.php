@@ -27,8 +27,8 @@
 
 
     {{-- Notes Table --}}
-    <table class="table-auto w-full bg-black dark:bg-slate-800 text-white dark:text-white shadow-md rounded-md mt-5">
-    <thead class="bg-neutral-800 dark:bg-slate-900">
+    <table class="table-auto w-full bg-gray-600 dark:bg-slate-800 text-white dark:text-white shadow-md rounded-md mt-5">
+    <thead class="bg-neutral-700 dark:bg-slate-900">
         <tr>
             <th class="px-4 py-2 text-left">Title</th>
             <th class="px-4 py-2 text-left">Content</th>
