@@ -114,5 +114,5 @@ class CommentSection extends Component
                 ->latest()
                 ->paginate(2), // or paginate() with a number
         ]);
-}
+    }
 }

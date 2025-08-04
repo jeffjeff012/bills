@@ -14,10 +14,18 @@
 
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')" class="grid">
-                    
+
                 @if (auth()->user()->role === App\Enums\UserRole::Admin)
                     <flux:navlist.item icon="home" :href="route('admin.dashboard')" :current="request()->routeIs('dashboard') || request()->routeIs('admin.dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                     <flux:navlist.item icon="notebook-open" :href="route('notes')" :current="request()->routeIs('notes')" wire:navigate>{{ __('Bills') }}</flux:navlist.item> 
+                    <flux:navlist.item 
+                        icon="users" 
+                        :href="route('admin.user-management')" 
+                        :current="request()->routeIs('admin.user-management')" 
+                        wire:navigate
+                    >
+                        {{ __('User Management') }}
+                    </flux:navlist.item>                
                 @endif
 
                 @if (auth()->user()->role === App\Enums\UserRole::SbStaff)
