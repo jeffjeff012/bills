@@ -1,0 +1,108 @@
+<div>
+    <flux:heading size="xl" level="1">User Management</flux:heading>
+    <flux:subheading size="lg" class="mb-6">Manage all registered users</flux:subheading>
+    <flux:separator variant="subtle" />
+
+    <div class="overflow-x-auto mt-4 rounded-md shadow-sm"> {{-- slightly rounded --}}
+        <table class="min-w-full text-sm text-left text-gray-700 bg-white rounded-md"> {{-- slightly rounded --}}
+            <thead class="bg-gray-300 text-gray-700 font-semibold text-xs uppercase tracking-wider border-b border-gray-200"> {{-- bold --}}
+                <tr>
+                    <th class="px-6 py-3 font-bold">Name</th>
+                    <th class="px-6 py-3 font-bold">Email</th>
+                    <th class="px-6 py-3 font-bold">Role</th>
+                    <th class="px-6 py-3 font-bold">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($users as $user)
+                    @php
+                        $rowBg = $loop->iteration % 2 === 1 ? 'bg-gray-100' : 'bg-white';
+                    @endphp
+
+                    <tr class="{{ $rowBg }} hover:bg-lime-100 border-b border-gray-100">
+                        <td class="px-6 py-4 text-black">{{ $user->name }}</td>
+                        <td class="px-6 py-4">{{ $user->email ?? 'No email used' }}</td>
+                        <td class="px-6 py-4">
+                            @php
+                                $roleName = strtolower($user->role->name ?? 'N/A');
+
+                                $badgeSettings = match($roleName) {
+                                    'admin' => ['color' => 'lime', 'textColor' => 'text-black dark:text-lime-800'], 
+                                    'user' => ['color' => 'yellow', 'textColor' => 'text-black dark:text-yellow-800'],
+                                    'sbstaff' => ['color' => 'blue', 'textColor' => 'text-black dark:text-blue-800'], 
+                                    default => ['color' => 'gray', 'textColor' => 'text-white'],
+                                };
+
+                            @endphp
+
+                            <flux:badge 
+                                color="{{ $badgeSettings['color'] }}" 
+                                size="lg" 
+                                pill 
+                                class="{{ $badgeSettings['textColor'] }}"
+                            >
+                                {{ ucfirst($roleName) }}
+                            </flux:badge>
+                        </td>
+                        <td class="px-6 py-4">
+                        <flux:button
+                            icon="pencil-square"
+                            wire:click="edit({{ $user->id }})"
+                            class="!bg-transparent !border-none !shadow-none !text-blue-800 dark:!text-black hover:!text-blue-600 hover:underline dark:hover:!text-blue-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
+                            variant="ghost"
+                        >
+                            Edit
+                        </flux:button>
+
+
+                        <flux:button
+                            icon="trash"
+                            wire:click="edit({{ $user->id }})"
+                            class="!bg-transparent !border-none !shadow-none !text-red-800 dark:!text-black hover:!text-red-600 hover:underline dark:hover:!text-red-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
+                            variant="ghost"
+                        >
+                            Delete
+                        </flux:button>
+
+
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="4" class="px-6 py-4 text-center text-gray-400">No users found.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+
+        </table>
+        <div class="mt-4">
+            {{ $users->links() }}
+        </div>
+        
+        <flux:modal name="edit-user-modal" wire:model="showEditModal" focusable class="max-w-lg">
+        <form wire:submit.prevent="updateUserRole" class="space-y-6">
+        <flux:heading size="lg">Edit User Role</flux:heading>
+
+        <flux:input label="Name" type="text" :value="$editName" readonly />
+        <flux:input label="Email" type="email" :value="$editEmail" readonly />
+
+        <flux:select wire:model="editRole" label="Role">
+            <option value="admin">Admin</option>
+            <option value="sbstaff">SB Staff</option>
+            <option value="user">User</option>
+        </flux:select>
+
+        <div class="flex justify-end space-x-2 rtl:space-x-reverse">
+            <flux:modal.close>
+                <flux:button variant="filled">Cancel</flux:button>
+            </flux:modal.close>
+            <flux:button variant="primary" type="submit">Update</flux:button>
+        </div>
+    </form>
+</flux:modal>
+
+  
+    </div>
+</div>
+
+
