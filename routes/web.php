@@ -24,18 +24,18 @@ Route::get('', function () {
 })->name('home');
 
 Route::view('admin/dashboard', 'admin.dashboard', [
-    'userCount' => User::count(),
-    'noteCount' => Note::count(),
-    'totalLikes' => Note::sum('likes'),
-    'totalDislikes' => Note::sum('dislikes'),
+    'userCount' => 0, //User::count(),
+        'noteCount' => 0, //Note::count(),
+        'totalLikes' => 0, //Note::sum('likes'),
+        'totalDislikes' => 0, //Note::sum('dislikes'),
 ])->middleware(['auth', 'verified', 'admin'])->name('admin.dashboard');
 
 Route::get('staff/dashboard', function () {
     return view('staff.dashboard', [
-        'userCount' => User::count(),
-        'noteCount' => Note::count(),
-        'totalLikes' => Note::sum('likes'),
-        'totalDislikes' => Note::sum('dislikes'),
+        'userCount' => 0, //User::count(),
+        'noteCount' => 0, //Note::count(),
+        'totalLikes' => 0, //Note::sum('likes'),
+        'totalDislikes' => 0, //Note::sum('dislikes'),
     ]);
 })->name('staff.dashboard');
 
@@ -75,8 +75,8 @@ Route::get('/inactive-blog/{note}', [BlogController::class, 'showInactive'])
 //     ->prefix('admin')
 //     ->name('admin.')
 //     ->group(function () {
-    Route::get('/admin/user-management', UserManagement::class)->name('user-management')->middleware(['auth', 'verified']);
-    //     });
+//         Route::get('/user-management', UserManagement::class)->name('user-management');
+//     });
 
 Route::get('/auth/facebook', [FacebookController::class, 'facebookpage']);
 Route::get('/auth/facebook/callback', [FacebookController::class, 'facebookredirect']);
