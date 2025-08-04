@@ -28,6 +28,11 @@ class Note extends Model
         return $this->hasMany(Like::class);
     }
 
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'user_id'); // adjust 'user_id' if using 'creator_id'
+    }
+
 }
 
 

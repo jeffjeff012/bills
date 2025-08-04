@@ -1,7 +1,7 @@
 <div>
     <div class="relative mb-6 w-full">
         <flux:heading size="xl" level="1">{{ __('Bills') }}</flux:heading>
-        <flux:subheading size="lg" class="mb-6">{{ __('Make Changes') }}</flux:subheading>
+        <flux:subheading size="lg" class="mb-6">{{ __('Make and add changes') }}</flux:subheading>
         <flux:separator variant="subtle" />
 
         <flux:modal.trigger name="create-note">

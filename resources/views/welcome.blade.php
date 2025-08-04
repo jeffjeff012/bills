@@ -44,7 +44,7 @@
                         class="inline-block px-5 py-1.5 text-[#1b1b18] dark:text-[#EDEDEC] 
                                border border-gray-400 rounded-lg 
                                text-xl leading-normal transition-all duration-200 
-                               hover:bg-yellow-300 hover:border-yellow-600"
+                               hover:bg-blue-300 hover:border-blue-600"
                     >
                         Log in
                     </a>

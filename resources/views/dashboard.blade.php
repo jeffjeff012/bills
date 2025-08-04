@@ -36,10 +36,14 @@
                             {{ \Carbon\Carbon::parse($note->due_date)->format('F j, Y') }}
                         @endif
                     </p>
-
-                    <p class="text-right text-sm text-white-600 mt-2">
-                        <em>{{ $note->comments_count }} comments</em>
-                    </p>
+                    <div class="flex justify-between items-center">
+                        <p class="text-sm text-zinc-500 dark:text-zinc-400">
+                            Authored by {{ $note->creator->name ?? 'Unknown' }}
+                        </p>
+                        <p class="text-right text-sm text-white-600 mt-2">
+                            <em>{{ $note->comments_count }} comments</em>
+                        </p>
+                    </div>
                 </div>
             </div>
        

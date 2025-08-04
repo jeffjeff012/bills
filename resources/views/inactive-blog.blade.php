@@ -19,7 +19,14 @@
             <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-6">
                 Published {{ $note->created_at->diffForHumans() }}
             </p>
-            <em>{{ $note->likes }} people liked this</em>
+            <div class="flex justify-between items-center">
+                <p class="text-sm text-zinc-500 dark:text-zinc-400">
+                    Authored by {{ $note->creator->name ?? 'Unknown' }}
+                </p>
+                <em class="text-sm text-zinc-500 dark:text-zinc-400">
+                    {{ $note->likes }} people liked this
+                </em>
+            </div>
         </div>
 
         {{-- Comment Area --}}

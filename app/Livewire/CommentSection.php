@@ -5,9 +5,12 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Note;
 use App\Models\Comment;
+use Livewire\WithPagination;
 
 class CommentSection extends Component
 {
+    use WithPagination;
+    
     public $note;
     public $content;
 
@@ -16,6 +19,8 @@ class CommentSection extends Component
 
     public $confirmingCommentDeletion = false;
     public $commentToDelete = null;
+
+    protected $paginationTheme = 'tailwind'; 
 
     public function mount(Note $note)
     {
@@ -102,8 +107,12 @@ class CommentSection extends Component
 
     public function render()
     {
-        return view('livewire.comment-section', [
-            'comments' => $this->note->comments()->latest()->with('user')->get(),
+         return view('livewire.comment-section', [
+            'comments' => $this->note
+                ->comments()
+                ->with('user')
+                ->latest()
+                ->paginate(2), // or paginate() with a number
         ]);
-    }
+}
 }

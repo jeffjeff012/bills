@@ -12,6 +12,7 @@ class UserController extends Controller
 {
     public function index()
     {
+        $note = Note::with('creator')->findOrFail($id);
         $notes = Note::all(); // or paginate() if needed
         return view('user.post', compact('notes'));
     }

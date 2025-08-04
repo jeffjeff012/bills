@@ -7,4 +7,4 @@
     />
 </svg> --}}
 
-<img src="{{ asset('images/logo.jpg') }}" alt="Logo" {{ $attributes }}/>
+<img src="{{ asset('images/final.png') }}" alt="Logo" {{ $attributes }}/>

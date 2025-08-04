@@ -7,7 +7,7 @@
     </svg><small class="mt-1 ml-2">Back</small>
 </a>
 
-                    <div class="p-6 center">
+    <div class="p-6 center">
                        <div class="max-w-3xl mx-auto mt-10 p-6 bg-white dark:bg-zinc-800 rounded-xl shadow-md space-y-4">
                         
                         <h1 class="text-3xl font-bold text-center text-gray-800 dark:text-white">
@@ -22,6 +22,10 @@
                         <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-6">
                             Published {{ $note->created_at->diffForHumans() }}
                         </p>
+                       <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-6">
+                            Authored by {{ $note->creator->name ?? 'Unknown' }}
+                        </p>
+
                             <em>{{$note->likes}} people liked this</em>
                 {{-- Comment Area --}}
                 

@@ -1,7 +1,7 @@
 <x-layouts.app :title="__('Admin Dashboard')">
     <div class="relative mb-6 w-full">
         <flux:heading size="xl" level="1">{{ __('Administrator') }}</flux:heading>
-        <flux:subheading size="lg" class="mb-6">{{ __('what to put here') }}</flux:subheading>
+        <flux:subheading size="lg" class="mb-6">{{ __('Manage your Bills and Data') }}</flux:subheading>
         <flux:separator variant="subtle" />
     </div>
 
