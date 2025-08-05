@@ -55,6 +55,13 @@
         <i class="fa-brands fa-facebook text-white mr-2"></i>
         <a class="text-white font-medium" href="{{ url('/auth/facebook') }}">Login with Facebook</a>
     </div>
+
+    <p class="text-xs text-gray-500 text-center mt-4">
+        By logging in, you agree to our
+        <a href="{{ route('privacy.policy') }}" class="underline">Privacy Policy</a>
+        and
+        <a href="{{ route('data.deletion') }}" class="underline">Data Deletion Policy</a>.
+    </p>
 </div>
 
 

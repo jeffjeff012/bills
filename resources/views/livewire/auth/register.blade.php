@@ -59,4 +59,11 @@
         <span>{{ __('Already have an account?') }}</span>
         <flux:link :href="route('login')" wire:navigate>{{ __('Log in') }}</flux:link>
     </div>
+
+    <p class="text-xs text-gray-500 text-center mt-4">
+        By registering, you agree to our
+        <a href="{{ route('privacy.policy') }}" class="underline">Privacy Policy</a>
+        and
+        <a href="{{ route('data.deletion') }}" class="underline">Data Deletion Policy</a>.
+    </p>
 </div>
