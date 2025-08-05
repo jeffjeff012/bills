@@ -56,7 +56,7 @@
                                 {{ ucfirst($roleName) }}
                             </flux:badge>
                         </td>
-                        <td class=" py-4">
+                        <td class="">
                         <flux:button
                             icon="pencil-square"
                             wire:click="edit({{ $user->id }})"
