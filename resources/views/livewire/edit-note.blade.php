@@ -15,6 +15,11 @@
             wire:model="content"
             placeholder="Your content"/>
 
+            <flux:input
+                type="date"
+                label="Due Date"
+                wire:model.defer="due_date"
+            />
             <div class="flex">
                 <flux:spacer />
 
