@@ -16,7 +16,8 @@ class UserManagement extends Component
     public $editEmail;
     public $editRole;
     public $showEditModal = false;
-
+    public $confirmingUserDeletion = false;
+    public $userToDelete = null;
    
     public function edit($userId)
     {
@@ -45,6 +46,29 @@ class UserManagement extends Component
         $this->showEditModal = false;
     }
 
+    public function confirmDelete($userId)
+    {
+        $this->userToDelete = $userId;
+        $this->confirmingUserDeletion = true;
+    }
+
+    public function deleteUser()
+    {
+        $user = \App\Models\User::findOrFail($this->userToDelete);
+
+        // Optional: Prevent self-deletion
+        if (auth()->id() === $user->id) {
+            $this->dispatch('notify', message: 'You cannot delete your own account.', type: 'warning');
+            $this->confirmingUserDeletion = false;
+            return;
+        }
+
+        $user->delete();
+        $this->confirmingUserDeletion = false;
+        $this->userToDelete = null;
+
+        session()->flash('success', 'User deleted successfully.');
+    }
     public function render()
     {
         return view('livewire.admin.user-management', [
