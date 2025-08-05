@@ -27,7 +27,7 @@
 
 
     {{-- Notes Table --}}
-    <table class="table-auto w-full bg-gray-600 dark:bg-slate-800 text-white dark:text-white shadow-md rounded-md mt-5">
+    <table class="table-auto w-full bg-gray-300 dark:bg-slate-800 text-white dark:text-white shadow-md rounded-md mt-5">
     <thead class="bg-neutral-700 dark:bg-slate-900">
         <tr>
             <th class="px-4 py-2 text-left">Title</th>
@@ -39,8 +39,8 @@
     <tbody >
         @forelse ( $notes as $note )
             <tr class="border-t border-gray-700">
-                <td class="px-4 py-2 text-white dark:text-white">{{ $note->title }}</td>
-                <td class="px-4 py-2 text-white dark:text-white">{{ str($note->content)->words(8) }}</td>
+                <td class="px-4 py-2 text-black dark:text-white">{{ $note->title }}</td>
+                <td class="px-4 py-2 text-black dark:text-white">{{ str($note->content)->words(8) }}</td>
 
                 <td class="px-4 py-2 align-center">
                     @if (\Carbon\Carbon::parse($note->due_date)->gte(\Carbon\Carbon::today()))
@@ -51,8 +51,25 @@
                 </td>
 
                 <td class="px-4 py-2 text-center space-x-2">
-                    <flux:button wire:click="edit({{ $note->id }})">Edit</flux:button>
-                    <flux:button variant="danger" wire:click="confirmDelete({{ $note->id }})">Delete</flux:button>
+                    <flux:button
+                            icon="pencil-square"
+                            wire:click="edit({{ $note->id }})"
+                            class="!bg-transparent !border-none !shadow-none !text-blue-800 dark:!text-white hover:!text-blue-800 hover:underline dark:hover:!text-blue-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
+                            variant="ghost"
+                        >
+                            Edit
+                        </flux:button>
+
+
+                        <flux:button
+                            icon="trash"
+                            wire:click="delete({{ $note->id }})"
+                            class="!bg-transparent !border-none !shadow-none !text-red-800 dark:!text-white hover:!text-red-800 hover:underline dark:hover:!text-red-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
+                            variant="ghost"
+                        >
+                            Delete
+                        </flux:button>
+                
                 </td>
             </tr>
         @empty
