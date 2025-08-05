@@ -7,6 +7,7 @@ use App\Models\Note;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
 use App\Enums\UserRole;
 
 class EditNote extends Component
