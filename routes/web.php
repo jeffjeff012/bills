@@ -78,7 +78,11 @@ Route::middleware(['auth', 'verified']) // optional role check middleware here
         Route::get('/user-management', UserManagement::class)->name('user-management');
     });
 
+//Facebook Legend
 Route::get('/auth/facebook', [FacebookController::class, 'facebookpage']);
 Route::get('/auth/facebook/callback', [FacebookController::class, 'facebookredirect']);
+Route::view('/facebook-legend/privacy-policy', 'facebook-legend.privacy-policy')->name('privacy.policy');
+Route::view('/facebook-legend/data-deletion', 'facebook-legend.data-deletion')->name('data.deletion');
+
 
 require __DIR__ . '/auth.php';
