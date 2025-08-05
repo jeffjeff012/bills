@@ -51,28 +51,28 @@
                         </div>
                     
 
-                     <flux:modal name="delete-comment" class="min-w-[22rem]" wire:model="confirmingCommentDeletion">
-        <div class="space-y-6">
-            <div>
-                <flux:heading size="lg">Delete Comment?</flux:heading>
+                    <flux:modal name="delete-comment" class="min-w-[22rem]" wire:model="confirmingCommentDeletion">
+                        <div class="space-y-6">
+                            <div>
+                                <flux:heading size="lg">Delete Comment?</flux:heading>
 
-                <flux:text class="mt-2">
-                    <p>You're about to delete this comment.</p>
-                    <p>This action cannot be reversed.</p>
-                </flux:text>
-            </div>
+                                <flux:text class="mt-2">
+                                    <p>You're about to delete this comment.</p>
+                                    <p>This action cannot be reversed.</p>
+                                </flux:text>
+                            </div>
 
-            <div class="flex gap-2">
-                <flux:spacer />
+                            <div class="flex gap-2">
+                                <flux:spacer />
 
-                <flux:modal.close>
-                    <flux:button variant="ghost" wire:click="$set('confirmingCommentDeletion', false)">Cancel</flux:button>
-                </flux:modal.close>
+                                <flux:modal.close>
+                                    <flux:button variant="ghost" wire:click="$set('confirmingCommentDeletion', false)">Cancel</flux:button>
+                                </flux:modal.close>
 
-                <flux:button type="button" variant="danger" wire:click="deleteComment">Delete Comment</flux:button>
-            </div>
-        </div>
-    </flux:modal>
+                                <flux:button type="button" variant="danger" wire:click="deleteComment">Delete Comment</flux:button>
+                            </div>
+                        </div>
+                    </flux:modal>
                 @endif
             </div>
         @endforeach
