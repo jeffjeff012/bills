@@ -72,8 +72,7 @@
         <div class="flex mt-15">
           <section class="relative isolate overflow-hidden bg-white/10 backdrop-blur-md px-6 sm:py-10 lg:px-8 rounded-xl border-white/20 shadow-xl max-h-[550px] max-w-[420px] mx-auto mr-20">
             <p class="text-white text-lg">
-                This platform allows you to browse, track, and participate in the legislative process.
-                Stay informed about local municipal bills that affect your community.
+                To discuss community concerns, present plans or policies, and gather feedback from residents. These meetings promote transparency, public participation, and accountability in local governance.
             </p>
             <figure class="mt-10">
                 <figcaption class="mt-10">
@@ -107,8 +106,7 @@
 
             <section class="relative isolate overflow-hidden bg-white/10 backdrop-blur-md px-6 sm:py-10 lg:px-8 rounded-xl border-white/20 shadow-xl max-h-[550px] max-w-[420px] mx-auto mr-20">
             <p class="text-white text-lg">
-                This platform allows you to browse, track, and participate in the legislative process.
-                Stay informed about local municipal bills that affect your community.
+                 Promoting the welfare of its constituents includes areas like public safety, sanitation, infrastructure, health services, and economic development, all aimed at improving the quality of life within the community.
             </p>
             <figure class="mt-10">
                 <figcaption class="mt-10">
