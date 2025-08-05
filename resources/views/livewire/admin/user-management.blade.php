@@ -3,6 +3,18 @@
     <flux:subheading size="lg" class="mb-6">Manage all registered users</flux:subheading>
     <flux:separator variant="subtle" />
 
+    @if (session('success'))
+        <div
+            x-data="{ show: true }"
+            x-show="show"
+            x-init="setTimeout(() => { show = false }, 3000)"
+            class="fixed top-5 right-5 bg-green-600 text-white text-sm p-4 rounded-lg shadow-lg z-50"
+            role="alert"
+        >
+            <p>{{ session('success') }}</p>
+        </div>
+    @endif
+
     <div class="overflow-x-auto mt-4 rounded-md shadow-sm"> {{-- slightly rounded --}}
         <table class="min-w-full text-sm text-left text-gray-700 bg-white rounded-md"> {{-- slightly rounded --}}
             <thead class="bg-gray-300 text-gray-700 font-semibold text-xs uppercase tracking-wider border-b border-gray-200"> {{-- bold --}}
@@ -57,7 +69,7 @@
 
                         <flux:button
                             icon="trash"
-                            wire:click="edit({{ $user->id }})"
+                            wire:click="confirmDelete({{ $user->id }})"
                             class="!bg-transparent !border-none !shadow-none !text-red-800 dark:!text-black hover:!text-red-600 hover:underline dark:hover:!text-red-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
                             variant="ghost"
                         >
@@ -80,26 +92,49 @@
         </div>
         
         <flux:modal name="edit-user-modal" wire:model="showEditModal" focusable class="max-w-lg">
-        <form wire:submit.prevent="updateUserRole" class="space-y-6">
-        <flux:heading size="lg">Edit User Role</flux:heading>
+                <form wire:submit.prevent="updateUserRole" class="space-y-6">
+                <flux:heading size="lg">Edit User Role</flux:heading>
 
-        <flux:input label="Name" type="text" :value="$editName" readonly />
-        <flux:input label="Email" type="email" :value="$editEmail" readonly />
+                <flux:input label="Name" type="text" :value="$editName" readonly />
+                <flux:input label="Email" type="email" :value="$editEmail" readonly />
 
-        <flux:select wire:model="editRole" label="Role">
-            <option value="admin">Admin</option>
-            <option value="sbstaff">SB Staff</option>
-            <option value="user">User</option>
-        </flux:select>
+                <flux:select wire:model="editRole" label="Role">
+                    <option value="admin">Admin</option>
+                    <option value="sbstaff">SB Staff</option>
+                    <option value="user">User</option>
+                </flux:select>
 
-        <div class="flex justify-end space-x-2 rtl:space-x-reverse">
-            <flux:modal.close>
-                <flux:button variant="filled">Cancel</flux:button>
-            </flux:modal.close>
-            <flux:button variant="primary" type="submit">Update</flux:button>
+                <div class="flex justify-end space-x-2 rtl:space-x-reverse">
+                    <flux:modal.close>
+                        <flux:button variant="filled">Cancel</flux:button>
+                    </flux:modal.close>
+                    <flux:button variant="primary" type="submit">Update</flux:button>
+                </div>
+            </form>
+        </flux:modal>
+
+<flux:modal name="delete-user" class="min-w-[22rem]" wire:model="confirmingUserDeletion">
+    <div class="space-y-6">
+        <div>
+            <flux:heading size="lg">Delete User?</flux:heading>
+            <flux:text class="mt-2">
+                <p>You're about to delete this user.</p>
+                <p>This action cannot be reversed.</p>
+            </flux:text>
         </div>
-    </form>
+
+        <div class="flex gap-2">
+            <flux:spacer />
+
+            <flux:modal.close>
+                <flux:button variant="ghost" wire:click="$set('confirmingUserDeletion', false)">Cancel</flux:button>
+            </flux:modal.close>
+
+            <flux:button type="button" variant="danger" wire:click="deleteUser">Delete</flux:button>
+        </div>
+    </div>
 </flux:modal>
+
 
   
     </div>
