@@ -40,8 +40,9 @@
                         <p class="text-sm text-zinc-500 dark:text-zinc-400">
                             Authored by {{ $note->creator->name ?? 'Unknown' }}
                         </p>
-                        <p class="text-right text-sm text-white-600 mt-2">
-                            <em>{{ $note->comments_count }} comments</em>
+                        <p class="text-right text-sm text-white-600 mt-2 flex items-center justify-end gap-1">
+                                <flux:icon name="chat-bubble-left" class="w-4 h-4" />
+                                {{ $note->comments_count }}
                         </p>
                     </div>
                 </div>
