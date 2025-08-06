@@ -11,10 +11,11 @@
         <div class="space-y-4">
         @foreach ($notes as $note)
                 <a href="{{ route('inactive-blog', $note->id) }}">
-                    <div class="p-6 rounded-lg border-2 border-yellow-500 bg-gray shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out">
+                    <div class=" p-6 rounded-lg border-2 border-yellow-500 bg-gray shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out">
                         <h2 class="font-bold text-xl text-black dark:text-white">{{ $note->title }}</h2>
-                        <p class="text-base text-black dark:text-white mt-1">{{ $note->content }}</p>
-
+                        <p class="text-base text-black dark:text-white mt-1">
+                            {{ \Illuminate\Support\Str::words($note->content, 20, '...') }}
+                        </p>
                         <div class="flex gap-x-4 mt-3">
                             <p class="text-sm text-black dark:text-white">{{ $note->likes }} liked this</p>
                             <p class="text-sm text-black dark:text-white">{{ $note->dislikes }} disliked this</p>
