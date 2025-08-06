@@ -63,7 +63,7 @@
 
                         <flux:button
                             icon="trash"
-                            wire:click="delete({{ $note->id }})"
+                            wire:click="confirmDelete({{ $note->id }})"
                             class="!bg-transparent !border-none !shadow-none !text-red-800 dark:!text-white hover:!text-red-800 hover:underline dark:hover:!text-red-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
                             variant="ghost"
                         >
