@@ -27,6 +27,7 @@ Route::get('', function () {
     return view('welcome');
 })->name('home');
 
+//Redirecting admin and sbstaff to their respective dashboard
 Route::get('admin/dashboard', [AdminController::class, 'dashboard'])
     ->middleware(['auth', 'verified', 'admin'])
     ->name('admin.dashboard');
@@ -35,7 +36,7 @@ Route::get('staff/dashboard', [StaffController::class, 'dashboard'])
     ->middleware(['auth', 'verified']) // optional: add 'sbstaff' middleware if needed
     ->name('staff.dashboard');
 
-
+//Active and Inactive Bills Handler
 Route::get('dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
