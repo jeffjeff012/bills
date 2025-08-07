@@ -16,6 +16,10 @@ use App\Http\Controllers\NoteController;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\DashboardController;
 use App\Livewire\Admin\UserManagement;
+use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StaffController;
+
 
 Route::get('/notes/{note}', NoteShow::class)->name('notes.show');
 
@@ -23,21 +27,13 @@ Route::get('', function () {
     return view('welcome');
 })->name('home');
 
-Route::view('admin/dashboard', 'admin.dashboard', [
-    'userCount' => User::count(),
-    'noteCount' => Note::count(),
-    'totalLikes' => Note::sum('likes'),
-    'totalDislikes' => Note::sum('dislikes'),
-])->middleware(['auth', 'verified', 'admin'])->name('admin.dashboard');
+Route::get('admin/dashboard', [AdminController::class, 'dashboard'])
+    ->middleware(['auth', 'verified', 'admin'])
+    ->name('admin.dashboard');
 
-Route::get('staff/dashboard', function () {
-    return view('staff.dashboard', [
-        'userCount' => User::count(),
-        'noteCount' => Note::count(),
-        'totalLikes' => Note::sum('likes'),
-        'totalDislikes' => Note::sum('dislikes'),
-    ]);
-})->name('staff.dashboard');
+Route::get('staff/dashboard', [StaffController::class, 'dashboard'])
+    ->middleware(['auth', 'verified', 'sbstaff']) // optional: add 'sbstaff' middleware if needed
+    ->name('staff.dashboard');
 
 
 Route::get('dashboard', [DashboardController::class, 'index'])
@@ -84,5 +80,8 @@ Route::get('/auth/facebook/callback', [FacebookController::class, 'facebookredir
 Route::view('/facebook-legend/privacy-policy', 'facebook-legend.privacy-policy')->name('privacy.policy');
 Route::view('/facebook-legend/data-deletion', 'facebook-legend.data-deletion')->name('data.deletion');
 
+//Google Legend
+Route::get("auth/google", [GoogleController:: class, "redirectToGoogle"])->name("redirect.google");
+Route::get("auth/google/callback", [GoogleController:: class, "handleGoogleCallback"]);
 
 require __DIR__ . '/auth.php';
