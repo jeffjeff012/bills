@@ -51,7 +51,15 @@
         </div>
     @endif
 
-    <div class="h-10 flex items-center justify-center rounded-md bg-[#1877F2] hover:bg-[#145DB2] transition">
+    {{-- Google Login --}}
+ <div class="flex justify-center">
+    <a href="{{ route('redirect.google') }}">
+        <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" alt="Sign in with Google">
+    </a>
+</div>
+
+
+    {{-- <div class="h-10 flex items-center justify-center rounded-md bg-[#1877F2] hover:bg-[#145DB2] transition">
         <i class="fa-brands fa-facebook text-white mr-2"></i>
         <a class="text-white font-medium" href="{{ url('/auth/facebook') }}">Login with Facebook</a>
     </div>
@@ -61,7 +69,7 @@
         <a href="{{ route('privacy.policy') }}" class="underline">Privacy Policy</a>
         and
         <a href="{{ route('data.deletion') }}" class="underline">Data Deletion Policy</a>.
-    </p>
+    </p> --}}
 </div>
 
 
