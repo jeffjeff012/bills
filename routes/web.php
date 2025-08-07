@@ -32,7 +32,7 @@ Route::get('admin/dashboard', [AdminController::class, 'dashboard'])
     ->name('admin.dashboard');
 
 Route::get('staff/dashboard', [StaffController::class, 'dashboard'])
-    ->middleware(['auth', 'verified', 'sbstaff']) // optional: add 'sbstaff' middleware if needed
+    ->middleware(['auth', 'verified']) // optional: add 'sbstaff' middleware if needed
     ->name('staff.dashboard');
 
 
