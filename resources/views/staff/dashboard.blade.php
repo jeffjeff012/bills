@@ -1,7 +1,7 @@
 <x-layouts.app :title="__('Staff Dashboard')">
     <div class="relative mb-6 w-full">
         <flux:heading size="xl" level="1">{{ __('Sangguniang Bayan') }}</flux:heading>
-        <flux:subheading size="lg" class="mb-6">{{ __('put something whatnot') }}</flux:subheading>
+        <flux:subheading size="lg" class="mb-6">{{ __('Bill creation process') }}</flux:subheading>
         <flux:separator variant="subtle" />
     </div>
 
