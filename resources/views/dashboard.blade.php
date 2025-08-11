@@ -38,7 +38,7 @@
                     </p>
                     <div class="flex justify-between items-center">
                         <p class="text-sm text-zinc-500 dark:text-zinc-400">
-                            Authored by {{ $note->creator->name ?? 'Unknown' }}
+                            Authored by {{ $note->authored_by ?? 'Unknown' }}
                         </p>
                         <p class="text-right text-sm text-white-600 mt-2 flex items-center justify-end gap-1">
                                 <flux:icon name="chat-bubble-left" class="w-4 h-4" />
