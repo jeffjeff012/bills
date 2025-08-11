@@ -24,7 +24,7 @@
             />
 
             <flux:input 
-                label="Authored By"
+                label="Who is the Author of this bill?"
                 wire:model="authored_by"
                 placeholder="Enter author name"
             />
