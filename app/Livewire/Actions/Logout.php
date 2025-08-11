@@ -2,21 +2,22 @@
 
 namespace App\Livewire\Actions;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class Logout
 {
     /**
      * Log the current user out of the application.
      */
-    public function __invoke()
+    public function __invoke(Request $request)
     {
-        Auth::guard('web')->logout();
-      
-        Session::invalidate();
-        Session::regenerateToken();
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        return redirect('/');
+        // Just go to your app's login page
+        return redirect()->route('login');
     }
+
 }

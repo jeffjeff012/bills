@@ -11,14 +11,17 @@ class GoogleController extends Controller
 {
     public function redirectToGoogle(Request $request)
     {
-        return Socialite::driver('google')->redirect();
+       return Socialite::driver('google')
+        ->with(['prompt' => 'select_account'])
+        ->redirect();
     }   
 
     public function handleGoogleCallback(Request $request)
     {
+      
         $user = Socialite::driver('google')->user();
         $findUser = User::where("google_id", $user->id)->first();
-
+       
         if(!is_null($findUser)){
             Auth::login($findUser);
         }else{
@@ -28,6 +31,7 @@ class GoogleController extends Controller
                 "google_id" => $user->id,
                 "password" => encrypt("password"),
             ]);
+            Auth::login($user);
         }
         return redirect("dashboard");
     }   
