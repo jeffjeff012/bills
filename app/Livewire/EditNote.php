@@ -12,7 +12,7 @@ use App\Enums\UserRole;
 
 class EditNote extends Component
 {
-    public $title, $content, $noteId, $due_date;
+    public $title, $content, $noteId, $due_date, $authored_by;
 
     #[On('edit-note')] 
     public function edit($id)
@@ -30,6 +30,7 @@ class EditNote extends Component
         $this->noteId = $id;
         $this->title = $note->title;
         $this->content = $note->content;
+        $this->authored_by = $note->authored_by; // Load authored_by
         $this->due_date = $note->due_date ? \Carbon\Carbon::parse($note->due_date)->format('Y-m-d') : null;
 
         Flux::modal('edit-note')->show();
@@ -40,6 +41,7 @@ class EditNote extends Component
         $this->validate([
             'title' => ['required', 'string', 'max:255', Rule::unique('notes', 'title')->ignore($this->noteId)],
             'content' => ['required', 'string'],
+            'authored_by' => ['nullable', 'string', 'max:255'], // Validate authored_by
             'due_date' => ['required', 'date'],
         ]);
 
@@ -55,6 +57,7 @@ class EditNote extends Component
 
         $note->title = $this->title;
         $note->content = $this->content;
+        $note->authored_by = $this->authored_by; // Save authored_by
         $note->due_date = $this->due_date;
         $note->save();
 
@@ -69,3 +72,4 @@ class EditNote extends Component
         return view('livewire.edit-note');
     }
 }
+

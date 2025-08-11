@@ -20,6 +20,12 @@
                 label="Due Date"
                 wire:model.defer="due_date"
             />
+
+            <flux:input 
+                label="Authored By" 
+                wire:model="authored_by"
+                placeholder="Enter author name"
+            />
             <div class="flex">
                 <flux:spacer />
 
