@@ -1,19 +1,13 @@
 <?php
 
-use App\Models\Note;
 use App\Livewire\Notes;
 use App\Livewire\NoteShow;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Appearance;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\UserController as ControllersUserController;
-use App\Models\User;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\NoteController;
-use Illuminate\Support\Carbon;
 use App\Http\Controllers\DashboardController;
 use App\Livewire\Admin\UserManagement;
 use App\Http\Controllers\GoogleController;
@@ -23,9 +17,8 @@ use App\Http\Controllers\StaffController;
 
 Route::get('/notes/{note}', NoteShow::class)->name('notes.show');
 
-Route::get('', function () {
-    return view('welcome');
-})->name('home');
+// Redirect root URL to login
+Route::redirect('/', '/login')->name('home');
 
 //Redirecting admin and sbstaff to their respective dashboard
 Route::get('admin/dashboard', [AdminController::class, 'dashboard'])
@@ -72,7 +65,7 @@ Route::middleware(['auth', 'verified']) // optional role check middleware here
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
-        Route::get('/user-management', UserManagement::class)->name('user-management');
+      Route::get('/user-management', UserManagement::class)->name('user-management');
     });
 
 //Facebook Legend
