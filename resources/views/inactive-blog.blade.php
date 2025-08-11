@@ -21,7 +21,7 @@
             </p>
             <div class="flex justify-between items-center">
                 <p class="text-sm text-zinc-500 dark:text-zinc-400">
-                    Authored by {{ $note->creator->name ?? 'Unknown' }}
+                    Authored by {{ $note->authored_by ?? 'Unknown' }}
                 </p>
                 <em class="text-sm text-zinc-500 dark:text-zinc-400">
                     {{ $note->likes }} people liked this
