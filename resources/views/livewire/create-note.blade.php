@@ -23,6 +23,12 @@
                 wire:model="due_date"
             />
 
+            <flux:input 
+                label="Authored By"
+                wire:model="authored_by"
+                placeholder="Enter author name"
+            />
+
             <div class="flex">
                 <flux:spacer />
                 <flux:button type="submit" variant="primary" wire:click="save">Save</flux:button>
