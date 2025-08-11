@@ -18,22 +18,28 @@
                           {!! nl2br(e($note->content)) !!}
 
                         </p>
+                        <div class="flex justify-between">
+                            <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-6">
+                                Published {{ $note->created_at->diffForHumans() }}
+                            </p>
+                            <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-6">
+                                Authored by {{ $note->authored_by ?? 'Unknown' }}
+                            </p>
+                        </div>
 
-                        <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-6">
-                            Published {{ $note->created_at->diffForHumans() }}
-                        </p>
-                       <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-6">
-                            Authored by {{ $note->creator->name ?? 'Unknown' }}
-                        </p>
+                            {{$note->likes}} people liked this
 
-                            <em>{{$note->likes}} people liked this</em>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+             
                 {{-- Comment Area --}}
-                
-                                
+                   <livewire:comment-section :note="$note" />    
                 </div>              
-                        <br>
-                        <br>
-                <livewire:comment-section :note="$note" />
+                        
                     
                       
                
