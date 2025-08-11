@@ -16,6 +16,7 @@ class Note extends Model
         'content', 
         'user_id',
         'due_date',
+        'authored_by',
     ];
 
     public function comments()
