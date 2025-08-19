@@ -1,9 +1,9 @@
 <div>
   
-    <flux:modal name="edit-note" class="md:w-900">
+    <flux:modal name="edit-bill" class="md:w-900">
         <div class="space-y-6">
             <div>
-                <flux:heading size="lg">Update Note</flux:heading>
+                <flux:heading size="lg">Update Bill</flux:heading>
                 <flux:text class="mt-2">Make changes to your articles.</flux:text>
             </div>
 

@@ -11,24 +11,24 @@
                        <div class="max-w-3xl mx-auto mt-10 p-6 bg-white dark:bg-zinc-800 rounded-xl shadow-md space-y-4">
                         
                         <h1 class="text-3xl font-bold text-center text-gray-800 dark:text-white">
-                            {{ $note->title }}
+                            {{ $bill->title }}
                         </h1>
                     <flux:separator />
                         <p class="text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed">
-                          {!! nl2br(e($note->content)) !!}
+                          {!! nl2br(e($bill->content)) !!}
 
                         </p>
                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center">
                             <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-2 sm:mt-0">
-                                Published {{ $note->created_at->diffForHumans() }}
+                                Published {{ $bill->created_at->diffForHumans() }}
                             </p>
                             <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-2 sm:mt-0">
-                                Authored by {{ $note->authored_by ?? 'Unknown' }}
+                                Authored by {{ $bill->authored_by ?? 'Unknown' }}
                             </p>
                         </div>
 
 
-                            {{$note->likes}} people liked this
+                            {{$bill->likes}} people liked this
 
                         <br>
                         <br>
@@ -38,7 +38,7 @@
                         <br>
              
                 {{-- Comment Area --}}
-                   <livewire:comment-section :note="$note" />    
+                   <livewire:comment-section :bill="$bill" />    
                 </div>              
                         
                     

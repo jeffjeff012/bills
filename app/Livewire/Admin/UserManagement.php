@@ -18,7 +18,51 @@ class UserManagement extends Component
     public $showEditModal = false;
     public $confirmingUserDeletion = false;
     public $userToDelete = null;
-   
+    public $name, $email, $password, $role;
+    public $showModal = false;
+    public bool $showCreateUserModal = false;
+
+
+    public function mount()
+    {
+        $user = auth()->user();
+
+        if ($user->role == UserRole::SbStaff) {
+            return redirect()->route('staff.dashboard'); // SbStaff dashboard
+        }
+
+        if ($user->role == UserRole::User) {
+            return redirect()->route('dashboard'); // User dashboard
+        }
+
+        // Admins continue normally
+    }
+
+
+    public function createUser()
+    {
+        $this->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+            'role' => 'required|in:admin,sbstaff,user',
+        ]);
+
+        User::create([
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => bcrypt($this->password),
+            'role' => UserRole::from($this->role),
+        ]);
+
+        $this->reset(['name','email','password','role']);
+        $this->showCreateUserModal = false;
+
+        session()->flash('success', 'User created successfully!');
+        $this->resetPage();
+    }
+
+
     public function edit($userId)
     {
         $user = User::findOrFail($userId);

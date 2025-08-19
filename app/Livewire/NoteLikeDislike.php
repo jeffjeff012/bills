@@ -3,20 +3,20 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\Note;
+use App\Models\Bill;
 use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
 
 
 class NoteLikeDislike extends Component
 {
-    public Note $note;
+    public Bill $bill;
     public $userVote;
 
-    public function mount(Note $note)
+    public function mount(Bill $bill)
     {
-        $this->note = $note;
-        $existingVote = Like::where('user_id', Auth::id())->where('note_id', $note->id)->first();
+        $this->bill = $bill;
+        $existingVote = Like::where('user_id', Auth::id())->where('bill_id', $bill->id)->first();
         $this->userVote = $existingVote ? ($existingVote->like ? 'like' : 'dislike') : null;
     }
 
@@ -24,52 +24,52 @@ class NoteLikeDislike extends Component
     {
         $vote = Like::firstOrNew([
             'user_id' => Auth::id(),
-            'note_id' => $this->note->id,
+            'bill_id' => $this->bill->id,
         ]);
 
         if ($vote->exists && $vote->like) {
             $vote->delete();
-            $this->note->decrement('likes');
+            $this->bill->decrement('likes');
             $this->userVote = null;
         } else {
             if ($vote->exists && !$vote->like) {
-                $this->note->decrement('dislikes');
+                $this->bill->decrement('dislikes');
             }
 
             $vote->like = true;
             $vote->save();
 
-            $this->note->increment('likes');
+            $this->bill->increment('likes');
             $this->userVote = 'like';
         }
 
-        $this->note->refresh();
+        $this->bill->refresh();
     }
 
     public function dislike()
     {
         $vote = Like::firstOrNew([
             'user_id' => Auth::id(),
-            'note_id' => $this->note->id,
+            'bill_id' => $this->bill->id,
         ]);
 
         if ($vote->exists && !$vote->like) {
             $vote->delete();
-            $this->note->decrement('dislikes');
+            $this->bill->decrement('dislikes');
             $this->userVote = null;
         } else {
             if ($vote->exists && $vote->like) {
-                $this->note->decrement('likes');
+                $this->bill->decrement('likes');
             }
 
             $vote->like = false;
             $vote->save();
 
-            $this->note->increment('dislikes');
+            $this->bill->increment('dislikes');
             $this->userVote = 'dislike';
         }
 
-        $this->note->refresh();
+        $this->bill->refresh();
     }
 
     public function render()

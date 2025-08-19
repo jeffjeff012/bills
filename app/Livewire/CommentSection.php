@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\Note;
+use App\Models\Bill;
 use App\Models\Comment;
 use Livewire\WithPagination;
 
@@ -11,7 +11,7 @@ class CommentSection extends Component
 {
     use WithPagination;
     
-    public $note;
+    public $bill;
     public $content;
 
     public $editingCommentId = null;
@@ -22,9 +22,9 @@ class CommentSection extends Component
 
     protected $paginationTheme = 'tailwind'; 
 
-    public function mount(Note $note)
+    public function mount(Bill $bill)
     {
-        $this->note = $note;
+        $this->bill = $bill;
     }
 
     public function submitComment()
@@ -33,7 +33,7 @@ class CommentSection extends Component
             'content' => 'required|string|max:500',
         ]);
 
-        $this->note->comments()->create([
+        $this->bill->comments()->create([
             'user_id' => auth()->id(),
             'content' => $this->content,
         ]);
@@ -108,7 +108,7 @@ class CommentSection extends Component
     public function render()
     {
          return view('livewire.comment-section', [
-            'comments' => $this->note
+            'comments' => $this->bill
                 ->comments()
                 ->with('user')
                 ->latest()

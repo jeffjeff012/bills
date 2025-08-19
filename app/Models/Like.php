@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Note;
+use App\Models\Bill;
 
 class Like extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['note_id', 'user_id', 'like'];
+    protected $fillable = ['bill_id', 'user_id', 'like'];
 
     /**
      * Write code on Method
@@ -22,8 +22,8 @@ class Like extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function note() 
+    public function bill() 
     {
-        return $this->belongsTo(Note::class);
+        return $this->belongsTo(Bill::class);
     }
 }

@@ -17,7 +17,7 @@
 
                 @if (auth()->user()->role === App\Enums\UserRole::Admin)
                     <flux:navlist.item icon="home" :href="route('admin.dashboard')" :current="request()->routeIs('dashboard') || request()->routeIs('admin.dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                    <flux:navlist.item icon="notebook-open" :href="route('notes')" :current="request()->routeIs('notes')" wire:navigate>{{ __('Bills') }}</flux:navlist.item> 
+                    <flux:navlist.item icon="notebook-open" :href="route('bills.index')" :current="request()->routeIs('bills.index')" wire:navigate>{{ __('Bills') }}</flux:navlist.item> 
                     <flux:navlist.item 
                         icon="users" 
                         :href="route('admin.user-management')" 
@@ -30,7 +30,7 @@
 
                 @if (auth()->user()->role === App\Enums\UserRole::SbStaff)
                     <flux:navlist.item icon="home" :href="route('staff.dashboard')" :current="request()->routeIs('dashboard') || request()->routeIs('staff.dashboard')" wire:navigate>{{ __('SB Dashboard') }}</flux:navlist.item>
-                    <flux:navlist.item icon="notebook-open" :href="route('notes')" :current="request()->routeIs('notes')" wire:navigate>{{ __('Bills') }}</flux:navlist.item> 
+                    <flux:navlist.item icon="notebook-open" :href="route('bills.index')" :current="request()->routeIs('bills.index')" wire:navigate>{{ __('Bills') }}</flux:navlist.item> 
                 @endif
 
                 @if (auth()->user()->role === App\Enums\UserRole::User)

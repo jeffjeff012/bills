@@ -8,11 +8,17 @@
         <div
             x-data="{ show: true }"
             x-show="show"
+            x-transition:enter="transform transition ease-out duration-300"
+            x-transition:enter-start="translate-y-[-10px] opacity-0"
+            x-transition:enter-end="translate-y-0 opacity-100"
+            x-transition:leave="transform transition ease-in duration-300"
+            x-transition:leave-start="translate-y-0 opacity-100"
+            x-transition:leave-end="translate-y-[-10px] opacity-0"
             x-init="setTimeout(() => { show = false }, 3000)"
-            class="fixed top-5 right-5 bg-green-600 text-white text-sm p-4 rounded-lg shadow-lg z-50"
+            class="fixed top-5 right-5 bg-green-300 border-2 border-solid border-green-800 text-green-900 text-sm p-4 rounded-lg shadow-xl z-50"
             role="alert"
         >
-            <p>{{ session('success') }}</p>
+            <p class="font-semibold">{{ session('success') }}</p>
         </div>
     @endif
 

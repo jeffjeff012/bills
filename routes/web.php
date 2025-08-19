@@ -1,7 +1,7 @@
 <?php
 
-use App\Livewire\Notes;
-use App\Livewire\NoteShow;
+use App\Livewire\Bills;
+use App\Livewire\BillShow;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Appearance;
@@ -13,12 +13,21 @@ use App\Livewire\Admin\UserManagement;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Middleware\BillsAccess;
+use App\Http\Controllers\BillController;
+
+// Root URL shows welcome page
+Route::get('/', function () {
+    return view('welcome');
+})->name('home');
+
+// Route::redirect('/', '/login')->name('home');
 
 
-Route::get('/notes/{note}', NoteShow::class)->name('notes.show');
+Route::get('/bills/{bill}', BillShow::class)->name('bills.show');
 
-// Redirect root URL to login
-Route::redirect('/', '/login')->name('home');
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 //Redirecting admin and sbstaff to their respective dashboard
 Route::get('admin/dashboard', [AdminController::class, 'dashboard'])
@@ -29,6 +38,10 @@ Route::get('staff/dashboard', [StaffController::class, 'dashboard'])
     ->middleware(['auth', 'verified']) // optional: add 'sbstaff' middleware if needed
     ->name('staff.dashboard');
 
+Route::middleware(['auth', BillsAccess::class])
+    ->get('/bills', Bills::class)
+    ->name('bills.index');
+
 //Active and Inactive Bills Handler
 Route::get('dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
@@ -38,17 +51,23 @@ Route::get('inactive-bills', [DashboardController::class, 'inactiveBills'])
     ->middleware(['auth', 'verified'])
     ->name('inactive-bills');
 
+// Restrict Access for Sbstaff and Admin in Active and Inactive Bills
+Route::middleware(['auth', 'verified', \App\Http\Middleware\UserAccess::class])
+    ->group(function () {
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('inactive-bills', [DashboardController::class, 'inactiveBills'])->name('inactive-bills');
+    });
 
 Route::middleware(['auth', 'admin'])->group(function () {
     //Notes Route
-    Route::get('notes', Notes::class)->name('notes');
+    Route::get('notes', Bills::class)->name('notes');
     Route::get('settings/password', Password::class)->name('settings.password');
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
 });
 
 Route::middleware(['auth'])->group(function () {
-    //Notes Route
-    Route::get('notes', Notes::class)->name('notes');
+    //Bills Route
+    // Route::get('bills', Bills::class)->name('bills');
     Route::redirect('settings', 'settings/profile');
 
     Route::get('settings/profile', Profile::class)->name('settings.profile');
@@ -57,16 +76,24 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //Routes for redirecting users and admin to comment
-Route::get('/blog/{note}', [BlogController::class, 'show'])->name('blog');
+Route::get('/bill/{bill}', [BlogController::class, 'show'])->name('bill');
 Route::get('/inactive-blog/{note}', [BlogController::class, 'showInactive'])
     ->name('inactive-blog');
 
-Route::middleware(['auth', 'verified']) // optional role check middleware here
+Route::middleware(['auth', 'verified', 'admin']) // apply admin middleware here
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
-      Route::get('/user-management', UserManagement::class)->name('user-management');
+        // Admin dashboard
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
+        // User management
+        Route::get('/user-management', UserManagement::class)->name('user-management');
     });
+
+Route::get('/bills/{bill}', [BillController::class, 'show'])->name('bills.show');
+// Route::post('/bills/{bill}/like', [BillController::class, 'like'])->name('bills.like');
+// Route::post('/bills/{bill}/comments', [CommentController::class, 'store'])->name('bills.comments.store');
 
 //Facebook Legend
 Route::get('/auth/facebook', [FacebookController::class, 'facebookpage']);

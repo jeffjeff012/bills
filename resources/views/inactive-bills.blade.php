@@ -6,7 +6,11 @@
     </div>
 
     @if ($notes->isEmpty())
-        <p class="text-gray-500">No inactive bills found.</p>
+    <div class="flex flex-col items-center justify-center py-12 text-center">
+        <flux:icon.cube class="w-16 h-16 text-gray-400 mb-4" />
+        <p class="text-gray-500 text-lg font-medium">No inactive bills found</p>
+        <p class="text-gray-400 text-sm mt-2">Check back later for archived legislation</p>
+    </div>
     @else  
         <div class="space-y-4">
         @foreach ($notes as $note)

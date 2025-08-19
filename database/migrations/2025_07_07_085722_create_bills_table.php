@@ -11,14 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notes', function (Blueprint $table) {
+        Schema::create('bills', function (Blueprint $table) {
             $table->id();
             $table->string('title')->unique();
             $table->text('content');
-            $table->integer('posted_by')->nullable();
+            
+            // Consolidated fields
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
+            $table->string('authored_by')->nullable();
+            $table->date('due_date')->nullable();
+
             $table->string('image')->nullable();
             $table->unsignedInteger('likes')->default(0);
             $table->unsignedInteger('dislikes')->default(0);
+            
+            $table->string('attachment')->nullable(); // For PDF uploads
             $table->timestamps();
         });
     }
@@ -28,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notes');
+        Schema::dropIfExists('bills');
     }
 };

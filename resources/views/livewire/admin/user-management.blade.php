@@ -14,6 +14,14 @@
             <p>{{ session('success') }}</p>
         </div>
     @endif
+    
+    <flux:modal.trigger wire:click="$set('showCreateUserModal', true)">
+        <flux:button class="mt-4 flex items-center gap-2">
+            <flux:icon.user class="w-5 h-5" />
+            Create User
+        </flux:button>
+    </flux:modal.trigger>
+
 
     <div class="overflow-x-auto mt-4 rounded-md shadow-sm"> {{-- slightly rounded --}}
         <table class="min-w-full text-sm text-left text-gray-700 bg-white rounded-md"> {{-- slightly rounded --}}
@@ -90,29 +98,82 @@
         <div class="mt-4">
             {{ $users->links() }}
         </div>
-        
-        <flux:modal name="edit-user-modal" wire:model="showEditModal" focusable class="max-w-lg">
-                <form wire:submit.prevent="updateUserRole" class="space-y-6">
-                <flux:heading size="lg">Edit User Role</flux:heading>
 
-                <flux:input label="Name" type="text" :value="$editName" readonly />
-                <flux:input label="Email" type="email" :value="$editEmail" readonly />
+{{-- Create user Modal --}}
+<flux:modal name="create-user" wire:model="showCreateUserModal" class="min-w-[28rem]">
+    <div class="space-y-4">
+        <flux:heading size="lg">Create New User</flux:heading>
 
-                <flux:select wire:model="editRole" label="Role">
-                    <option value="admin">Admin</option>
-                    <option value="sbstaff">SB Staff</option>
-                    <option value="user">User</option>
-                </flux:select>
+        <form wire:submit.prevent="createUser" class="space-y-4">
+        <flux:field label="Name">
+            <flux:input type="text" wire:model="name" />
+            @error('name')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </flux:field>
 
-                <div class="flex justify-end space-x-2 rtl:space-x-reverse">
-                    <flux:modal.close>
-                        <flux:button variant="filled">Cancel</flux:button>
-                    </flux:modal.close>
-                    <flux:button variant="primary" type="submit">Update</flux:button>
-                </div>
-            </form>
-        </flux:modal>
+        <flux:field label="Email">
+            <flux:input type="email" wire:model="email" />
+            @error('email')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </flux:field>
 
+        <flux:field label="Password">
+            <flux:input type="password" wire:model="password" />
+            @error('password')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </flux:field>
+
+        {{-- Role --}}
+        <flux:field label="Role">
+            <flux:select wire:model="role">
+                <option value="">-- Select Role --</option>
+                <option value="admin">Admin</option>
+                <option value="sbstaff">SbStaff</option>
+                <option value="user">User</option>
+            </flux:select>
+            @error('role')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </flux:field>
+
+        <div class="flex justify-end gap-2">
+            <flux:modal.close>
+                <flux:button type="button" variant="ghost">Cancel</flux:button>
+            </flux:modal.close>
+            <flux:button type="submit">Save</flux:button>
+        </div>
+    </form>
+
+    </div>
+</flux:modal>
+
+{{-- Edit User Modal --}}
+<flux:modal name="edit-user-modal" wire:model="showEditModal" focusable class="max-w-lg">
+        <form wire:submit.prevent="updateUserRole" class="space-y-6">
+        <flux:heading size="lg">Edit User Role</flux:heading>
+
+        <flux:input label="Name" type="text" :value="$editName" readonly />
+        <flux:input label="Email" type="email" :value="$editEmail" readonly />
+
+        <flux:select wire:model="editRole" label="Role">
+            <option value="admin">Admin</option>
+            <option value="sbstaff">SB Staff</option>
+            <option value="user">User</option>
+        </flux:select>
+
+        <div class="flex justify-end space-x-2 rtl:space-x-reverse">
+            <flux:modal.close>
+                <flux:button variant="filled">Cancel</flux:button>
+            </flux:modal.close>
+            <flux:button variant="primary" type="submit">Update</flux:button>
+        </div>
+    </form>
+</flux:modal>
+
+{{-- Delete User Modal --}}
 <flux:modal name="delete-user" class="min-w-[22rem]" wire:model="confirmingUserDeletion">
     <div class="space-y-6">
         <div>

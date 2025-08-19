@@ -3,11 +3,10 @@
 namespace App\Livewire;
 
 use Flux\Flux;
-use App\Models\Note;
+use App\Models\Bill;
 use Livewire\Component;
 
-
-class CreateNote extends Component
+class CreateBill extends Component
 {
     public $title;
     public $content;
@@ -16,9 +15,8 @@ class CreateNote extends Component
 
     protected function rules()
     {
-        return
-        [
-            'title' => 'required|string|unique:notes,title|max:255',
+        return [
+            'title' => 'required|string|unique:bills,title|max:255',
             'content' => 'required|string',
             'due_date' => 'required|date',
             'authored_by' => 'required|string|max:255',
@@ -28,25 +26,26 @@ class CreateNote extends Component
     public function save()
     {
         $this->validate();
-        Note::create([
-            "title" => $this->title,
-            "content" => $this->content,
+
+        Bill::create([
+            'title' => $this->title,
+            'content' => $this->content,
             'due_date' => $this->due_date,
-            "user_id" => auth()->id(),
+            'user_id' => auth()->id(),
             'authored_by' => $this->authored_by,
         ]);
 
         $this->reset();
 
-        Flux::modal('create-note')->close();
+        Flux::modal('create-bill')->close();
 
         session()->flash('success', 'Bill created successfully');
 
-        $this->redirectRoute('notes', navigate: true);
+        $this->redirectRoute('bills.index', navigate: true);
     }
 
     public function render()
     {
-        return view('livewire.create-note');
+        return view('livewire.create-bill');
     }
 }

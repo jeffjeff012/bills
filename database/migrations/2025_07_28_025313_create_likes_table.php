@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('note_id')->constrained('notes')->onDelete('cascade');
+             $table->foreignId('bill_id')->constrained('bills')->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->boolean('like'); // true for like, false for dislike
             $table->timestamps();
 
-            $table->unique(['user_id', 'note_id']); // one vote per user per note
+            $table->unique(['user_id', 'bill_id']); // ✅ fixed here
         });
     }
 

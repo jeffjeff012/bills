@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Bill;
 
 class Comment extends Model
 {
     protected $fillable = [
     'user_id',
-    'note_id',
+    'bill_id',
     'content',
     ];
     
@@ -17,9 +18,9 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function note()
+    public function bill()
     {
-        return $this->belongsTo(Note::class);
+        return $this->belongsTo(Bill::class);
     }
 
 }
