@@ -140,7 +140,7 @@
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
-                </button> --}}
+                </button>  --}}
             </div>
         </div>
     </nav>
@@ -185,19 +185,19 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div class="text-center animate-fade-in">
-                    <div class="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">1,247</div>
-                    <div class="text-gray-600 dark:text-gray-400">Active Bills</div>
+                    <div class="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">{{ number_format($totalBills) }}</div>
+                    <div class="text-gray-600 dark:text-gray-400">Bills Published</div>
                 </div>
                 <div class="text-center animate-fade-in" style="animation-delay: 0.2s;">
-                    <div class="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">89%</div>
+                    <div class="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">{{ number_format($userEngagement, 0) }}%</div>
                     <div class="text-gray-600 dark:text-gray-400">User Engagement</div>
                 </div>
                 <div class="text-center animate-fade-in" style="animation-delay: 0.4s;">
-                    <div class="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">25,431</div>
+                    <div class="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">{{ number_format($totalComments) }}</div>
                     <div class="text-gray-600 dark:text-gray-400">Total Comments</div>
                 </div>
                 <div class="text-center animate-fade-in" style="animation-delay: 0.6s;">
-                    <div class="text-4xl font-bold text-red-600 dark:text-red-400 mb-2">12,847</div>
+                    <div class="text-4xl font-bold text-red-600 dark:text-red-400 mb-2">  {{ number_format($totalVotes) }}</div>
                     <div class="text-gray-600 dark:text-gray-400">Community Votes</div>
                 </div>
             </div>
