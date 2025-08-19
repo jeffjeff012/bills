@@ -14,11 +14,24 @@ class AdminMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle($request, Closure $next)
     {
-        if(auth()->user()->role != UserRole::Admin){
-            return redirect()->route("dashboard");
+        $user = auth()->user();
+
+        if (!$user) {
+            return redirect()->route('login');
         }
-        return $next($request);
+
+        switch ($user->role) {
+            case \App\Enums\UserRole::Admin:
+                return $next($request); // allow admin to proceed
+            case \App\Enums\UserRole::SbStaff:
+                return redirect()->route('staff.dashboard'); // SbStaff to staff dashboard
+            case \App\Enums\UserRole::User:
+            default:
+                return redirect()->route('dashboard'); // normal user to user dashboard
+        }
     }
+
+
 }
