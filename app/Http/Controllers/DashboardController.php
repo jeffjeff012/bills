@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Note;
+use App\Models\Bill;
 use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $notes = Note::where(function ($query) {
+        $bills = Bill::where(function ($query) {
                 $query->whereNull('due_date')
                       ->orWhereDate('due_date', '>=', Carbon::today());
             })
@@ -18,12 +18,12 @@ class DashboardController extends Controller
             ->latest()
             ->get();
 
-        return view('dashboard', compact('notes'));
+        return view('dashboard', compact('bills'));
     }
 
     public function inactiveBills()
     {
-        $notes = Note::whereDate('due_date', '<', Carbon::today())
+        $notes = Bill::whereDate('due_date', '<', Carbon::today())
             ->latest()
             ->get();
 
