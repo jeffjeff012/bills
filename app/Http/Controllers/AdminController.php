@@ -8,6 +8,19 @@ use App\Models\Bill;
 
 class AdminController extends Controller
 {
+
+    public function viewDetails()
+    {
+        $user = auth()->user();
+
+        // if (!in_array($user->role, ['Admin', 'SbStaff'])) {
+        //     abort(403); // forbidden for everyone else
+        // }
+
+        $bills = Bill::with('comments')->get();
+        return view('view-details', compact('bills'));
+    }
+
     public function dashboard()
     {
         // Count of users

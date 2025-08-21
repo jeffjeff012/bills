@@ -17,8 +17,7 @@ class CommentController extends Controller
         $comment = new Comment();
         $comment->content = $request->content;
         $comment->bill_id = $bill->id;
-        $comment->user_id = auth()->id(); // If you have authentication
-        $comment->save();
+        $comment->user_id = auth()->id();
 
         return redirect()->route('bills.show', $bill->id)
                         ->with('success', 'Comment added successfully!');

@@ -8,10 +8,34 @@ use App\Models\Bill;
 
 class StaffController extends Controller
 {
-   public function dashboard()
+    public $selectedBill;
+
+    public function viewBill($billId)
+    {
+        $this->selectedBill = Bill::with('comments', 'likes')->findOrFail($billId);
+    }
+
+    public function viewDetails()
+    {
+        
+
+        $bills = Bill::with('comments')->get();
+        return view('view-details', compact('bills'));
+    }
+
+    public function showBillDetails(Bill $bill)
+    {
+        // Load comments associated with this bill
+        $bill->load('comments.user');
+
+        return view('view-details', compact('bill'));
+    }
+
+    public function dashboard()
     {
 
         $user = auth()->user();
+
 
         // Redirect Admin if they try to access Staff dashboard
         if ($user->role === \App\Enums\UserRole::Admin) {
@@ -33,13 +57,25 @@ class StaffController extends Controller
         $totalLikes = $bills->sum('likes_count');
         $totalDislikes = $bills->sum('dislikes_count');
 
+        // Get the bill with the most likes (Hot Bill)
+        $hotBill = Bill::withCount('likes')
+            ->orderByDesc('likes_count')
+            ->first();
+
+         // Get the bill with the most comments (Most Commented Bill)
+        $mostCommentedBill = Bill::withCount('comments')
+            ->orderByDesc('comments_count')
+            ->first();
+
         return view('staff.dashboard', compact(
             'userCount',
             'billCount',
             'totalLikes',
             'totalDislikes',
             'bills',
-            'users'
+            'users',
+            'hotBill',
+            'mostCommentedBill'
         ));
     }
 }

@@ -129,9 +129,10 @@
                             </div>
                             
                             {{-- Action button --}}
-                            <button class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors">
-                                View Details →
-                            </button>
+                            <a href="{{ route('report-of-bills') }}" 
+   class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors">
+    View Details →
+</a>
                         </div>
                     </div>
                 </div>
@@ -201,9 +202,10 @@
                             </div>
                             
                             {{-- Action button --}}
-                            <button class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors">
-                                View Details →
-                            </button>
+                            <a href="{{ route('report-of-bills') }}" 
+   class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors">
+    View Details →
+</a>
                         </div>
                     </div>
                 </div>

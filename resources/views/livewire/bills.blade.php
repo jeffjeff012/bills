@@ -45,7 +45,7 @@
             <td class="px-4 py-2 text-black dark:text-white">{{ str($bill->content)->words(8) }}</td>
 
             <td class="px-4 py-2">
-                @if (\Carbon\Carbon::parse($bill->due_date)->gte(\Carbon\Carbon::today()))
+               @if (\Carbon\Carbon::parse($bill->due_date)->gt(\Carbon\Carbon::today()))
                     <flux:badge color="lime" size="lg" pill>Active</flux:badge>
                 @else
                     <flux:badge color="red" size="lg" pill>Inactive</flux:badge>

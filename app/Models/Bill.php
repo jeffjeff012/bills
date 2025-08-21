@@ -11,6 +11,7 @@ use App\Models\User;
 class Bill extends Model
 {
     use HasFactory;
+    
 
     protected $fillable = [
         'title',
@@ -18,6 +19,7 @@ class Bill extends Model
         'user_id',
         'due_date',
         'authored_by',
+        'attachment',
     ];
 
     // Relationships

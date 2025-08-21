@@ -51,6 +51,12 @@ class CommentSection extends Component
             abort(403);
         }
 
+        // Restrict edit if more than 5 minutes have passed
+        if ($comment->created_at->diffInMinutes(now()) > 5) {
+            session()->flash('error', 'You can only edit your comment within 5 minutes of posting.');
+            return;
+        }
+
         $this->editingCommentId = $commentId;
         $this->editedContent = $comment->content;
     }
@@ -61,6 +67,14 @@ class CommentSection extends Component
 
         if ($comment->user_id !== auth()->id()) {
             abort(403);
+        }
+
+        // Restrict edit if more than 5 minutes have passed
+        if ($comment->created_at->diffInMinutes(now()) > 5) {
+            session()->flash('error', 'Editing time has expired. You can only edit within 5 minutes.');
+            $this->editingCommentId = null;
+            $this->editedContent = '';
+            return;
         }
 
         $this->validate([

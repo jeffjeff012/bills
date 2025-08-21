@@ -24,14 +24,13 @@ class AdminMiddleware
 
         switch ($user->role) {
             case \App\Enums\UserRole::Admin:
-                return $next($request); // allow admin to proceed
+                return $next($request); 
             case \App\Enums\UserRole::SbStaff:
-                return redirect()->route('staff.dashboard'); // SbStaff to staff dashboard
+                return $next($request);  
             case \App\Enums\UserRole::User:
             default:
-                return redirect()->route('dashboard'); // normal user to user dashboard
+                return redirect()->route('dashboard');
         }
     }
-
 
 }

@@ -9,22 +9,22 @@
     <div class="p-6 center">
         <div class="max-w-3xl mx-auto mt-10 p-6 bg-white dark:bg-zinc-800 rounded-xl shadow-md space-y-4">
             <h1 class="text-3xl font-bold text-center text-gray-800 dark:text-white">
-                {{ $note->title }}
+                {{ $bill->title }}
             </h1>
             <flux:separator />
             <p class="text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed">
-                {!! nl2br(e($note->content)) !!}
+                {!! nl2br(e($bill->content)) !!}
             </p>
 
             <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-6">
-                Published {{ $note->created_at->diffForHumans() }}
+                Published {{ $bill->created_at->diffForHumans() }}
             </p>
             <div class="flex justify-between items-center">
                 <p class="text-sm text-zinc-500 dark:text-zinc-400">
-                    Authored by {{ $note->authored_by ?? 'Unknown' }}
+                    Authored by {{ $bill->authored_by ?? 'Unknown' }}
                 </p>
                 <em class="text-sm text-zinc-500 dark:text-zinc-400">
-                    {{ $note->likes }} people liked this
+                    {{ $bill->likes }} people liked this
                 </em>
             </div>
         </div>
@@ -33,11 +33,11 @@
         <div class="mt-8">
             <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-4">Comments</h2>
 
-            @if ($note->comments->isEmpty())
+            @if ($bill->comments->isEmpty())
                 <p class="text-sm text-gray-500 dark:text-gray-400 italic">No one commented.</p>
             @else
                 <div class="space-y-4">
-                    @foreach ($note->comments as $comment)
+                    @foreach ($bill->comments as $comment)
                         <div class="p-4 bg-zinc-100 dark:bg-zinc-700 rounded-lg shadow">
                             <p class="text-sm text-gray-800 dark:text-gray-200">
                                 {{ $comment->user->name ?? 'Anonymous' }} said:

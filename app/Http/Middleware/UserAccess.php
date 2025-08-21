@@ -20,7 +20,7 @@ class UserAccess
             // Redirect SbStaff and Admin away
             if ($user->role === UserRole::SbStaff) {
                 return redirect()->route('staff.dashboard');
-            } else { // Admin
+            } else {
                 return redirect()->route('admin.dashboard');
             }
         }

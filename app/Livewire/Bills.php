@@ -8,6 +8,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Enums\UserRole;
 
+
 class Bills extends Component
 {
     use WithPagination;
@@ -72,6 +73,6 @@ class Bills extends Component
 
         session()->flash('success', 'Bill deleted successfully.');
 
-        $this->redirectRoute('bills', navigate: true);
+        $this->redirectRoute('bills.index', navigate: true);
     }
 }

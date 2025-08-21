@@ -1,51 +1,154 @@
- <x-layouts.app >
- <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <!-- Your content -->
-<a href="/dashboard" class="flex underlined">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-    </svg><small class="mt-1 ml-2">Back</small>
-</a>
+<x-layouts.app>
+    <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900">
+        <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+            <!--content -->
 
-    <div class="p-6 center">
-                       <div class="max-w-3xl mx-auto mt-10 p-6 bg-white dark:bg-zinc-800 rounded-xl shadow-md space-y-4">
+            @php
+                $user = auth()->user();
+                $backUrl = match($user->role) {
+                    \App\Enums\UserRole::Admin, \App\Enums\UserRole::SbStaff => '/report-of-bills',
+                    default => '/dashboard',
+                };
+            @endphp
+
+            <!-- Enhanced Back Button -->
+            <div class="mb-8">
+                <a href="{{ $backUrl }}" class="group inline-flex items-center px-4 py-2 rounded-lg bg-white dark:bg-zinc-800 shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200 dark:border-zinc-700 hover:border-blue-300 dark:hover:border-blue-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500 dark:text-zinc-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                    </svg>
+                    <span class="ml-2 text-sm font-medium text-gray-700 dark:text-zinc-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">
+                        Back
+                    </span>
+                </a>
+            </div>
+
+            <!-- Main Content Card -->
+            <div class="relative">
+                <div class="max-w-4xl mx-auto bg-white dark:bg-zinc-800 rounded-2xl shadow-xl border border-gray-100 dark:border-zinc-700 overflow-hidden">
+                    
+                    <!-- Header Section with Gradient -->
+                    <div class="relative bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 px-8 py-12">
+                        <div class="absolute inset-0 bg-black/10"></div>
+                        <div class="relative z-10">
+                            <h1 class="text-4xl md:text-5xl font-bold text-center text-white leading-tight">
+                                {{ $bill->title }}
+                            </h1>
+                        </div>
+                        <!-- Decorative elements -->
+                        <div class="absolute top-4 left-4 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+                        <div class="absolute bottom-4 right-4 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+                    </div>
+
+                    <!-- Content Section -->
+                    <div class="px-8 py-8 space-y-8">
                         
-                        <h1 class="text-3xl font-bold text-center text-gray-800 dark:text-white">
-                            {{ $bill->title }}
-                        </h1>
-                    <flux:separator />
-                        <p class="text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed">
-                          {!! nl2br(e($bill->content)) !!}
-
-                        </p>
-                       <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center">
-                            <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-2 sm:mt-0">
-                                Published {{ $bill->created_at->diffForHumans() }}
-                            </p>
-                            <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-2 sm:mt-0">
-                                Authored by {{ $bill->authored_by ?? 'Unknown' }}
-                            </p>
+                        <!-- Bill Content -->
+                        <div class="prose prose-lg max-w-none dark:prose-invert">
+                            <div class="text-gray-700 dark:text-zinc-300 leading-relaxed text-lg font-light">
+                                {!! nl2br(e($bill->content)) !!}
+                            </div>
                         </div>
 
+                        <!-- Attachment Section -->
+                        @if($bill->attachment)
+                            <div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-800 rounded-lg flex items-center justify-center">
+                                            <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="text-sm font-semibold text-blue-900 dark:text-blue-100">
+                                            PDF Attachment Available
+                                        </h3>
+                                        <a href="{{ Storage::url($bill->attachment) }}" target="_blank" 
+                                           class="inline-flex items-center mt-2 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium text-sm transition-colors duration-200">
+                                            <span>View PDF Attachment</span>
+                                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
 
-                            {{$bill->likes}} people liked this
+                        <!-- Separator -->
+                        <div class="border-t border-gray-200 dark:border-zinc-700"></div>
 
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-             
-                {{-- Comment Area --}}
-                   <livewire:comment-section :bill="$bill" />    
-                </div>              
-                        
-                    
-                      
-               
+                        <!-- Meta Information -->
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-gray-100 dark:bg-zinc-700 rounded-full flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-gray-600 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Published</p>
+                                    <p class="text-sm text-gray-500 dark:text-zinc-400">
+                                        {{ $bill->created_at->diffForHumans() }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-gray-100 dark:bg-zinc-700 rounded-full flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-gray-600 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Author</p>
+                                    <p class="text-sm text-gray-500 dark:text-zinc-400">
+                                        {{ $bill->authored_by ?? 'Unknown' }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Likes Section -->
+                        <div class="bg-gradient-to-r from-pink-50 to-rose-50 dark:from-pink-900/20 dark:to-rose-900/20 rounded-xl p-6 border border-pink-200 dark:border-pink-800">
+                            <div class="flex items-center justify-center space-x-3">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-8 h-8 bg-pink-100 dark:bg-pink-800 rounded-full flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-pink-600 dark:text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="text-lg font-semibold text-gray-900 dark:text-white">
+                                        {{ $bill->likes }}
+                                    </span>
+                                </div>
+                                <span class="text-gray-600 dark:text-zinc-300">
+                                    people liked this
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Comments Section Divider -->
+                        <div class="relative py-8">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-gray-300 dark:border-zinc-600"></div>
+                            </div>
+                            <div class="relative flex justify-center">
+                                <span class="bg-white dark:bg-zinc-800 px-6 text-lg font-semibold text-gray-700 dark:text-zinc-300">
+                                    Comments
+                                </span>
+                            </div>
+                        </div>
+
+                        {{-- Comment Area --}}
+                        <div class="mt-8">
+                            <livewire:comment-section :bill="$bill" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    
-
-</div>
 </x-layouts.app>
