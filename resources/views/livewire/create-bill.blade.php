@@ -29,6 +29,15 @@
                 placeholder="Enter author name"
             />
 
+             <!--  PDF Upload -->
+            <flux:input 
+                type="file" 
+                label="Upload PDF Attachment" 
+                wire:model="attachment"
+                accept="application/pdf"
+            />
+            @error('attachment') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+
             <div class="flex">
                 <flux:spacer />
                 <flux:button type="submit" variant="primary" wire:click="save">Save</flux:button>

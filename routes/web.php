@@ -16,6 +16,8 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Middleware\BillsAccess;
 use App\Http\Controllers\BillController;
+use App\Http\Controllers\ReportController;
+use App\Enums\UserRole;
 
 // Root URL shows welcome page
 Route::get('/', function () {
@@ -47,7 +49,7 @@ Route::get('dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::get('inactive-bills', [DashboardController::class, 'inactiveBills'])
+Route::get('/inactive-bills', [DashboardController::class, 'inactiveBills'])
     ->middleware(['auth', 'verified'])
     ->name('inactive-bills');
 
@@ -77,7 +79,7 @@ Route::middleware(['auth'])->group(function () {
 
 //Routes for redirecting users and admin to comment
 Route::get('/bill/{bill}', [BlogController::class, 'show'])->name('bill');
-Route::get('/inactive-blog/{note}', [BlogController::class, 'showInactive'])
+Route::get('/inactive-blog/{bill}', [BlogController::class, 'showInactive'])
     ->name('inactive-blog');
 
 Route::middleware(['auth', 'verified', 'admin']) // apply admin middleware here
@@ -91,6 +93,22 @@ Route::middleware(['auth', 'verified', 'admin']) // apply admin middleware here
         Route::get('/user-management', UserManagement::class)->name('user-management');
     });
 
+
+
+// Route::middleware(['auth', 'admin'])->get('/report-of-bills', function () {
+//     return view('report-of-bills');
+// })->name('report-of-bills');
+
+
+Route::middleware(['auth', 'admin'])->get('/report-of-bills', [AdminController::class, 'viewDetails'])
+    ->name('report-of-bills');
+
+
+Route::get('/staff/bills/{bill}', [StaffController::class, 'showBillDetails'])->name('bills.show-bill-details');
+// Route::get('/report-of-bills', [StaffController::class, 'viewDetails'])
+//      ->name('report-of-bills');
+// Route::get('/report-of-bills', [AdminController::class, 'viewDetails'])
+//      ->name('report-of-bills');
 Route::get('/bills/{bill}', [BillController::class, 'show'])->name('bills.show');
 // Route::post('/bills/{bill}/like', [BillController::class, 'like'])->name('bills.like');
 // Route::post('/bills/{bill}/comments', [CommentController::class, 'store'])->name('bills.comments.store');
