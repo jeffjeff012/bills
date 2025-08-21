@@ -1,8 +1,14 @@
 <div>
-    <form wire:submit.prevent="submitComment" class="mb-4">
-        <textarea wire:model="content" class="w-full p-2 border rounded" placeholder="Write a comment..."></textarea>
-        <button type="submit" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded">Post Comment</button>
-    </form>
+    @php
+        use App\Enums\UserRole;
+    @endphp
+
+    @if(auth()->check() && auth()->user()->role === UserRole::User)
+        <form wire:submit.prevent="submitComment" class="mb-4">
+            <textarea wire:model="content" class="w-full p-2 border rounded" placeholder="Write a comment..."></textarea>
+            <button type="submit" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded">Post Comment</button>
+        </form>
+    @endif
 
     @if (session('success'))
         <div
@@ -46,15 +52,18 @@
                     
                     {{-- Only show edit/delete if comment belongs to user --}}
                     
-                        <div class="mt-10 space-x-2">
+                      <div class="mt-10 space-x-2">
                             @can('update', $comment)
-                            <button wire:click="startEditing({{ $comment->id }})" class="text-blue-500">Edit</button>
+                            @if($comment->canEdit())
+                                <button wire:click="startEditing({{ $comment->id }})" class="text-blue-500">Edit</button>
+                            @endif
                             @endcan
 
                             @can('delete', $comment)
-                            <button wire:click="confirmCommentDeletion({{ $comment->id }})" class="text-red-500">Delete</button>
+                                <button wire:click="confirmCommentDeletion({{ $comment->id }})" class="text-red-500">Delete</button>
                             @endcan
                         </div>
+
                     
 
                     <flux:modal name="delete-comment" class="min-w-[22rem]" wire:model="confirmingCommentDeletion">
