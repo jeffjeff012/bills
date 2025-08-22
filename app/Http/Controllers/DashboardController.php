@@ -16,7 +16,7 @@ class DashboardController extends Controller
     })
     ->withCount('comments')
     ->latest()
-    ->get();
+    ->paginate(6);
 
 
         return view('dashboard', compact('bills'));
@@ -26,7 +26,7 @@ class DashboardController extends Controller
     {
         $bills = Bill::whereDate('due_date', '<', Carbon::today()) // strictly before today
         ->latest()
-        ->get();
+        ->paginate(6);;
 
         return view('inactive-bills', compact('bills'));
     }

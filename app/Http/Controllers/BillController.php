@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 
 class BillController extends Controller
 {
-    public function show()
+    public function show(Bill $bill)
     {
-        $bills = Bill::withCount(['likes', 'comments'])->with('comments.user')->latest()->get();
+        // Load relationships
+        $bill->load(['comments.user']);
 
-
-        return view('bills.show', compact('bills'));
+        return view('bills.show', compact('bill'));
     }
 
 }

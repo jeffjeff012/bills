@@ -33,36 +33,32 @@ class StaffController extends Controller
 
     public function dashboard()
     {
-
         $user = auth()->user();
-
 
         // Redirect Admin if they try to access Staff dashboard
         if ($user->role === \App\Enums\UserRole::Admin) {
             return redirect()->route('admin.dashboard');
         }
 
-        $users = User::all();
+        $users = User::paginate(5);
         
         $userCount = Schema::hasTable('users') ? User::count() : 0;
         $billCount = Schema::hasTable('bills') ? Bill::count() : 0;
 
-        // Get total likes and dislikes by summing the counts
-        $bills = Bill::withCount(['likes as likes_count', 'dislikes as dislikes_count'])->get();
+        // ✅ Use paginate instead of get
+        $bills = Bill::withCount(['likes as likes_count', 'dislikes as dislikes_count'])
+            ->paginate(5)   
+            ->withQueryString();
 
-        $bills = Bill::withCount(['likes as likes_count'])->get();
-        $totalLikes = $bills->sum('likes_count');
-        $totalDislikes = $bills->sum('dislikes_count');
-            
-        $totalLikes = $bills->sum('likes_count');
-        $totalDislikes = $bills->sum('dislikes_count');
+        $totalLikes = Bill::withCount('likes')->get()->sum('likes_count');
+        $totalDislikes = Bill::withCount('dislikes')->get()->sum('dislikes_count');
 
         // Get the bill with the most likes (Hot Bill)
         $hotBill = Bill::withCount('likes')
             ->orderByDesc('likes_count')
             ->first();
 
-         // Get the bill with the most comments (Most Commented Bill)
+        // Get the bill with the most comments (Most Commented Bill)
         $mostCommentedBill = Bill::withCount('comments')
             ->orderByDesc('comments_count')
             ->first();
@@ -78,4 +74,5 @@ class StaffController extends Controller
             'mostCommentedBill'
         ));
     }
+
 }
