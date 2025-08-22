@@ -24,8 +24,8 @@
         <!-- Bills Grid -->
         <div class="grid auto-rows-min gap-6 md:grid-cols-2 xl:grid-cols-3">
             @forelse ($bills as $bill)
-                <div class="group relative overflow-hidden rounded-2xl border-2 border-green-200 dark:border-green-800/50 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-gray-800 dark:to-gray-900 shadow-md hover:shadow-2xl hover:scale-[1.03] hover:border-green-300 dark:hover:border-green-700 transition-all duration-300 ease-in-out">
-                    
+                <div class="group relative overflow-hidden rounded-2xl border-2 border-green-200 dark:border-green-800/50  to-emerald-50 dark:from-gray-800 dark:to-gray-900 shadow-md hover:shadow-2xl hover:scale-[1.03] hover:border-green-300 dark:hover:border-green-700 transition-all duration-300 ease-in-out">
+                    {{-- bg-gradient-to-br from-green-50 --}}
                     <!-- Status Badge -->
                     <div class="absolute top-4 right-4 z-10">
                         <span class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-full shadow-sm">
@@ -54,10 +54,13 @@
                         
                         <!-- Interactive Section -->
                         <div class="mt-auto space-y-4">
-                            <!-- Big Like/Dislike Buttons -->
-                            <div class="flex justify-center">
-                                <div class="bg-white dark:bg-gray-700 rounded-2xl p-3 shadow-lg border border-gray-200 dark:border-gray-600">
-                                    <livewire:note-like-dislike :bill="$bill" :key="$bill->id" />
+                            <!-- Likes Summary -->
+                            <div class="mb-3">
+                                <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-full border border-red-200 dark:border-red-800/50">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                                        <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                                    </svg>
+                                    <span class="text-sm font-medium">{{ $bill->likes }} liked this</span>
                                 </div>
                             </div>
 
@@ -113,7 +116,7 @@
                     </div>
                 </div>
             @empty
-                <!-- Enhanced Empty State -->
+                <!--  Empty State -->
                 <div class="col-span-full flex flex-col justify-center items-center py-16 text-center">
                     <div class="relative mb-6">
                         <div class="w-20 h-20 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center">
@@ -137,6 +140,9 @@
             @endforelse
         </div>
     </div>
+    <div class="mt-4">
+    {{ $bills->links() }}
+</div>
 </x-layouts.app>
 
 

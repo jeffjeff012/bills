@@ -100,4 +100,10 @@
             </p>
         </div>
     @endif
+    
+<div class="mt-4">
+    {{ $bills->links() }}
+</div>
+
+
 </x-layouts.app>

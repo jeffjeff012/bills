@@ -6,7 +6,7 @@
             @php
                 $user = auth()->user();
                 $backUrl = match($user->role) {
-                    \App\Enums\UserRole::Admin, \App\Enums\UserRole::SbStaff => '/report-of-bills',
+                    \App\Enums\UserRole::Admin, \App\Enums\UserRole::SbStaff => '/bills',
                     default => '/dashboard',
                 };
             @endphp
@@ -111,24 +111,13 @@
                             </div>
                         </div>
 
-                        <!-- Likes Section -->
-                        <div class="bg-gradient-to-r from-pink-50 to-rose-50 dark:from-pink-900/20 dark:to-rose-900/20 rounded-xl p-6 border border-pink-200 dark:border-pink-800">
-                            <div class="flex items-center justify-center space-x-3">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-8 h-8 bg-pink-100 dark:bg-pink-800 rounded-full flex items-center justify-center">
-                                        <svg class="w-4 h-4 text-pink-600 dark:text-pink-400" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                        </svg>
-                                    </div>
-                                    <span class="text-lg font-semibold text-gray-900 dark:text-white">
-                                        {{ $bill->likes }}
-                                    </span>
-                                </div>
-                                <span class="text-gray-600 dark:text-zinc-300">
-                                    people liked this
-                                </span>
+                        <!-- Interactive Like/Dislike Section -->
+                        <div class="flex justify-center">
+                            <div class="bg-white dark:bg-gray-700 rounded-2xl p-4 shadow-lg border border-gray-200 dark:border-gray-600">
+                                <livewire:note-like-dislike :bill="$bill" :key="$bill->id" />
                             </div>
                         </div>
+
 
                         <!-- Comments Section Divider -->
                         <div class="relative py-8">

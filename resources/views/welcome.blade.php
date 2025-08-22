@@ -323,7 +323,7 @@
                                     </div>
 
                                     <!-- Action button -->
-                                    <a href="{{ route('bills.show', $hotBill->id) }}" 
+                                    <a href="{{ route('bills.show', $mostCommentedBill->id) }}" 
                                         class="relative z-[9999] bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-all duration-300 hover:shadow-lg">
                                         View Details →
                                     </a>

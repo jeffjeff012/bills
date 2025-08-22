@@ -36,12 +36,12 @@
 
                 @if (auth()->user()->role === App\Enums\UserRole::SbStaff)
                     <flux:navlist.item icon="home" :href="route('staff.dashboard')" :current="request()->routeIs('dashboard') || request()->routeIs('staff.dashboard')" wire:navigate>{{ __('SB Dashboard') }}</flux:navlist.item>
-                    <flux:navlist.item icon="notebook-open" :href="route('bills.index')" :current="request()->routeIs('bills.index')" wire:navigate>{{ __('Bills') }}</flux:navlist.item> 
+                    <flux:navlist.item icon="notebook-open" :href="route('report-of-bills')" :current="request()->routeIs('report-of-bills')" wire:navigate>{{ __('Report of Bills') }}</flux:navlist.item> 
                     <flux:navlist.item icon="megaphone" 
-                                    :href="route('report-of-bills')" 
-                                    :current="request()->routeIs('report-of-bills')" 
+                                    :href="route('bills.index')" 
+                                    :current="request()->routeIs('bills.index')" 
                                     wire:navigate>
-                        {{ __('Report of Bills') }}
+                        {{ __('Bills') }}
                     </flux:navlist.item>                 
                 @endif
 
