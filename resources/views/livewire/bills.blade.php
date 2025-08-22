@@ -1,12 +1,25 @@
 <div>
     <div class="relative mb-6 w-full">
-        <flux:heading size="xl" level="1">{{ __('Bills') }}</flux:heading>
+        <flux:heading size="xl" level="1">{{ __('Report of Bills') }}</flux:heading>
         <flux:subheading size="lg" class="mb-6">{{ __('Make and add changes') }}</flux:subheading>
         <flux:separator variant="subtle" />
 
         <flux:modal.trigger name="create-bill">
             <flux:button class="mt-4">Create New</flux:button>
         </flux:modal.trigger>
+
+        <!-- Notice -->
+        @if(auth()->user()->role !== \App\Enums\UserRole::Admin)
+            <div class="mt-4 mb-4 bg-blue-50 border border-blue-300 rounded-xl p-5 shadow-sm flex items-start gap-4">
+                <flux:icon.information-circle class="w-8 h-8 text-blue-600 flex-shrink-0" />
+                <div>
+                    <p class="text-blue-900 text-base md:text-lg leading-relaxed">
+                        You can only <span class="font-semibold">edit</span> and <span class="font-semibold">delete</span> the 
+                        <span class="font-semibold">Bills</span> you created.  
+                    </p>
+                </div>
+            </div>
+        @endif
 
         @session('success')
             <div
@@ -57,25 +70,29 @@
             <td class="px-4 py-2 text-center text-black dark:text-white">{{ $bill->comments_count }}</td>
 
             <td class="px-4 py-2 text-center space-x-2">
-                    <flux:button
-                            icon="pencil-square"
-                            wire:click="edit({{ $bill->id }})"
-                            class="!bg-transparent !border-none !shadow-none !text-blue-800 dark:!text-white hover:!text-blue-800 hover:underline dark:hover:!text-blue-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
-                            variant="ghost"
-                        >
-                            Edit
-                        </flux:button>
+    @can('update', $bill)
+        <flux:button
+            icon="pencil-square"
+            wire:click="edit({{ $bill->id }})"
+            class="!bg-transparent !border-none !shadow-none !text-blue-800 dark:!text-white hover:!text-blue-800 hover:underline dark:hover:!text-blue-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
+            variant="ghost"
+        >
+            Edit
+        </flux:button>
+    @endcan
 
+    @can('delete', $bill)
+        <flux:button
+            icon="trash"
+            wire:click="confirmDelete({{ $bill->id }})"
+            class="!bg-transparent !border-none !shadow-none !text-red-800 dark:!text-white hover:!text-red-800 hover:underline dark:hover:!text-red-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
+            variant="ghost"
+        >
+            Delete
+        </flux:button>
+    @endcan
+</td>
 
-                        <flux:button
-                            icon="trash"
-                            wire:click="confirmDelete({{ $bill->id }})"
-                            class="!bg-transparent !border-none !shadow-none !text-red-800 dark:!text-white hover:!text-red-800 hover:underline dark:hover:!text-red-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
-                            variant="ghost"
-                        >
-                            Delete
-                        </flux:button>
-            </td>
         </tr>
     @empty
         <tr>

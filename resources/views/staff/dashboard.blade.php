@@ -24,34 +24,32 @@
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
     <!-- Users -->
-    <flux:modal.trigger name="all-users">
-        <div class="bg-gradient-to-br from-blue-500 to-cyan-600 border border-blue-500 text-white p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h2 class="text-sm font-medium uppercase">Users</h2>
-                    <p class="text-3xl font-bold mt-2">{{ $userCount }}</p>
-                </div>
-                <flux:icon name="user-group" class="w-10 h-10 text-white" />
-            </div>
+        <a href="#all-users-section"
+   class="block bg-gradient-to-br from-blue-500 to-cyan-600 border border-blue-500 text-white p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer">
+    <div class="flex items-center justify-between">
+        <div>
+            <h2 class="text-sm font-medium uppercase">Users</h2>
+            <p class="text-3xl font-bold mt-2">{{ $userCount }}</p>
         </div>
-    </flux:modal.trigger>
-
+        <flux:icon name="user-group" class="w-10 h-10 text-white" />
+    </div>
+</a>
     <!-- Bills Created -->
-    <flux:modal.trigger name="all-bills">
-        <div class="bg-gradient-to-br from-purple-500 to-blue-600 border border-blue-500 text-white p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h2 class="text-sm font-medium uppercase">Bills Created</h2>
-                    <p class="text-3xl font-bold mt-2">{{ $billCount }}</p>
-                </div>
-                <flux:icon name="scale" class="w-10 h-10 text-white" />
+    <a href="/report-of-bills" class="block">
+    <div class="bg-gradient-to-br from-purple-500 to-blue-600 border border-blue-500 text-white p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer">
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-sm font-medium uppercase">Bills Created</h2>
+                <p class="text-3xl font-bold mt-2">{{ $billCount }}</p>
             </div>
+            <flux:icon name="scale" class="w-10 h-10 text-white" />
         </div>
-    </flux:modal.trigger>
+    </div>
+</a>
 
 
     <!-- Likes Modal -->
-    <flux:modal.trigger name="likes-summary">
+    <a href="/report-of-bills">
         <div class="bg-gradient-to-br from-blue-400 to-blue-500 border border-blue-500 text-white p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer">
             <div class="flex items-center justify-between">
                 <div>
@@ -61,10 +59,10 @@
                 <flux:icon name="hand-thumb-up" class="w-10 h-10 text-black-500" />
             </div>
         </div>
-    </flux:modal.trigger>
+    </a>
 
     <!-- Dislikes -->
-    <flux:modal.trigger name="dislikes-summary">
+    <a href="/report-of-bills">
         <div class="bg-gradient-to-br from-teal-500 to-orange-600 border border-blue-500 text-white p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer">
             <div class="flex items-center justify-between">
                 <div>
@@ -74,7 +72,8 @@
                 <flux:icon name="hand-thumb-down" class="w-10 h-10 text-black-500" />
             </div>
         </div>
-    </flux:modal.trigger>
+    </a>
+ 
 
 </div>
 
@@ -128,7 +127,7 @@
                             </div>
                             
                             {{-- Action button --}}
-                            <a href="{{ route('report-of-bills') }}" 
+                            <a href="{{ route('bills.index') }}" 
    class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors">
     View Details →
 </a>
@@ -202,10 +201,10 @@
                             </div>
                             
                             {{-- Action button --}}
-                            <a href="{{ route('report-of-bills') }}" 
-   class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors">
-    View Details →
-</a>
+                            <a href="{{ route('bills.index') }}" 
+                                class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors">
+                                    View Details →
+                            </a>
 
                         </div>
                     </div>
@@ -231,105 +230,11 @@
     
 </div>
 
-{{-- Bills Summary --}}
-<flux:modal name="all-bills" class="min-w-[30rem] max-h-[60vh] overflow-auto">
-    <div class="space-y-4">
-        <flux:heading size="lg">All Bills</flux:heading>
 
-       <table class="table-auto w-full rounded-md overflow-hidden shadow-md">
-            <thead class="bg-gray-300 dark:bg-slate-900 text-black dark:text-white">
-                <tr>
-                    <th class="px-4 py-2 text-left">Title</th>
-                    <th class="px-4 py-2 text-left">Status</th>
-                </tr>
-            </thead>
-            <tbody class="bg-gray-100 dark:bg-slate-800">
-                @foreach ($bills as $bill)
-                <tr class="border-b border-gray-300 dark:border-slate-700 hover:bg-lime-100 dark:hover:bg-lime-100 transition-colors">
-                    <td class="px-4 py-2 text-black dark:text-white">{{ $bill->title }}</td>
-                    <td class="px-4 py-2">
-                        @if (\Carbon\Carbon::parse($bill->due_date)->gte(\Carbon\Carbon::today()))
-                            <flux:badge color="lime" size="lg" pill>Active</flux:badge>
-                        @else
-                            <flux:badge color="red" size="lg" pill>Inactive</flux:badge>
-                        @endif
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <div class="flex justify-end mt-4">
-            <flux:modal.close>
-                <flux:button variant="ghost">Close</flux:button>
-            </flux:modal.close>
-        </div>
-    </div>
-</flux:modal>
-
-{{-- Likes Summary Modal --}}
-<flux:modal name="likes-summary" class="min-w-[30rem] max-h-[60vh] overflow-auto">
-    <div class="space-y-4">
-        <flux:heading size="lg">Bills Likes Summary</flux:heading>
-
-        <table class="table-auto w-full rounded-md overflow-hidden shadow-md">
-            <thead class="bg-gray-300 dark:bg-slate-900 text-black dark:text-white">
-                <tr>
-                    <th class="px-4 py-2 text-left">Title</th>
-                    <th class="px-4 py-2 text-left">Likes</th>
-                </tr>
-            </thead>
-            <tbody class="bg-gray-100 dark:bg-slate-800">
-                @foreach ($bills as $bill)
-                    <tr class="border-b border-gray-300 dark:border-slate-700">
-                        <td class="px-4 py-2 text-black dark:text-white">{{ $bill->title }}</td>
-                        <td class="px-4 py-2 text-center">{{ $bill->likes_count }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-        <div class="flex justify-end mt-4">
-            <flux:modal.close>
-                <flux:button variant="ghost">Close</flux:button>
-            </flux:modal.close>
-        </div>
-    </div>
-</flux:modal>
-
-{{-- Dislikes Summary Modal --}}
-<flux:modal name="dislikes-summary" class="min-w-[30rem] max-h-[60vh] overflow-auto">
-    <div class="space-y-4">
-        <flux:heading size="lg">Bills Dislikes Summary</flux:heading>
-
-        <table class="table-auto w-full rounded-md overflow-hidden shadow-md">
-            <thead class="bg-gray-300 dark:bg-slate-900 text-black dark:text-white">
-                <tr>
-                    <th class="px-4 py-2 text-left">Title</th>
-                    <th class="px-4 py-2 text-left">Dislikes</th>
-                </tr>
-            </thead>
-            <tbody class="bg-gray-100 dark:bg-slate-800">
-                @foreach ($bills as $bill)
-                    <tr class="border-b border-gray-300 dark:border-slate-700 hover:bg-lime-100 dark:hover:bg-lime-700 transition-colors">
-                        <td class="px-4 py-2 text-black dark:text-white">{{ $bill->title }}</td>
-                        <td class="px-4 py-2 text-center">{{ $bill->dislikes_count ?? 0 }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-        <div class="flex justify-end mt-4">
-            <flux:modal.close>
-                <flux:button variant="ghost">Close</flux:button>
-            </flux:modal.close>
-        </div>
-    </div>
-</flux:modal>
-
-
-<flux:modal name="all-users" class="min-w-[30rem] max-h-[60vh] overflow-auto">
-    <div class="space-y-4">
-        <flux:heading size="lg">All Users</flux:heading>
+<!-- All Users Section -->
+<section id="all-users-section" class="mt-16 scroll-mt-20">
+    <div class="bg-white dark:bg-slate-900 rounded-xl shadow-md p-6">
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">All Users</h2>
 
         <table class="table-auto w-full rounded-md overflow-hidden shadow-md">
             <thead class="bg-gray-300 dark:bg-slate-900 text-black dark:text-white">
@@ -350,12 +255,16 @@
             </tbody>
         </table>
 
+        <div class="mt-4">
+    {{ $users->withQueryString()->fragment('all-users-section')->links() }}
+</div>
+
         <div class="flex justify-end mt-4">
-            <flux:modal.close>
-                <flux:button variant="ghost">Close</flux:button>
-            </flux:modal.close>
+            <a href="#top" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition">
+                ↑ Back to Top
+            </a>
         </div>
     </div>
-</flux:modal>
+</section>
 
 </x-layouts.app>

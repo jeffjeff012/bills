@@ -24,7 +24,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-// Route::redirect('/', '/login')->name('home');
+
 
 
 Route::get('/bills/{bill}', BillShow::class)->name('bills.show');
@@ -41,7 +41,7 @@ Route::get('staff/dashboard', [StaffController::class, 'dashboard'])
     ->name('staff.dashboard');
 
 Route::middleware(['auth', BillsAccess::class])
-    ->get('/bills', Bills::class)
+    ->get('/bills', [AdminController::class, 'viewDetails'])
     ->name('bills.index');
 
 //Active and Inactive Bills Handler
@@ -82,7 +82,7 @@ Route::get('/bill/{bill}', [BlogController::class, 'show'])->name('bill');
 Route::get('/inactive-blog/{bill}', [BlogController::class, 'showInactive'])
     ->name('inactive-blog');
 
-Route::middleware(['auth', 'verified', 'admin']) // apply admin middleware here
+Route::middleware(['auth', 'verified', 'admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
@@ -94,24 +94,15 @@ Route::middleware(['auth', 'verified', 'admin']) // apply admin middleware here
     });
 
 
-
-// Route::middleware(['auth', 'admin'])->get('/report-of-bills', function () {
-//     return view('report-of-bills');
-// })->name('report-of-bills');
-
-
-Route::middleware(['auth', 'admin'])->get('/report-of-bills', [AdminController::class, 'viewDetails'])
+Route::middleware(['auth', 'admin'])
+    ->get('/report-of-bills', Bills::class)
     ->name('report-of-bills');
 
-
 Route::get('/staff/bills/{bill}', [StaffController::class, 'showBillDetails'])->name('bills.show-bill-details');
-// Route::get('/report-of-bills', [StaffController::class, 'viewDetails'])
-//      ->name('report-of-bills');
-// Route::get('/report-of-bills', [AdminController::class, 'viewDetails'])
-//      ->name('report-of-bills');
+
 Route::get('/bills/{bill}', [BillController::class, 'show'])->name('bills.show');
-// Route::post('/bills/{bill}/like', [BillController::class, 'like'])->name('bills.like');
-// Route::post('/bills/{bill}/comments', [CommentController::class, 'store'])->name('bills.comments.store');
+
+
 
 //Facebook Legend
 Route::get('/auth/facebook', [FacebookController::class, 'facebookpage']);
