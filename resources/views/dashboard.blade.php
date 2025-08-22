@@ -78,7 +78,7 @@
                                         @if ($bill->due_date->isToday())
                                             {{ __('Due Today!') }}
                                         @elseif ($bill->due_date->diffInDays() <= 3)
-                                            {{ __('Due in') }} {{ $bill->due_date->diffInDays() }} {{ Str::plural('day', $bill->due_date->diffInDays()) }}
+                                            {{ __('Due') }} {{ $bill->due_date->diffForHumans() }}
                                         @else
                                             {{ __('Due') }} {{ $bill->due_date->format('M j, Y') }}
                                         @endif

@@ -13,7 +13,8 @@ use App\Enums\UserRole;
 class EditBill extends Component
 {
     public $title, $content, $billId, $due_date, $authored_by;
-
+    public $attachment;
+    public $currentAttachment; 
     #[On('edit-bill')] 
     public function edit($id)
     {
@@ -32,6 +33,7 @@ class EditBill extends Component
         $this->content = $bill->content;
         $this->authored_by = $bill->authored_by;
         $this->due_date = $bill->due_date ? \Carbon\Carbon::parse($bill->due_date)->format('Y-m-d') : null;
+        $this->currentAttachment = $bill->attachment;
 
         Flux::modal('edit-bill')->show();
     }
@@ -59,10 +61,18 @@ class EditBill extends Component
         $bill->content = $this->content;
         $bill->authored_by = $this->authored_by;
         $bill->due_date = $this->due_date;
+            if ($this->attachment) {
+            // delete old file if exists
+            if ($bill->attachment && Storage::exists($bill->attachment)) {
+                Storage::delete($bill->attachment);
+            }
+
+            $bill->attachment = $this->attachment->store('attachments', 'public');
+        }
         $bill->save();
 
         session()->flash('success', 'Bill updated successfully.');
-
+        $this->reset(['attachment']);
         $this->redirectRoute('bills.index', navigate: true);
         Flux::modal('edit-bill')->close();
     }
