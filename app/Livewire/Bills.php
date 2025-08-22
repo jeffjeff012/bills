@@ -42,28 +42,21 @@ class Bills extends Component
     {
         $bill = Bill::with('user')->findOrFail($billId);
 
-        if (
-            auth()->user()->role === UserRole::SbStaff &&
-            $bill->user &&
-            $bill->user->role === UserRole::Admin
-        ) {
-            abort(403, 'Unauthorized: Staff cannot delete bills created by Admin.');
+        if (!auth()->user()->can('delete', $bill)) {
+            abort(403, 'Unauthorized');
         }
 
         $this->billIdBeingDeleted = $billId;
         $this->showDeleteModal = true;
     }
 
+
     public function deleteBill()
     {
         $bill = Bill::with('user')->findOrFail($this->billIdBeingDeleted);
 
-        if (
-            auth()->user()->role === UserRole::SbStaff &&
-            $bill->user &&
-            $bill->user->role === UserRole::Admin
-        ) {
-            abort(403, 'Unauthorized: Staff cannot delete bills created by Admin.');
+        if (!auth()->user()->can('delete', $bill)) {
+            abort(403, 'Unauthorized');
         }
 
         $bill->delete();
@@ -73,6 +66,7 @@ class Bills extends Component
 
         session()->flash('success', 'Bill deleted successfully.');
 
-        $this->redirectRoute('bills.index', navigate: true);
+        $this->redirectRoute('report-of-bills', navigate: true);
     }
+
 }

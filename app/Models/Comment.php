@@ -18,7 +18,7 @@ class Comment extends Model
     // In App\Models\Comment.php
     public function canEdit(): bool
     {
-        return $this->user_id === auth()->id() && $this->created_at->diffInMinutes(now()) >= 5;
+        return $this->user_id === auth()->id() && $this->created_at->diffInMinutes(now()) <= 5;
     }
 
     public function user()
