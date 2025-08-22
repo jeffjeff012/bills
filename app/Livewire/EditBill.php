@@ -73,7 +73,7 @@ class EditBill extends Component
 
         session()->flash('success', 'Bill updated successfully.');
         $this->reset(['attachment']);
-        $this->redirectRoute('bills.index', navigate: true);
+        $this->redirectRoute('report-of-bills', navigate: true);
         Flux::modal('edit-bill')->close();
     }
 

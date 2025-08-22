@@ -56,7 +56,7 @@ class CreateBill extends Component
 
         session()->flash('success', 'Bill created successfully');
 
-        $this->redirectRoute('bills.index', navigate: true);
+        $this->redirectRoute('report-of-bills', navigate: true);
     }
 
     public function render()

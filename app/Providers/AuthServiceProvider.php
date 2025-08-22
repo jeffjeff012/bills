@@ -17,4 +17,9 @@ class AuthServiceProvider extends ServiceProvider
             ]);
         });
     }
+
+    protected $policies = [
+    \App\Models\Bill::class => \App\Policies\BillPolicy::class,
+    ];
+
 }
