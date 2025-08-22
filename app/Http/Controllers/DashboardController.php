@@ -10,9 +10,9 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $bills = Bill::where(function ($query) {
+      $bills = Bill::where(function ($query) {
         $query->whereNull('due_date')
-              ->orWhereDate('due_date', '>', Carbon::today()); // strictly greater than today
+              ->orWhereDate('due_date', '>=', Carbon::today()); // include today as active
     })
     ->withCount('comments')
     ->latest()
@@ -24,9 +24,9 @@ class DashboardController extends Controller
 
     public function inactiveBills()
     {
-        $bills = Bill::whereDate('due_date', '<=', Carbon::today()) // include today
-            ->latest()
-            ->get();
+        $bills = Bill::whereDate('due_date', '<', Carbon::today()) // strictly before today
+        ->latest()
+        ->get();
 
         return view('inactive-bills', compact('bills'));
     }

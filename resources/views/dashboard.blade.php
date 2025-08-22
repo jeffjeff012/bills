@@ -33,11 +33,12 @@
 
                             <p class="text-xs text-red-400 mt-2">
                                 Due: 
-                                @if (\Carbon\Carbon::parse($bill->due_date)->isToday())
-                                    Today
-                                @else
-                                    {{ \Carbon\Carbon::parse($bill->due_date)->format('F j, Y') }}
-                                @endif
+                                @if ($bill->due_date->isToday())
+    Today
+@else
+    {{ $bill->due_date->format('F j, Y') }}
+@endif
+
                             </p>
 
                             <div class="flex justify-between items-center mt-2">

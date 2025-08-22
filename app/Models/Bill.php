@@ -22,6 +22,10 @@ class Bill extends Model
         'attachment',
     ];
 
+    protected $casts = [
+        'due_date' => 'date', 
+    ];
+
     // Relationships
     public function user()
     {
