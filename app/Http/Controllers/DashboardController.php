@@ -26,7 +26,7 @@ class DashboardController extends Controller
     {
         $bills = Bill::whereDate('due_date', '<', Carbon::today()) // strictly before today
         ->latest()
-        ->paginate(6);;
+        ->paginate(6);
 
         return view('inactive-bills', compact('bills'));
     }

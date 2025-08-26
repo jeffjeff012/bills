@@ -14,7 +14,6 @@ class ReportController extends Controller
             abort(403, 'You do not have permission to access this report.');
         }
 
-        // Your report logic here
         return view('reports.bills');
     }
 }

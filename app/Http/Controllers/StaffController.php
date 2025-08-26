@@ -45,7 +45,6 @@ class StaffController extends Controller
         $userCount = Schema::hasTable('users') ? User::count() : 0;
         $billCount = Schema::hasTable('bills') ? Bill::count() : 0;
 
-        // ✅ Use paginate instead of get
         $bills = Bill::withCount(['likes as likes_count', 'dislikes as dislikes_count'])
             ->paginate(5)   
             ->withQueryString();

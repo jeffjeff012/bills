@@ -6,6 +6,8 @@ use Flux\Flux;
 use App\Models\Bill;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Carbon\Carbon;
+
 
 class CreateBill extends Component
 {
@@ -44,7 +46,7 @@ class CreateBill extends Component
         Bill::create([
             'title'       => $this->title,
             'content'     => $this->content,
-            'due_date'    => $this->due_date,
+            'due_date'    => Carbon::parse($this->due_date)->endOfDay(),
             'user_id'     => auth()->id(),
             'authored_by' => $this->authored_by,
             'attachment'  => $path, // ✅ safe, always defined
