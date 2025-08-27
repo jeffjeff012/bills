@@ -360,7 +360,7 @@
             No Bill Available
         </h3>
         <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            There’s currently no most liked bill. Once a bill gets likes, it will show up here.
+            There’s currently no most commented bill. Once a bill gets populated, it will show up here.
         </p>
     </div>
 @endif
