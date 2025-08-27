@@ -114,7 +114,7 @@
                     </div>
 
                     {{-- Card Footer --}}
-                    <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-100 dark:border-gray-600">
+                    <div class="px-6 py-4 bg-red-50 dark:bg-gray-700/50 border-t border-gray-100 dark:border-gray-600">
                         <div class="flex items-center justify-between">
                             {{-- Likes count --}}
                             <div class="flex items-center gap-2">
@@ -187,7 +187,7 @@
                     </div>
 
                     {{-- Card Footer --}}
-                    <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-100 dark:border-gray-600">
+                    <div class="px-6 py-4 bg-blue-50 dark:bg-gray-700/50 border-t border-gray-100 dark:border-gray-600">
                         <div class="flex items-center justify-between">
                             {{-- Comments count --}}
                             <div class="flex items-center gap-2">
