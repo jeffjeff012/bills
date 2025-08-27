@@ -9,6 +9,8 @@ use Livewire\Attributes\On;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Gate;
 use App\Enums\UserRole;
+use Illuminate\Support\Facades\Storage;
+
 
 class EditBill extends Component
 {
@@ -67,7 +69,8 @@ class EditBill extends Component
                 Storage::delete($bill->attachment);
             }
 
-            $bill->attachment = $this->attachment->store('attachments', 'public');
+           $bill->attachment = $this->attachment->store('attachments', 'public');
+            $this->currentAttachment = $bill->attachment; 
         }
         $bill->save();
 

@@ -10,10 +10,10 @@
 
         <!-- Notice -->
         @if(auth()->user()->role !== \App\Enums\UserRole::Admin)
-            <div class="mt-4 mb-4 bg-blue-50 border border-blue-300 rounded-xl p-5 shadow-sm flex items-start gap-4">
-                <flux:icon.information-circle class="w-8 h-8 text-blue-600 flex-shrink-0" />
+            <div class="mt-4 mb-4 bg-white border-3 border-dashed border-gray-400 rounded-xl p-5 shadow-sm flex items-start gap-4">
+                <flux:icon.information-circle class="w-8 h-8 text-gray-600 flex-shrink-0" />
                 <div>
-                    <p class="text-blue-900 text-base md:text-lg leading-relaxed">
+                    <p class="text-gray-900 text-base md:text-lg leading-relaxed">
                         You can only <span class="font-semibold">edit</span> and <span class="font-semibold">delete</span> the 
                         <span class="font-semibold">Bills</span> you created.  
                     </p>
@@ -56,7 +56,6 @@
         <tr class="border-t border-gray-700">
             <td class="px-4 py-2 text-black dark:text-white">{{ $bill->title }}</td>
             <td class="px-4 py-2 text-black dark:text-white">{{ str($bill->content)->words(8) }}</td>
-
             <td class="px-4 py-2">
                 @if (\Carbon\Carbon::parse($bill->due_date)->gte(\Carbon\Carbon::today()))
                     <flux:badge color="lime" size="lg" pill>Active</flux:badge>
@@ -64,45 +63,41 @@
                     <flux:badge color="red" size="lg" pill>Inactive</flux:badge>
                 @endif
             </td>
-
             <td class="px-4 py-2 text-center text-black dark:text-white">{{ $bill->likes_count }}</td>
             <td class="px-4 py-2 text-center text-black dark:text-white">{{ $bill->dislikes_count }}</td>
             <td class="px-4 py-2 text-center text-black dark:text-white">{{ $bill->comments_count }}</td>
-
             <td class="px-4 py-2 text-center space-x-2">
-    @can('update', $bill)
-        <flux:button
-            icon="pencil-square"
-            wire:click="edit({{ $bill->id }})"
-            class="!bg-transparent !border-none !shadow-none !text-blue-800 dark:!text-white hover:!text-blue-800 hover:underline dark:hover:!text-blue-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
-            variant="ghost"
-        >
-            Edit
-        </flux:button>
-    @endcan
+                @can('update', $bill)
+                    <flux:button
+                        icon="pencil-square"
+                        wire:click="edit({{ $bill->id }})"
+                        class="!bg-transparent !border-none !shadow-none !text-blue-800 dark:!text-white hover:!text-blue-800 hover:underline dark:hover:!text-blue-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
+                        variant="ghost"
+                    >
+                        Edit
+                    </flux:button>
+                @endcan
 
-    @can('delete', $bill)
-        <flux:button
-            icon="trash"
-            wire:click="confirmDelete({{ $bill->id }})"
-            class="!bg-transparent !border-none !shadow-none !text-red-800 dark:!text-white hover:!text-red-800 hover:underline dark:hover:!text-red-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
-            variant="ghost"
-        >
-            Delete
-        </flux:button>
-    @endcan
-</td>
-
+                @can('delete', $bill)
+                    <flux:button
+                        icon="trash"
+                        wire:click="confirmDelete({{ $bill->id }})"
+                        class="!bg-transparent !border-none !shadow-none !text-red-800 dark:!text-white hover:!text-red-800 hover:underline dark:hover:!text-red-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
+                        variant="ghost"
+                    >
+                        Delete
+                    </flux:button>
+                @endcan
+            </td>
         </tr>
     @empty
         <tr>
             <td colspan="7" class="px-4 py-3 text-center text-black dark:text-gray-400">
-                No bills yet!
+                No bills yet! Start creating bills
             </td>
         </tr>
     @endforelse
 </tbody>
-
 </table>
 
     <div class="mt-4">
@@ -110,27 +105,26 @@
     </div>
 
     {{-- Delete --}}
+    <flux:modal name="delete-bill" class="min-w-[22rem]" wire:model="showDeleteModal">
+        <div class="space-y-6">
+            <div>
+                <flux:heading size="lg">Delete bill?</flux:heading>
 
-<flux:modal name="delete-bill" class="min-w-[22rem]" wire:model="showDeleteModal">
-    <div class="space-y-6">
-        <div>
-            <flux:heading size="lg">Delete bill?</flux:heading>
+                <flux:text class="mt-2">
+                    <p>You're about to delete this project.</p>
+                    <p>This action cannot be reversed.</p>
+                </flux:text>
+            </div>
 
-            <flux:text class="mt-2">
-                <p>You're about to delete this project.</p>
-                <p>This action cannot be reversed.</p>
-            </flux:text>
+            <div class="flex gap-2">
+                <flux:spacer />
+
+                <flux:modal.close>
+                    <flux:button variant="ghost">Cancel</flux:button>
+                </flux:modal.close>
+
+                <flux:button type="button" variant="danger" wire:click="deleteBill()">Delete bill</flux:button>
+            </div>
         </div>
-
-        <div class="flex gap-2">
-            <flux:spacer />
-
-            <flux:modal.close>
-                <flux:button variant="ghost">Cancel</flux:button>
-            </flux:modal.close>
-
-            <flux:button type="button" variant="danger" wire:click="deleteBill()">Delete bill</flux:button>
-        </div>
-    </div>
-</flux:modal>
+    </flux:modal>
 </div>

@@ -67,6 +67,9 @@ select:focus[data-flux-control] {
 html {
   scroll-behavior: smooth;
 }
+
+
+
 /* \[:where(&)\]:size-4 {
     @apply size-4;
 } */

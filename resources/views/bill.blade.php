@@ -112,11 +112,13 @@
                         </div>
 
                         <!-- Interactive Like/Dislike Section -->
+                        @if(auth()->user()->role === \App\Enums\UserRole::User)
                         <div class="flex justify-center">
                             <div class="bg-white dark:bg-gray-700 rounded-2xl p-4 shadow-lg border border-gray-200 dark:border-gray-600">
                                 <livewire:note-like-dislike :bill="$bill" :key="$bill->id" />
                             </div>
                         </div>
+                        @endif
 
 
                         <!-- Comments Section Divider -->
