@@ -247,7 +247,7 @@
                             <!-- Card Body -->
                             <div class="px-6 pb-4">
                                 <p class="text-gray-600 dark:text-gray-300 line-clamp-3 leading-relaxed">
-                                {{ Str::limit($hotBill->content, 150 ?? '') }}</p>
+                                {{ $hotBill->content ? Str::limit($hotBill->content, 150) : '' }}</p>
                             </div>
 
                             <!-- Card Footer -->
@@ -304,7 +304,7 @@
                             <!-- Card Body -->
                             <div class="px-6 pb-4">
                                 <p class="text-gray-600 dark:text-gray-300 line-clamp-3 leading-relaxed">
-                                    {{ Str::limit($mostCommentedBill->content, 150 ?? '') }}</p>
+                                    {{ $mostCommentedBill->content ? Str::limit($mostCommentedBill->content, 150) : '' }}</p>
                             </div>
 
                             <!-- Card Footer -->
