@@ -116,48 +116,63 @@
         <flux:heading size="lg">Create New User</flux:heading>
 
         <form wire:submit.prevent="createUser" class="space-y-4">
-        <flux:field label="Name">
-            <flux:input type="text" wire:model="name" />
-            @error('name')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-            @enderror
-        </flux:field>
+            <!-- Name -->
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Name
+                </label>
+                <flux:input id="name" type="text" wire:model="name" />
+                @error('name')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <flux:field label="Email">
-            <flux:input type="email" wire:model="email" />
-            @error('email')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-            @enderror
-        </flux:field>
+            <!-- Email -->
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Email
+                </label>
+                <flux:input id="email" type="email" wire:model="email" />
+                @error('email')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <flux:field label="Password">
-            <flux:input type="password" wire:model="password" />
-            @error('password')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-            @enderror
-        </flux:field>
+            <!-- Password -->
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Password
+                </label>
+                <flux:input id="password" type="password" wire:model="password" />
+                @error('password')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
 
-        {{-- Role --}}
-        <flux:field label="Role">
-            <flux:select wire:model="role">
-                <option value="">-- Select Role --</option>
-                <option value="admin">Admin</option>
-                <option value="sbstaff">SbStaff</option>
-                <option value="user">User</option>
-            </flux:select>
-            @error('role')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-            @enderror
-        </flux:field>
+            <!-- Role -->
+            <div>
+                <label for="role" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Role
+                </label>
+                <flux:select id="role" wire:model="role">
+                    <option value="">-- Select Role --</option>
+                    <option value="admin">Admin</option>
+                    <option value="sbstaff">SbStaff</option>
+                    <option value="user">User</option>
+                </flux:select>
+                @error('role')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <div class="flex justify-end gap-2">
-            <flux:modal.close>
-                <flux:button type="button" variant="ghost">Cancel</flux:button>
-            </flux:modal.close>
-            <flux:button type="submit">Save</flux:button>
-        </div>
-    </form>
-
+            <!-- Actions -->
+            <div class="flex justify-end gap-2">
+                <flux:modal.close>
+                    <flux:button type="button" variant="ghost">Cancel</flux:button>
+                </flux:modal.close>
+                <flux:button type="submit">Save</flux:button>
+            </div>
+        </form>
     </div>
 </flux:modal>
 

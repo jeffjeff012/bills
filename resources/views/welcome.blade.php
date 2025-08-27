@@ -349,21 +349,21 @@
                                 </div>
                             </div>
                            @else
-    <!-- Empty State -->
-    <div class="flex flex-col items-center justify-center text-center px-6 py-12">
-        <div class="w-16 h-16 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700 mb-4">
-            <svg class="w-8 h-8 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625A1.125 1.125 0 004.5 3.75v16.5A1.125 1.125 0 005.625 21h12.75a1.125 1.125 0 001.125-1.125V11.25a9 9 0 00-9-9z"/>
-            </svg>
-        </div>
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
-            No Bill Available
-        </h3>
-        <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            There’s currently no most commented bill. Once a bill gets populated, it will show up here.
-        </p>
-    </div>
-@endif
+                            <!-- Empty State -->
+                            <div class="flex flex-col items-center justify-center text-center px-6 py-12">
+                                <div class="w-16 h-16 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700 mb-4">
+                                    <svg class="w-8 h-8 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625A1.125 1.125 0 004.5 3.75v16.5A1.125 1.125 0 005.625 21h12.75a1.125 1.125 0 001.125-1.125V11.25a9 9 0 00-9-9z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                                    No Bill Available
+                                </h3>
+                                <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                                    There’s currently no most commented bill. Once a bill gets populated, it will show up here.
+                                </p>
+                            </div>
+                        @endif
                         </div>
                     </div>
                 </div>
