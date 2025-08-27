@@ -219,7 +219,7 @@
 
             <!-- Your existing bill cards code goes here -->
             <div class="flex flex-col lg:flex-row gap-8 mt-20">
-                @if($hotBill)
+               
                 <!-- Most Liked Bill Card -->
                 <div class="flex-1 animate-fade-in-up" style="animation-delay: 0.2s;">
                     <div class="w-full max-w-2xl mx-auto"> 
@@ -232,6 +232,7 @@
                                     HOT
                                 </span>
                             </div>
+     @if($hotBill)
     <!-- Card Header -->
     <div class="px-6 pt-6 pb-4">
         <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
@@ -293,7 +294,7 @@
                     </div>
                 </div>
 
-                @if($mostCommentedBill)
+                
                 <!-- Most Commented Bill Card -->
                 <div class="flex-1 animate-fade-in-up" style="animation-delay: 0.4s;">
                     <div class="w-full max-w-2xl mx-auto"> 
@@ -307,7 +308,7 @@
                                 </span>
 
                             </div>
-
+                            @if($mostCommentedBill)
                             <!-- Card Header -->
                             <div class="px-6 pt-6 pb-4">
                                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
