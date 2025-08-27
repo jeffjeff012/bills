@@ -240,7 +240,7 @@
                                 </h3>
                                 <!-- Bill Title -->
                                 <h4 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">
-                                    {{ $hotBill->title }}
+                                    {{ $hotBill->title ?? '' }}
                                 </h4>
                             </div>
 
@@ -297,7 +297,7 @@
                                 </h3>
                                 <!-- Bill Title -->
                                 <h4 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">
-                                    {{ $mostCommentedBill->title }}
+                                    {{ $mostCommentedBill->title ?? '' }}
                                 </h4>
                             </div>
 
