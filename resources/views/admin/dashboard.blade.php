@@ -26,57 +26,55 @@
 
     <!-- Users -->
     <a href="{{ url('admin/user-management') }}">
-        <div class="bg-gradient-to-br from-blue-500 to-cyan-600 border border-blue-500 text-white p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer">
+        <div class="bg-white text-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer border border-gray-200">
             <div class="flex items-center justify-between">
                 <div>
-                    <h2 class="text-sm font-medium uppercase">Users</h2>
-                    <p class="text-3xl font-bold mt-2">{{ $userCount }}</p>
+                    <h2 class="text-sm font-medium uppercase text-gray-600">Users</h2>
+                    <p class="text-3xl font-bold mt-2 border-2 bg-blue-100 rounded-lg px-3 py-1 inline-block text-blue-500">{{ $userCount }}</p>
                 </div>
-                <flux:icon name="user-group" class="w-10 h-10 text-white" />
+                <flux:icon name="user-group" class="w-10 h-10 text-gray-500" />
             </div>
         </div>
     </a>
 
-
-    <!-- Bills Created Modal -->
+    <!-- Bills Created -->
     <a href="/report-of-bills">
-        <div class="bg-gradient-to-br from-purple-500 to-blue-600 border border-blue-500 text-white p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer">
+        <div class="bg-white text-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer border border-gray-200">
             <div class="flex items-center justify-between">
                 <div>
-                    <h2 class="text-sm font-medium uppercase">Bills Created</h2>
-                    <p class="text-3xl font-bold mt-2">{{ $billCount }}</p>
+                    <h2 class="text-sm font-medium uppercase text-gray-600">Bills Created</h2>
+                    <p class="text-3xl font-bold mt-2 border-2 bg-blue-100 rounded-lg px-3 py-1 inline-block text-blue-500">{{ $billCount }}</p>
                 </div>
-                <flux:icon name="scale" class="w-10 h-10 text-white" />
+                <flux:icon name="scale" class="w-10 h-10 text-gray-500" />
             </div>
         </div>
     </a>
 
-
-    <!-- Likes Modal -->
+    <!-- Likes -->
     <a href="/report-of-bills">
-        <div class="bg-gradient-to-br from-blue-400 to-blue-500 border border-blue-500 text-white p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer">
+        <div class="bg-white text-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer border border-gray-200">
             <div class="flex items-center justify-between">
                 <div>
-                    <h2 class="text-sm font-medium uppercase">Likes</h2>
-                    <p class="text-3xl font-bold mt-2">{{ $totalLikes }}</p>
+                    <h2 class="text-sm font-medium uppercase text-gray-600">Likes</h2>
+                    <p class="text-3xl font-bold mt-2 border-2 bg-blue-100 rounded-lg px-3 py-1 inline-block text-blue-500">{{ $totalLikes }}</p>
                 </div>
-                <flux:icon name="hand-thumb-up" class="w-10 h-10 text-black-500" />
+                <flux:icon name="hand-thumb-up" class="w-10 h-10 text-gray-500" />
             </div>
         </div>
     </a>
 
     <!-- Dislikes -->
     <a href="/report-of-bills">
-        <div class="bg-gradient-to-br from-teal-500 to-orange-600 border border-blue-500 text-white p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer">
+        <div class="bg-white text-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer border border-gray-200">
             <div class="flex items-center justify-between">
                 <div>
-                    <h2 class="text-sm font-medium uppercase">Dislikes</h2>
-                    <p class="text-3xl font-bold mt-2">{{ $totalDislikes }}</p>
+                    <h2 class="text-sm font-medium uppercase text-gray-600">Dislikes</h2>
+                    <p class="text-3xl font-bold mt-2 border-2 bg-blue-100 rounded-lg px-3 py-1 inline-block text-blue-500">{{ $totalDislikes }}</p>
                 </div>
-                <flux:icon name="hand-thumb-down" class="w-10 h-10 text-black-500" />
+                <flux:icon name="hand-thumb-down" class="w-10 h-10 text-gray-500" />
             </div>
         </div>
-    <a>
+    </a>
 </div>
 
 {{-- Container for both cards --}}
@@ -130,9 +128,9 @@
                             
                             {{-- Action button --}}
                             <a href="{{ route('bills.index') }}" 
-   class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors">
-    View Details →
-</a>
+                            class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors">
+                                View Details →
+                            </a>
                         </div>
                     </div>
                 </div>
