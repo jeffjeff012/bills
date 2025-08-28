@@ -25,15 +25,16 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
     <!-- Users -->
         <a href="#all-users-section"
-   class="block bg-gradient-to-br from-blue-500 to-cyan-600 border border-blue-500 text-white p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer">
-    <div class="flex items-center justify-between">
-        <div>
-            <h2 class="text-sm font-medium uppercase text-gray-600">Users</h2>
-            <p class="text-3xl font-bold mt-2 border-2 bg-blue-100 rounded-lg px-3 py-1 inline-block text-blue-500">{{ $userCount }}</p>
-        </div>
-        <flux:icon name="user-group" class="w-10 h-10 text-gray-500" />
-    </div>
-</a>
+        class="block text-white p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-sm font-medium uppercase text-gray-600">Users</h2>
+                    <p class="text-3xl font-bold mt-2 border-2 bg-blue-100 rounded-lg px-3 py-1 inline-block text-blue-500">{{ $userCount }}</p>
+                </div>
+                <flux:icon name="user-group" class="w-10 h-10 text-gray-500" />
+            </div>
+        </a>
+        
     <!-- Bills Created -->
     <a href="/report-of-bills">
         <div class="bg-white text-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer border border-gray-200">
