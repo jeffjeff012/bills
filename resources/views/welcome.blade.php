@@ -76,15 +76,15 @@
     </style>
     </head>
 
-<body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] min-h-screen">
+<body class="bg-[#FDFDFC] text-[#1b1b18] min-h-screen">
     
     <!-- Sticky Header -->
-    <div class="top-0 z-50 w-full bg-white dark:bg-[#0a0a0a] border-b border-gray-200 dark:border-gray-800 shadow-sm">
+    <div class="top-0 z-50 w-full bg-white border-b border-gray-200 dark:border-gray-800 shadow-sm">
         <header class="mx-auto w-full max-w-7xl px-4 py-4">
             <div class="flex items-center justify-between">
                 <!-- Logo (Left side) -->
                 <div class="flex items-center gap-2">
-                    <img src="/images/logo.jpg" alt="Logo" class="h-[110px] w-auto" />
+                    <img src="/images/final.png" alt="Logo" class="h-[110px] w-auto" />
                     <!-- Optional: add site title next to logo -->
                     <!-- <span class="text-lg font-semibold">YourSite</span> -->
                 </div>
