@@ -78,7 +78,7 @@
                             </div>
 
                             <!-- Voting Bar -->
-                            @php
+                            {{-- @php
                                 $totalVotes = $bill->likes + $bill->dislikes;
                                 $likePercentage = $totalVotes > 0 ? ($bill->likes / $totalVotes) * 100 : 0;
                             @endphp
@@ -91,7 +91,7 @@
                                         <div class="bg-green-500 dark:bg-green-400 h-2 rounded-full transition-all duration-500" style="width: {{ $likePercentage }}%"></div>
                                     </div>
                                 </div>
-                            @endif
+                            @endif --}}
                         </div>
                         <!-- Due Date -->
                         <div class="flex items-center justify-between pt-4 border-t border-gray-100">

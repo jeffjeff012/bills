@@ -9,12 +9,12 @@
         <link rel="icon" href="/favicon.ico" sizes="any">
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-        <script src="https://cdn.tailwindcss.com"></script>
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        
+        @vite('resources/css/app.css')
+        @vite('resources/js/app.js')
         <!-- Styles -->
         <style>
             /*! tailwindcss v4.0.14 | MIT License | https://tailwindcss.com */
@@ -75,6 +75,7 @@
         
     </style>
     </head>
+
 <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] min-h-screen">
     
     <!-- Sticky Header -->
@@ -127,11 +128,11 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <div class="flex items-center space-x-2">
-                    <div class="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                    {{-- <div class="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
                         <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 0v12h8V4H6z"/>
                         </svg>
-                    </div>
+                    </div> --}}
                     <span class="text-xl font-bold gradient-text">BillTracker</span>
                 </div>
                 
@@ -160,7 +161,7 @@
                         Stay informed about bills and legislation that matter to you. 
                         Discover trending discussions, track votes, and engage with your community.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <div class="flex sm:flex-row gap-4 justify-center">
                         <a href="#featured-bills"
                         class="bg-white text-gray-900 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
                             Explore Bills

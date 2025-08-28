@@ -15,4 +15,7 @@ export default defineConfig({
     server: {
         cors: true,
     },
+    content: [
+    "./resources/views/welcome.blade.php",
+  ],
 });
