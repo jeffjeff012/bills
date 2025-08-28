@@ -35,22 +35,33 @@
                     </div>
 
                     <div class="p-6 h-full flex flex-col">
-                        <!-- Bill Content -->
+                    <!-- Bill Content -->
                         <div class="flex-1 pr-20">
                             <a href="{{ route('bill', $bill->id) }}" class="block">
-                                <h2 class="text-lg font-bold text-gray-900 dark:text-white mb-3 group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors duration-200 line-clamp-2 leading-tight">
-                                    {{ $bill->title }}
-                                </h2>
+                                @if (str_word_count(strip_tags($bill->title)) > 10)
+                                    {{-- Title only (no content, no clamp) --}}
+                                    <h2 class="text-lg font-bold text-gray-900 dark:text-white mb-3 group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors duration-200 leading-tight">
+                                        {{ $bill->title }}
+                                    </h2>
+                                @else
+                                    {{-- Title + Content --}}
+                                    <h2 class="text-lg font-bold text-gray-900 dark:text-white mb-3 group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors duration-200 line-clamp-2 leading-tight">
+                                        {{ $bill->title }}
+                                    </h2>
 
-                                <p class="text-sm text-gray-700 dark:text-gray-300 line-clamp-4 leading-relaxed mb-4">
-                                    {{ $bill->content }}
-                                </p>
+                                    <p class="text-sm text-gray-700 dark:text-gray-300 line-clamp-4 leading-relaxed mb-4">
+                                        {{ $bill->content }}
+                                    </p>
+                                @endif
 
                                 <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">
                                     {{ __('Published') }} {{ $bill->created_at->diffForHumans() }}
                                 </p>
                             </a>
                         </div>
+
+
+
                         
             
                         <!-- Interactive Section -->
@@ -113,11 +124,11 @@
                     </div>
 
                     <!-- Hover Indicator -->
-                    <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    {{-- <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-green-600 dark:text-green-400">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
                         </svg>
-                    </div>
+                    </div> --}}
                 </div>
             @empty
                 <!--  Empty State -->
