@@ -40,6 +40,20 @@
                         <div class="absolute bottom-4 right-4 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
                     </div>
 
+                    <div class="flex items-center justify-center space-x-3 mt-5">
+                                <div class="w-10 h-10 bg-gray-100 dark:bg-zinc-700 rounded-full flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-gray-600 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex">
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Authored by</p>
+                                    <p class="ml-1 text-sm text-gray-500 dark:text-zinc-400">
+                                        {{ $bill->authored_by ?? 'Unknown' }}
+                                    </p>
+                                </div>
+                            </div>
+                    
                     <!-- Content Section -->
                     <div class="px-8 py-8 space-y-8">
                         
@@ -96,7 +110,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex items-center space-x-3">
+                            {{-- <div class="flex items-center space-x-3">
                                 <div class="w-10 h-10 bg-gray-100 dark:bg-zinc-700 rounded-full flex items-center justify-center">
                                     <svg class="w-5 h-5 text-gray-600 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -108,17 +122,19 @@
                                         {{ $bill->authored_by ?? 'Unknown' }}
                                     </p>
                                 </div>
+                            </div> --}}
+
+                                <!-- Interactive Like/Dislike Section -->
+                            @if(auth()->user()->role === \App\Enums\UserRole::User)
+                            <div class="flex justify-center">
+                                <div class="bg-white dark:bg-gray-700 rounded-2xl p-4 shadow-lg border border-gray-200 dark:border-gray-600">
+                                    <livewire:note-like-dislike :bill="$bill" :key="$bill->id" />
+                                </div>
                             </div>
+                            @endif
                         </div>
 
-                        <!-- Interactive Like/Dislike Section -->
-                        @if(auth()->user()->role === \App\Enums\UserRole::User)
-                        <div class="flex justify-center">
-                            <div class="bg-white dark:bg-gray-700 rounded-2xl p-4 shadow-lg border border-gray-200 dark:border-gray-600">
-                                <livewire:note-like-dislike :bill="$bill" :key="$bill->id" />
-                            </div>
-                        </div>
-                        @endif
+                        
 
 
                         <!-- Comments Section Divider -->
