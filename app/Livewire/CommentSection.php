@@ -126,7 +126,7 @@ class CommentSection extends Component
                 ->comments()
                 ->with('user')
                 ->latest()
-                ->paginate(2), // or paginate() with a number
+                ->paginate(10), // or paginate() with a number
         ]);
     }
 }
