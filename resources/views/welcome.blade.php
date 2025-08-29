@@ -210,7 +210,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Section Header -->
             <div class="text-center mb-16 animate-fade-in-up">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-black mb-4">
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
                     Featured <span class="gradient-text">Bills</span>
                 </h2>
                 <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
