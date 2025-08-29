@@ -10,8 +10,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@plugin "flowbite-typography";
-
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
