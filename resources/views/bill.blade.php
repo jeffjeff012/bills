@@ -1,4 +1,4 @@
-<x-layouts.app>
+<x-layouts.app :title="__('Bills')">
     <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900">
         <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
             <!--content -->
