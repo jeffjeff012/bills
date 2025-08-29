@@ -341,7 +341,7 @@
                                                     <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"></path>
                                                 </svg>
                                             </div>
-                                            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                            <span class="text-sm font-medium text-gray-700 dark:text-black-300">
                                                 {{ $mostCommentedBill->comments_count }} comments
                                             </span>
                                         </div>
@@ -399,7 +399,7 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-black mb-2">Real-time Updates</h3>
-                    <p class="text-gray-600 dark:text-gray-400">Stay updated with the latest bill progress and voting results in real-time.</p>
+                    <p class="text-gray-600 dark:font-bold dark:text-gray-800">Stay updated with the latest bill progress and voting results in real-time.</p>
                 </div>
                 
                 <div class="text-center p-6 rounded-xl bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 card-hover animate-fade-in-up" style="animation-delay: 0.2s;">
@@ -409,7 +409,7 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-black mb-2">Community Discussion</h3>
-                    <p class="text-gray-600 dark:text-gray-400">Engage in meaningful discussions with fellow citizens about important legislation.</p>
+                    <p class="text-gray-600 dark:font-bold dark:text-gray-800">Engage in meaningful discussions with fellow citizens about important legislation.</p>
                 </div>
                 
                 <div class="text-center p-6 rounded-xl bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 card-hover animate-fade-in-up" style="animation-delay: 0.4s;">
@@ -419,7 +419,7 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-black mb-2">Transparent Process</h3>
-                    <p class="text-gray-600 dark:text-gray-400">Follow the complete journey of bills from introduction to final vote.</p>
+                    <p class="text-gray-600 dark:font-bold dark:text-gray-800">Follow the complete journey of bills from introduction to final vote.</p>
                 </div>
             </div>
         </div>
