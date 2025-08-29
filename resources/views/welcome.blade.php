@@ -196,11 +196,11 @@
     </section>
 
     <!-- Featured Bills Section -->
-    <section id="featured-bills" class="py-20 bg-gray-50 dark:bg-gray-900">
+    <section id="featured-bills" class="py-40 bg-gray-50 dark:bg-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Section Header -->
             <div class="text-center mb-16 animate-fade-in-up">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                <h2 class="text-3xl lg:text-4xl font-bold text-purple-900 dark:text-gray mb-4">
                     Featured <span class="gradient-text">Bills</span>
                 </h2>
                 <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
@@ -373,7 +373,7 @@
     </section>
         
     <!-- Features Section -->
-    <section id="features-section" class="py-20 bg-white dark:bg-gray-800">
+    <section id="features-section" class="py-40 bg-white dark:bg-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-black mb-4">
@@ -416,7 +416,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-20 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
+    <section class="py-10 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
         <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">
                 Ready to Make Your Voice Heard?
