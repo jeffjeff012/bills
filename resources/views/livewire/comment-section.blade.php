@@ -3,6 +3,7 @@
         use App\Enums\UserRole;
     @endphp
 
+    {{-- Only show comment box for normal Users --}}
     @if(auth()->check() && auth()->user()->role === UserRole::User)
         <form wire:submit.prevent="submitComment" class="mb-4">
             <textarea wire:model="content" class="w-full p-2 border rounded" placeholder="Write a comment..."></textarea>
@@ -10,6 +11,7 @@
         </form>
     @endif
 
+    {{-- Success flash message --}}
     @if (session('success'))
         <div
             x-data="{ show: true }"
@@ -28,18 +30,18 @@
         </div>
     @endif
 
-
     <div>
-        @foreach($comments as $comment)
+        @forelse($comments as $comment)
             <div class="p-2 border-b">
                 <strong>{{ $comment->user->name }}</strong>
-                  <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-sm me-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500 ">
+                <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-sm me-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
                     <svg class="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z"/>
+                        <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z"/>
                     </svg>
                     {{ $comment->created_at->diffForHumans() }}
-                  </span>
-                {{-- Check if currently editing this comment --}}
+                </span>
+
+                {{-- Editing state --}}
                 @if($editingCommentId === $comment->id)
                     <textarea wire:model="editedContent" class="w-full p-2 border rounded mt-2"></textarea>
                     <div class="mt-2 space-x-2">
@@ -48,51 +50,55 @@
                     </div>
                 @else
                     <p class="mt-1">{{ $comment->content }}</p>
-                  
-                    
-                    {{-- Only show edit/delete if comment belongs to user --}}
-                    
-                      <div class="mt-10 space-x-2">
-                            @can('update', $comment)
+
+                    {{-- Actions --}}
+                    <div class="mt-10 space-x-2">
+                        @can('update', $comment)
                             @if($comment->canEdit())
                                 <button wire:click="startEditing({{ $comment->id }})" class="text-blue-500">Edit</button>
                             @endif
-                            @endcan
+                        @endcan
 
-                            @can('delete', $comment)
-                                <button wire:click="confirmCommentDeletion({{ $comment->id }})" class="text-red-500">Delete</button>
-                            @endcan
-                        </div>
+                        @can('delete', $comment)
+                            <button wire:click="confirmCommentDeletion({{ $comment->id }})" class="text-red-500">Delete</button>
+                        @endcan
+                    </div>
 
-                    
-
+                    {{-- Delete confirmation modal --}}
                     <flux:modal name="delete-comment" class="min-w-[22rem]" wire:model="confirmingCommentDeletion">
                         <div class="space-y-6">
                             <div>
                                 <flux:heading size="lg">Delete Comment?</flux:heading>
-
                                 <flux:text class="mt-2">
                                     <p>You're about to delete this comment.</p>
                                     <p>This action cannot be reversed.</p>
                                 </flux:text>
                             </div>
-
                             <div class="flex gap-2">
                                 <flux:spacer />
-
                                 <flux:modal.close>
                                     <flux:button variant="ghost" wire:click="$set('confirmingCommentDeletion', false)">Cancel</flux:button>
                                 </flux:modal.close>
-
                                 <flux:button type="button" variant="danger" wire:click="deleteComment">Delete Comment</flux:button>
                             </div>
                         </div>
                     </flux:modal>
                 @endif
             </div>
-        @endforeach
+       @empty
+            {{-- Empty state --}}
+            <div class="flex flex-col items-center justify-center py-10 px-6 border-2 border-dashed border-gray-300 dark:border-zinc-600 rounded-xl bg-gray-50 dark:bg-zinc-800/50">
+                <flux:icon name="chat-bubble-left-right" class="w-10 h-10 text-gray-400 dark:text-zinc-500 mb-3" />
+                <p class="text-gray-600 dark:text-gray-400 font-medium">No comments yet</p>
+                @if(auth()->check() && auth()->user()->role === UserRole::User)
+                    <p class="text-sm text-gray-500 dark:text-gray-500 mt-1">Be the first to share your thoughts.</p>
+                @endif
+            </div>
+        @endforelse
     </div>
-     <div class="mt-4">
+
+    {{-- Pagination --}}
+    <div class="mt-4">
         {{ $comments->links() }}
     </div>
 </div>

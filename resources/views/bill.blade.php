@@ -55,10 +55,10 @@
                             </div>
                     
                     <!-- Content Section -->
-                    <div class="px-8 py-8 space-y-8">
+                    <div class="px-20 py-8 space-y-8">
                         
                         <!-- Bill Content -->
-                        <div class="prose prose-lg max-w-none dark:prose-invert">
+                        <div class="prose prose-lg max-w-none dark:prose-invert prose-p:m-0 prose-headings:m-0">
                             <div class="text-gray-700 dark:text-zinc-300 leading-relaxed text-lg font-light">
                                 {!! nl2br(e($bill->content)) !!}
                             </div>
@@ -135,8 +135,6 @@
                         </div>
 
                         
-
-
                         <!-- Comments Section Divider -->
                         <div class="relative py-8">
                             <div class="absolute inset-0 flex items-center">

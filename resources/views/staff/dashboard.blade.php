@@ -25,7 +25,7 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
     <!-- Users -->
         <a href="#all-users-section"
-        class="block text-white p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer">
+        class=" text-white dark:bg-blue-300 p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer">
             <div class="flex items-center justify-between">
                 <div>
                     <h2 class="text-sm font-medium uppercase text-gray-600">Users</h2>
@@ -37,7 +37,7 @@
         
     <!-- Bills Created -->
     <a href="/report-of-bills">
-        <div class="bg-white text-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer border border-gray-200">
+        <div class="bg-white dark:bg-blue-300 text-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer">
             <div class="flex items-center justify-between">
                 <div>
                     <h2 class="text-sm font-medium uppercase text-gray-600">Bills Created</h2>
@@ -50,7 +50,7 @@
 
     <!-- Likes -->
     <a href="/report-of-bills">
-        <div class="bg-white text-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer border border-gray-200">
+        <div class="bg-white dark:bg-blue-300 text-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer">
             <div class="flex items-center justify-between">
                 <div>
                     <h2 class="text-sm font-medium uppercase text-gray-600">Likes</h2>
@@ -63,7 +63,7 @@
 
     <!-- Dislikes -->
     <a href="/report-of-bills">
-        <div class="bg-white text-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer border border-gray-200">
+        <div class="bg-white dark:bg-blue-300 text-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer">
             <div class="flex items-center justify-between">
                 <div>
                     <h2 class="text-sm font-medium uppercase text-gray-600">Dislikes</h2>

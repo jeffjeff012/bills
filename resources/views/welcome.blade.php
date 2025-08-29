@@ -154,8 +154,8 @@
             <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
                 <div class="text-center animate-fade-in-up">
                     <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold text-white mb-6">
-                        Dapat <span class="text-yellow-300">Alam Mo!</span><br>
-                        <span class="text-pink-300">Kuya Kim,</span> Ano na?
+                        Dapat <span class="text-yellow-300">Alam</span><br>
+                        <span class="text-pink-300">Mo!</span>
                     </h1>
                     <p class="text-xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
                         Stay informed about bills and legislation that matter to you. 
