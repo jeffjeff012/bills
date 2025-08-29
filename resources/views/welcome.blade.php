@@ -77,16 +77,19 @@
     </head>
 
 <body class="bg-[#FDFDFC] text-[#1b1b18] min-h-screen">
-    
     <!-- Sticky Header -->
-    <div class="top-0 z-50 w-full bg-white border-b border-gray-200 dark:border-gray-800 shadow-sm">
+    <div class="sticky top-0 z-50 w-full bg-white border-b border-gray-200 dark:border-gray-800 shadow-sm">
         <header class="mx-auto w-full max-w-7xl px-4 py-4">
             <div class="flex items-center justify-between">
                 <!-- Logo (Left side) -->
-                <div class="flex items-center gap-2">
-                    <img src="/images/final.png" alt="Logo" class="h-[110px] w-auto" />
-                    <!-- Optional: add site title next to logo -->
-                    <!-- <span class="text-lg font-semibold">YourSite</span> -->
+                <div class="flex">
+                    <div class="flex items-center gap-2">
+                        <img src="/images/final.png" alt="Logo" class="h-[110px] w-auto" />
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xl font-bold gradient-text">Bayambang Bills Forum</span>
+                    </div>
                 </div>
                 
                 <!-- Navigation / Auth Buttons (Right side) -->
@@ -120,31 +123,18 @@
     </div>
 
 </div>
-<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
     
-    <!-- Navigation -->
+    {{-- <!-- Navigation -->
     <nav class="bg-white/80 dark:bg-white-800/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
+                
                 <div class="flex items-center space-x-2">
-                    {{-- <div class="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 0v12h8V4H6z"/>
-                        </svg>
-                    </div> --}}
                     <span class="text-xl font-bold gradient-text">Bayambang Bills Forum</span>
                 </div>
-                
-                <!-- Mobile Menu Button -->
-                {{-- <button class="md:hidden p-2 rounded-lg text-gray-600 dark:text-gray-300">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                </button>  --}}
             </div>
         </div>
-    </nav>
+    </nav> --}}
 
     <!-- Hero Section -->
     <section class="relative overflow-hidden">
@@ -155,7 +145,7 @@
                 <div class="text-center animate-fade-in-up">
                     <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold text-white mb-6">
                         Dapat <span class="text-yellow-300">Alam</span><br>
-                        <span class="text-pink-300">Mo!</span>
+                        <span class="text-blue-300">Mo!</span>
                     </h1>
                     <p class="text-xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
                         Stay informed about bills and legislation that matter to you. 
@@ -182,7 +172,7 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
+    <section class="py-8 bg-white dark:bg-gray-800 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div class="text-center animate-fade-in">

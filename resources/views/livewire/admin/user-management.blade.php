@@ -90,7 +90,7 @@
 
 
                         <flux:button
-                            icon="trash"
+                            icon="user-minus"
                             wire:click="confirmDelete({{ $user->id }})"
                             class="!bg-transparent !border-none !shadow-none !text-red-800 dark:!text-blue hover:!text-red-600 hover:underline dark:hover:!text-red-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
                             variant="ghost"
