@@ -11,14 +11,11 @@ export default defineConfig({
             refresh: true,
         }),
         tailwindcss(),
-        require('flowbite/plugin'),
-        require('flowbite-typography'),
     ],
     server: {
         cors: true,
     },
     content: [
     "./resources/views/welcome.blade.php",
-    "./node_modules/flowbite/**/*.js"
   ],
 });
