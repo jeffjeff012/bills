@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use App\Enums\UserRole;
+use Illuminate\Support\Facades\Auth;
 
 class RoleMiddleware
 {
@@ -26,5 +27,8 @@ class RoleMiddleware
 
         // Block normal Users
         abort(403, 'Unauthorized');
+
     }
+
+    
 }

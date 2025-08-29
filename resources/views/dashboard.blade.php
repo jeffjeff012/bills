@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="p-6 h-full flex flex-col">
-                    <!-- Bill Content -->
+                        <!-- Bill Content -->
                         <div class="flex-1 pr-20">
                             <a href="{{ route('bill', $bill->id) }}" class="block">
                                 @if (str_word_count(strip_tags($bill->title)) > 10)
@@ -53,7 +53,6 @@
                                         {{ $bill->content }}
                                     </p>
                                 @endif
-
                                 <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">
                                     {{ __('Published') }} {{ $bill->created_at->diffForHumans() }}
                                 </p>

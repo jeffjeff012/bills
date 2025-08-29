@@ -6,9 +6,9 @@
 
         <title>{{ env("APP_NAME") }}</title>
 
-        <link rel="icon" href="/favicon.ico" sizes="any">
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <link rel="icon" href="/images/final.png" sizes="any">
+        <link rel="icon" href="/images/final.png" type="image/svg+xml">
+        <link rel="apple-touch-icon" href="/images/final.png">
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
@@ -123,7 +123,7 @@
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
     
     <!-- Navigation -->
-    <nav class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+    <nav class="bg-white/80 dark:bg-white-800/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
@@ -154,8 +154,8 @@
             <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
                 <div class="text-center animate-fade-in-up">
                     <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold text-white mb-6">
-                        Track <span class="text-yellow-300">Legislative</span><br>
-                        <span class="text-pink-300">Progress</span> Easily
+                        Dapat <span class="text-yellow-300">Alam Mo!</span><br>
+                        <span class="text-pink-300">Kuya Kim,</span> Ano na?
                     </h1>
                     <p class="text-xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
                         Stay informed about bills and legislation that matter to you. 
@@ -233,64 +233,63 @@
                                     HOT
                                 </span>
                             </div>
-     @if($hotBill)
-    <!-- Card Header -->
-    <div class="px-6 pt-6 pb-4">
-        <h3 class="text-lg font-semibold text-black-900 dark:text-white mb-2">
-            Most Liked Bill
-        </h3>
-        <!-- Bill Title -->
-        <h4 class="text-xl font-bold text-black-800 dark:text-gray-100 mb-2">
-            {{ $hotBill->title }}
-        </h4>
-    </div>
+                            @if($hotBill)
+                            <!-- Card Header -->
+                            <div class="px-6 pt-6 pb-4">
+                                <h3 class="text-lg font-semibold text-black-900 dark:text-white mb-2">
+                                    Most Liked Bill
+                                </h3>
+                                <!-- Bill Title -->
+                                <h4 class="text-xl font-bold text-black-800 dark:text-gray-100 mb-2">
+                                    {{ $hotBill->title }}
+                                </h4>
+                            </div>
 
-    <!-- Card Body -->
-    <div class="px-6 pb-4">
-        <p class="text-gray-600 dark:text-black-300 line-clamp-3 leading-relaxed">
-            {{ Str::limit($hotBill->content, 150) }}
-        </p>
-    </div>
+                            <!-- Card Body -->
+                            <div class="px-6 pb-4">
+                                <p class="text-gray-600 dark:text-black-300 line-clamp-3 leading-relaxed">
+                                    {{ Str::limit($hotBill->content, 150) }}
+                                </p>
+                            </div>
 
-    <!-- Card Footer -->
-    <div class="px-6 py-4 bg-gradient-to-r from-red-50 to-orange-50 dark:from-gray-700/50 dark:to-gray-700/50 border-t border-gray-100 dark:border-gray-600">
-        <div class="flex items-center justify-between">
-            <!-- Likes count -->
-            <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
-                    <svg class="w-4 h-4 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
-                    </svg>
-                </div>
-                <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {{ $hotBill->likes_count }} likes
-                </span>
-            </div>
-            
-            <!-- Action button -->
-            <a href="{{ route('bills.show', $hotBill->id) }}" 
-                class="relative z-[9999] bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-all duration-300 hover:shadow-lg">
-                View Details →
-            </a>
-        </div>
-    </div>
-@else
-    <!-- Empty State -->
-    <div class="flex flex-col items-center justify-center text-center px-6 py-12">
-        <div class="w-16 h-16 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700 mb-4">
-            <svg class="w-8 h-8 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625A1.125 1.125 0 004.5 3.75v16.5A1.125 1.125 0 005.625 21h12.75a1.125 1.125 0 001.125-1.125V11.25a9 9 0 00-9-9z"/>
-            </svg>
-        </div>
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
-            No Bill Available
-        </h3>
-        <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            There’s currently no most liked bill. Once a bill gets likes, it will show up here.
-        </p>
-    </div>
-@endif
-
+                            <!-- Card Footer -->
+                            <div class="px-6 py-4 bg-gradient-to-r from-red-50 to-orange-50 dark:from-gray-700/50 dark:to-gray-700/50 border-t border-gray-100 dark:border-gray-600">
+                                <div class="flex items-center justify-between">
+                                    <!-- Likes count -->
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
+                                            <svg class="w-4 h-4 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                                            </svg>
+                                        </div>
+                                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                            {{ $hotBill->likes_count }} likes
+                                        </span>
+                                    </div>
+                                    
+                                    <!-- Action button -->
+                                    <a href="{{ route('bills.show', $hotBill->id) }}" 
+                                        class="relative z-[9999] bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-all duration-300 hover:shadow-lg">
+                                        View Details →
+                                    </a>
+                                </div>
+                            </div>
+                                @else
+                                    <!-- Empty State -->
+                                    <div class="flex flex-col items-center justify-center text-center px-6 py-12">
+                                        <div class="w-16 h-16 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700 mb-4">
+                                            <svg class="w-8 h-8 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625A1.125 1.125 0 004.5 3.75v16.5A1.125 1.125 0 005.625 21h12.75a1.125 1.125 0 001.125-1.125V11.25a9 9 0 00-9-9z"/>
+                                            </svg>
+                                        </div>
+                                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                                            No Bill Available
+                                        </h3>
+                                        <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                                            There’s currently no most liked bill. Once a bill gets likes, it will show up here.
+                                        </p>
+                                    </div>
+                                @endif
                         </div>
                     </div>
                 </div>

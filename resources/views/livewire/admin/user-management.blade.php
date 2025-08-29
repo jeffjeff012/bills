@@ -47,8 +47,11 @@
             <tbody>
                 @forelse ($users as $user)
                     @php
-                        $rowBg = $loop->iteration % 2 === 1 ? 'bg-gray-100' : 'bg-white';
+                        $rowBg = $loop->iteration % 2 === 1
+                            ? 'bg-gray-100 dark:bg-black-800'
+                            : 'bg-white dark:bg-slate-200';
                     @endphp
+
 
                     <tr class="{{ $rowBg }} hover:bg-lime-100 border-b border-gray-100">
                         <td class="px-6 py-4 text-black">{{ $user->name }}</td>
@@ -79,7 +82,7 @@
                         <flux:button
                             icon="pencil-square"
                             wire:click="edit({{ $user->id }})"
-                            class="!bg-transparent !border-none !shadow-none !text-blue-800 dark:!text-black hover:!text-blue-600 hover:underline dark:hover:!text-blue-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
+                            class="!bg-transparent !border-none !shadow-none !text-blue-800 dark:!text-orange hover:!text-blue-600 hover:underline dark:hover:!text-blue-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
                             variant="ghost"
                         >
                             Edit
@@ -89,7 +92,7 @@
                         <flux:button
                             icon="trash"
                             wire:click="confirmDelete({{ $user->id }})"
-                            class="!bg-transparent !border-none !shadow-none !text-red-800 dark:!text-black hover:!text-red-600 hover:underline dark:hover:!text-red-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
+                            class="!bg-transparent !border-none !shadow-none !text-red-800 dark:!text-blue hover:!text-red-600 hover:underline dark:hover:!text-red-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
                             variant="ghost"
                         >
                             Delete

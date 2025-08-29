@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bill Card - Simple Design</title>
+    <title>Bill Overview</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="/images/final.png" type="image/svg+xml">
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 p-6">
     <div class="max-w-4xl mx-auto">

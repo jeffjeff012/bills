@@ -10,6 +10,7 @@ use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DashboardController;
 use App\Livewire\Admin\UserManagement;
+use App\Livewire\BillCreate;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StaffController;
@@ -18,6 +19,7 @@ use App\Http\Middleware\BillsAccess;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\ReportController;
 use App\Enums\UserRole;
+
 
 // Root URL shows welcome page
 Route::get('/', function () {
@@ -70,6 +72,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     //Bills Route
     // Route::get('bills', Bills::class)->name('bills');
+    // Route::get('/bills/create', BillCreate::class)->name('bills.create');
     Route::redirect('settings', 'settings/profile');
 
     Route::get('settings/profile', Profile::class)->name('settings.profile');
@@ -93,6 +96,8 @@ Route::middleware(['auth', 'verified', 'admin'])
         Route::get('/user-management', UserManagement::class)->name('user-management');
     });
 
+// Route::get('/create-bill-page', \App\Livewire\CreateBillPage::class)
+//         ->name('bills.create');
 
 Route::middleware(['auth', 'admin'])
     ->get('/report-of-bills', Bills::class)
