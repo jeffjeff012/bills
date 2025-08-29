@@ -99,6 +99,8 @@ Route::middleware(['auth', 'verified', 'admin'])
 // Route::get('/create-bill-page', \App\Livewire\CreateBillPage::class)
 //         ->name('bills.create');
 
+Route::get('/other-bills', [BillController::class, 'otherBills'])->name('bills.other');
+
 Route::middleware(['auth', 'admin'])
     ->get('/report-of-bills', Bills::class)
     ->name('report-of-bills');

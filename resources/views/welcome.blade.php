@@ -236,20 +236,22 @@
                             @if($hotBill)
                             <!-- Card Header -->
                             <div class="px-6 pt-6 pb-4">
-                                <h3 class="text-lg font-semibold text-black-900 dark:text-white mb-2">
+                                <h3 class="text-lg font-semibold text-black-900 dark:text-black mb-2">
                                     Most Liked Bill
                                 </h3>
                                 <!-- Bill Title -->
-                                <h4 class="text-xl font-bold text-black-800 dark:text-gray-100 mb-2">
+                                <h4 class="text-xl font-bold text-black-800 dark:text-gray-800 mb-2">
                                     {{ $hotBill->title }}
                                 </h4>
                             </div>
 
                             <!-- Card Body -->
                             <div class="px-6 pb-4">
-                                <p class="text-gray-600 dark:text-black-300 line-clamp-3 leading-relaxed">
-                                    {{ Str::limit($hotBill->content, 150) }}
-                                </p>
+                                @if(str_word_count($hotBill->title) <= 10)
+                                    <p class="text-gray-600 dark:text-black-300 line-clamp-3 leading-relaxed">
+                                        {{ Str::limit($hotBill->content, 150) }}
+                                    </p>
+                                @endif
                             </div>
 
                             <!-- Card Footer -->
@@ -311,19 +313,22 @@
                             @if($mostCommentedBill)
                             <!-- Card Header -->
                             <div class="px-6 pt-6 pb-4">
-                                <h3 class="text-lg font-semibold text-red-900 dark:text-white mb-2">
+                                <h3 class="text-lg font-semibold text-red-900 dark:text-black mb-2">
                                     Most Discussed Bill
                                 </h3>
                                 <!-- Bill Title -->
-                                <h4 class="text-xl font-bold text-black-800 dark:text-gray-100 mb-2">
+                                <h4 class="text-xl font-bold text-black-800 dark:text-gray-800 mb-2">
                                     {{ $mostCommentedBill->title ?? '' }}
                                 </h4>
                             </div>
 
                             <!-- Card Body -->
                             <div class="px-6 pb-4">
+                                @if(str_word_count($mostCommentedBill->title) <= 10)
                                 <p class="text-gray-600 dark:text-black-300 line-clamp-3 leading-relaxed">
-                                    {{ Str::limit($mostCommentedBill->content, 150)  }}</p>
+                                    {{ Str::limit($mostCommentedBill->content, 150)  }}
+                                </p>
+                                @endif
                             </div>
 
                             <!-- Card Footer -->
@@ -368,6 +373,12 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="text-center mt-8">
+            <a href="{{ route('bills.other') }}"
+            class="inline-block bg-blue-600 text-white px-6 py-2.5 rounded-lg font-medium shadow hover:bg-blue-700 transition">
+                View Other Bills →
+            </a>
         </div>
     </section>
         

@@ -8,18 +8,27 @@ use App\Models\Like;
 use App\Models\User;
 use App\Models\Comment;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class WelcomeController extends Controller
 {
     public function index()
     {
+        // --- Active Bills Only ---
+        $activeBillsQuery = Bill::where(function ($query) {
+            $query->whereNull('due_date')
+                  ->orWhereDate('due_date', '>=', Carbon::today());
+        });
+
         // Get the bill with the most likes (Hot Bill)
-        $hotBill = Bill::withCount('likes')
+        $hotBill = (clone $activeBillsQuery)
+            ->withCount('likes')
             ->orderByDesc('likes_count')
             ->first();
 
         // Get the bill with the most comments (Most Commented Bill)
-        $mostCommentedBill = Bill::withCount('comments')
+        $mostCommentedBill = (clone $activeBillsQuery)
+            ->withCount('comments')
             ->orderByDesc('comments_count')
             ->first();
 
@@ -45,6 +54,13 @@ class WelcomeController extends Controller
         // Compute engagement %
         $userEngagement = $maxScore ? ($weightedScore / $maxScore) * 100 : 0;
 
+        // Other bills (exclude the most commented one, still filter active only)
+        $otherBills = (clone $activeBillsQuery)
+            ->withCount('comments')
+            ->when($mostCommentedBill, fn ($q) => $q->where('id', '!=', $mostCommentedBill->id))
+            ->latest()
+            ->get();
+
         // Pass data to the welcome view
         return view('welcome', compact(
             'hotBill',
@@ -52,7 +68,8 @@ class WelcomeController extends Controller
             'totalBills',
             'totalComments',
             'totalVotes',
-            'userEngagement'
+            'userEngagement',
+            'otherBills'
         ));
     }
 }

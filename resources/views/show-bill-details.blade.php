@@ -1,8 +1,9 @@
 <x-layouts.app :title="'Bill Details'">
     <div class="max-w-3xl mx-auto px-4 py-6">
+        <div class="flex">
         <h1 class="text-2xl font-bold mb-4">{{ $bill->title }}</h1>
+        </div>
         <p class="text-gray-700 dark:text-gray-300 mb-6">{{ $bill->content }}</p>
-
         <!-- Due Date -->
         <div class="text-sm text-gray-500 mb-6">
             Due: {{ \Carbon\Carbon::parse($bill->due_date)->diffForHumans() }}

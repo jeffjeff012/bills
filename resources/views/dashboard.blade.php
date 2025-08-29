@@ -53,9 +53,21 @@
                                         {{ $bill->content }}
                                     </p>
                                 @endif
-                                <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">
-                                    {{ __('Published') }} {{ $bill->created_at->diffForHumans() }}
-                                </p>
+                                <div class="flex items-center gap-4 text-xs text-gray-600 dark:text-gray-400">
+                                    <div class="flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                                        </svg>
+                                        <span class="whitespace-nowrap">{{ $bill->authored_by ?? 'Unknown' }}</span>
+                                    </div>
+
+                                    <p class="text-gray-500 dark:text-gray-400">
+                                        {{ __('Published') }} {{ $bill->created_at->diffForHumans() }}
+                                    </p>
+                                </div>
+
                             </a>
                         </div>
 
@@ -105,12 +117,12 @@
 
                             <!-- Bill Metadata -->
                             <div class="flex justify-between items-center pt-3 border-t border-gray-200 dark:border-gray-600">
-                                <div class="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-400">
+                                {{-- <div class="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-400">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                                     </svg>
                                     <span class="truncate max-w-20">{{ $bill->authored_by ?? 'Unknown' }}</span>
-                                </div>
+                                </div> --}}
                                 
                                 <div class="flex items-center gap-1.5 text-xs text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3.5 h-3.5">

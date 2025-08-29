@@ -24,9 +24,15 @@
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden">
             <!-- Card Header -->
             <div class="bg-blue-50 dark:bg-blue-900/20 px-6 py-6">
-                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                    {{ $bill->title ?? 'Sample Bill Title: Healthcare Reform Act' }}
-                </h2>
+                <<div class="flex items-center gap-4 flex-wrap">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+                        {{ $bill->title }}
+                    </h2>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-zinc-800 px-3 py-1 rounded-lg">
+                        Authored by <span class="font-medium text-gray-800 dark:text-gray-200">{{ $bill->authored_by }}</span>
+                    </p>
+                </div>
+
                 <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
                     {{ $bill->content ?? 'This legislation aims to reform healthcare accessibility and reduce costs through innovative policy measures.' }}
                 </p>
@@ -57,7 +63,7 @@
                     </div>
                 @empty
                     <p class="text-gray-500 dark:text-gray-400 text-center py-8">
-                        No comments yet. Be the first to comment!
+                        No comments yet.
                     </p>
                 @endforelse
             </div>

@@ -15,5 +15,14 @@ class BillController extends Controller
         return view('bills.show', compact('bill'));
     }
 
+    public function otherBills()
+    {
+        $otherBills = \App\Models\Bill::withCount('comments')
+            ->latest()
+            ->paginate(9); // paginate instead of all for cleaner UI
+
+        return view('bills.other-bills', compact('otherBills'));
+    }
+
 }
 
