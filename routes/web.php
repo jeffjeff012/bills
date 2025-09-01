@@ -19,7 +19,7 @@ use App\Http\Middleware\BillsAccess;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\ReportController;
 use App\Enums\UserRole;
-
+use App\Livewire\ActivityLogs;
 
 // Root URL shows welcome page
 Route::get('/', function () {
@@ -91,7 +91,6 @@ Route::middleware(['auth', 'verified', 'admin'])
     ->group(function () {
         // Admin dashboard
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-
         // User management
         Route::get('/user-management', UserManagement::class)->name('user-management');
     });
@@ -104,6 +103,10 @@ Route::get('/other-bills', [BillController::class, 'otherBills'])->name('bills.o
 Route::middleware(['auth', 'admin'])
     ->get('/report-of-bills', Bills::class)
     ->name('report-of-bills');
+
+Route::get('/activity-logs', \App\Livewire\ActivityLogs::class)
+    ->middleware(['auth', 'verified', 'admin'])
+    ->name('activity.logs');
 
 Route::get('/staff/bills/{bill}', [StaffController::class, 'showBillDetails'])->name('bills.show-bill-details');
 

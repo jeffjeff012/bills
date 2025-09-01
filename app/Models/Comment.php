@@ -4,17 +4,40 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Bill;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
+
 
 class Comment extends Model
 {
-   
+    use LogsActivity;
 
     protected $fillable = [
-    'user_id',
-    'bill_id',
-    'content',
+        'user_id',
+        'bill_id',
+        'content',
+        'title',
     ];
-    
+
+     protected static $logAttributes = [
+        'user_id',
+        'bill_id',
+        'content',
+        'title',
+    ];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+
+            ->logOnly([
+                    'user_id',
+                    'bill_id',
+                    'content',
+                    'title',
+            ]);
+    }
+
     // In App\Models\Comment.php
     public function canEdit(): bool
     {

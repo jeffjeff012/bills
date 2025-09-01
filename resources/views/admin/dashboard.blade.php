@@ -25,56 +25,57 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
 
     <!-- Users -->
-    <a href="{{ url('admin/user-management') }}">
-        <div class="bg-white text-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer border border-gray-200">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h2 class="text-sm font-medium uppercase text-gray-600">Users</h2>
-                    <p class="text-3xl font-bold mt-2 border-2 bg-blue-100 rounded-lg px-3 py-1 inline-block text-blue-500">{{ $userCount }}</p>
-                </div>
-                <flux:icon name="user-group" class="w-10 h-10 text-gray-500" />
+    <!-- Users -->
+<a href="{{ url('admin/user-management') }}">
+    <div class="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 p-6 rounded-xl shadow-md dark:shadow-gray-900/20 hover:shadow-xl dark:hover:shadow-gray-900/40 hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer border border-gray-200 dark:border-gray-700">
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-sm font-medium uppercase text-gray-600 dark:text-gray-400">Users</h2>
+                <p class="text-3xl font-bold mt-2 border-2 bg-blue-100 dark:bg-blue-900/30 dark:border-blue-700 rounded-lg px-3 py-1 inline-block text-blue-500 dark:text-blue-400">{{ $userCount }}</p>
             </div>
+            <flux:icon name="user-group" class="w-10 h-10 text-gray-500 dark:text-gray-400" />
         </div>
-    </a>
+    </div>
+</a>
 
-    <!-- Bills Created -->
-    <a href="/report-of-bills">
-        <div class="bg-white text-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer border border-gray-200">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h2 class="text-sm font-medium uppercase text-gray-600">Bills Created</h2>
-                    <p class="text-3xl font-bold mt-2 border-2 bg-blue-100 rounded-lg px-3 py-1 inline-block text-blue-500">{{ $billCount }}</p>
-                </div>
-                <flux:icon name="scale" class="w-10 h-10 text-gray-500" />
+<!-- Bills Created -->
+<a href="/report-of-bills">
+    <div class="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 p-6 rounded-xl shadow-md dark:shadow-gray-900/20 hover:shadow-xl dark:hover:shadow-gray-900/40 hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer border border-gray-200 dark:border-gray-700">
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-sm font-medium uppercase text-gray-600 dark:text-gray-400">Bills Created</h2>
+                <p class="text-3xl font-bold mt-2 border-2 bg-blue-100 dark:bg-blue-900/30 dark:border-blue-700 rounded-lg px-3 py-1 inline-block text-blue-500 dark:text-blue-400">{{ $billCount }}</p>
             </div>
+            <flux:icon name="scale" class="w-10 h-10 text-gray-500 dark:text-gray-400" />
         </div>
-    </a>
+    </div>
+</a>
 
-    <!-- Likes -->
-    <a href="/report-of-bills">
-        <div class="bg-white text-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer border border-gray-200">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h2 class="text-sm font-medium uppercase text-gray-600">Likes</h2>
-                    <p class="text-3xl font-bold mt-2 border-2 bg-blue-100 rounded-lg px-3 py-1 inline-block text-blue-500">{{ $totalLikes }}</p>
-                </div>
-                <flux:icon name="hand-thumb-up" class="w-10 h-10 text-gray-500" />
+<!-- Likes -->
+<a href="/report-of-bills">
+    <div class="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 p-6 rounded-xl shadow-md dark:shadow-gray-900/20 hover:shadow-xl dark:hover:shadow-gray-900/40 hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer border border-gray-200 dark:border-gray-700">
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-sm font-medium uppercase text-gray-600 dark:text-gray-400">Likes</h2>
+                <p class="text-3xl font-bold mt-2 border-2 bg-blue-100 dark:bg-blue-900/30 dark:border-blue-700 rounded-lg px-3 py-1 inline-block text-blue-500 dark:text-blue-400">{{ $totalLikes }}</p>
             </div>
+            <flux:icon name="hand-thumb-up" class="w-10 h-10 text-gray-500 dark:text-gray-400" />
         </div>
-    </a>
+    </div>
+</a>
 
-    <!-- Dislikes -->
-    <a href="/report-of-bills">
-        <div class="bg-white text-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer border border-gray-200">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h2 class="text-sm font-medium uppercase text-gray-600">Dislikes</h2>
-                    <p class="text-3xl font-bold mt-2 border-2 bg-blue-100 rounded-lg px-3 py-1 inline-block text-blue-500">{{ $totalDislikes }}</p>
-                </div>
-                <flux:icon name="hand-thumb-down" class="w-10 h-10 text-gray-500" />
+<!-- Dislikes -->
+<a href="/report-of-bills">
+    <div class="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 p-6 rounded-xl shadow-md dark:shadow-gray-900/20 hover:shadow-xl dark:hover:shadow-gray-900/40 hover:scale-[1.02] transition-all duration-200 ease-in-out cursor-pointer border border-gray-200 dark:border-gray-700">
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-sm font-medium uppercase text-gray-600 dark:text-gray-400">Dislikes</h2>
+                <p class="text-3xl font-bold mt-2 border-2 bg-blue-100 dark:bg-blue-900/30 dark:border-blue-700 rounded-lg px-3 py-1 inline-block text-blue-500 dark:text-blue-400">{{ $totalDislikes }}</p>
             </div>
+            <flux:icon name="hand-thumb-down" class="w-10 h-10 text-gray-500 dark:text-gray-400" />
         </div>
-    </a>
+    </div>
+</a>
 </div>
 
 {{-- Container for both cards --}}

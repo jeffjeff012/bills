@@ -31,7 +31,13 @@
                                     :current="request()->routeIs('report-of-bills')" 
                                     wire:navigate>
                         {{ __('Report of Bills') }}
-                    </flux:navlist.item>                 
+                    </flux:navlist.item>
+                    <flux:navlist.item icon="clipboard-document-list" 
+                                    :href="route('activity.logs')" 
+                                    :current="request()->routeIs('activity.logs')" 
+                                    wire:navigate>
+                        {{ __('Activity Logs') }}
+                    </flux:navlist.item>                   
                 @endif
 
                 @if (auth()->user()->role === App\Enums\UserRole::SbStaff)

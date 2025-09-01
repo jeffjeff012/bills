@@ -33,6 +33,30 @@
                     </p>
                 </div>
 
+                <div class="flex mt-3 items-center gap-4 p-4 bg-blue-50 dark:bg-gray-800 border border-blue-200 dark:border-gray-700 rounded-lg shadow-sm">
+                    <!-- Icon -->
+                    <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-md bg-blue-100 dark:bg-blue-900/40">
+                        <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 20h9M12 4v16m0-16H6a2 2 0 00-2 2v12a2 2 0 002 2h6" />
+                        </svg>
+                    </div>
+
+                    <!-- Text + Button -->
+                    <div class="flex-1">
+                        <h3 class="text-sm font-semibold text-blue-900 dark:text-blue-100">
+                            PDF Attachment Available
+                        </h3>
+                        <a href="{{ Storage::url($bill->attachment) }}" target="_blank" 
+                            class="inline-flex items-center mt-1 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium text-sm transition-colors duration-200">
+                            <span>View PDF Attachment</span>
+                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+
                 <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
                     {{ $bill->content ?? 'This legislation aims to reform healthcare accessibility and reduce costs through innovative policy measures.' }}
                 </p>

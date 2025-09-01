@@ -274,10 +274,10 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625A1.125 1.125 0 004.5 3.75v16.5A1.125 1.125 0 005.625 21h12.75a1.125 1.125 0 001.125-1.125V11.25a9 9 0 00-9-9z"/>
                                             </svg>
                                         </div>
-                                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                                        <h3 class="text-lg font-semibold text-gray-800 dark:text-black-200">
                                             No Bill Available
                                         </h3>
-                                        <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                                        <p class="mt-2 text-sm text-gray-600 dark:text-gray-800">
                                             There’s currently no most liked bill. Once a bill gets likes, it will show up here.
                                         </p>
                                     </div>
@@ -351,10 +351,10 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625A1.125 1.125 0 004.5 3.75v16.5A1.125 1.125 0 005.625 21h12.75a1.125 1.125 0 001.125-1.125V11.25a9 9 0 00-9-9z"/>
                                         </svg>
                                     </div>
-                                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                                    <h3 class="text-lg font-semibold text-gray-800 dark:text-black-200">
                                         No Bill Available
                                     </h3>
-                                    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                                    <p class="mt-2 text-sm text-gray-600 dark:text-gray-800">
                                         There’s currently no most commented bill. Once a bill gets comments, it will show up here.
                                     </p>
                                 </div>
