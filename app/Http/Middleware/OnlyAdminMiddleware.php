@@ -22,14 +22,8 @@ class OnlyAdminMiddleware
         }
 
         if ($user->role === \App\Enums\UserRole::Admin) {
-            return $next($request); // ✅ allow admins only
-        }
-
-        if($user->role === \App\Enums\UserRole::SbStaff) {
             return $next($request); 
         }
-
-
 
         // Default (for Users or anything else)
             abort(403, 'You may not proceed.');

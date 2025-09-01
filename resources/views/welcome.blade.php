@@ -313,7 +313,7 @@
                                 </div>
 
                                 <!-- Card Body -->
-                                <div class="px-6 h-10 pb-4">
+                                <div class="px-6 h-20 pb-4">
                                     @if(str_word_count($mostCommentedBill->title) <= 10)
                                         <p class="text-gray-600 dark:text-black-300 line-clamp-3 leading-relaxed">
                                             {{ Str::limit($mostCommentedBill->content, 150) }}

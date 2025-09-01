@@ -69,8 +69,6 @@
                                         N/A
                                     @endif
                                 </td>
-
-
                             </tr>
                         @endforeach
                     </tbody>

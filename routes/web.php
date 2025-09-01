@@ -100,7 +100,7 @@ Route::middleware(['auth', 'verified', 'admin'])
 
 Route::get('/other-bills', [BillController::class, 'otherBills'])->name('bills.other');
 
-Route::middleware(['auth', 'admin'])
+Route::middleware(['auth', 'verified', 'admin'])
     ->get('/report-of-bills', Bills::class)
     ->name('report-of-bills');
 
