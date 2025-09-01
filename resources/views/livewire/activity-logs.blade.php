@@ -29,33 +29,32 @@
                                     {{ $log->causer?->name ?? 'System' }}
                                 </td>
                                 <td class="px-4 py-2 text-sm text-gray-600 dark:text-gray-300"> 
-    @if($log->subject_type === App\Models\Like::class && $log->description === 'created')
-        Added a Like
-    @elseif($log->subject_type === App\Models\Comment::class && $log->description === 'created')
-        Added a Comment
-    @elseif($log->description === 'updated' && isset($log->properties['attributes'], $log->properties['old']))
-        @php
-            $changed = [];
-            foreach ($log->properties['attributes'] as $field => $newValue) {
-                $oldValue = $log->properties['old'][$field] ?? null;
-                if ($oldValue !== $newValue) {
-                    $changed[] = str_replace('_', ' ', $field);
-                }
-            }
-        @endphp
+                                    @if($log->subject_type === App\Models\Like::class && $log->description === 'created')
+                                        Added a Like
+                                    @elseif($log->subject_type === App\Models\Comment::class && $log->description === 'created')
+                                        Added a Comment
+                                    @elseif($log->description === 'updated' && isset($log->properties['attributes'], $log->properties['old']))
+                                        @php
+                                            $changed = [];
+                                            foreach ($log->properties['attributes'] as $field => $newValue) {
+                                                $oldValue = $log->properties['old'][$field] ?? null;
+                                                if ($oldValue !== $newValue) {
+                                                    $changed[] = str_replace('_', ' ', $field);
+                                                }
+                                            }
+                                        @endphp
 
-        @if(count($changed))
-            @foreach($changed as $field)
-                Updated the {{ $field }}@if(!$loop->last), @endif
-            @endforeach
-        @else
-            Updated
-        @endif
-    @else
-        {{ ucfirst($log->description) }}
-    @endif
-</td>
-
+                                        @if(count($changed))
+                                            @foreach($changed as $field)
+                                                Updated the {{ $field }}@if(!$loop->last), @endif
+                                            @endforeach
+                                        @else
+                                            Updated
+                                        @endif
+                                    @else
+                                        {{ ucfirst($log->description) }}
+                                    @endif
+                                </td>
                                 <td class="px-4 py-2 text-sm text-gray-600 dark:text-gray-300">
                                     {{ class_basename($log->subject_type) }}
                                     @if($log->subject)
