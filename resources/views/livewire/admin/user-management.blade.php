@@ -108,19 +108,19 @@
         </div>
 
 {{-- Create user Modal --}}
-<flux:modal name="create-user" wire:model="showCreateUserModal" class="min-w-[28rem]">
-    <div class="space-y-4">
-        <flux:heading size="lg">Create New User</flux:heading>
+<flux:modal name="create-user" wire:model="showCreateUserModal" class="min-w-[28rem] max-w-[95vw] md:max-w-none max-h-[90vh] md:max-h-none overflow-y-auto">
+    <div class="space-y-3 md:space-y-4 p-1 md:p-0">
+        <flux:heading size="lg" class="text-lg md:text-xl">Create New User</flux:heading>
 
-        <form wire:submit.prevent="createUser" class="space-y-4">
+        <form wire:submit.prevent="createUser" class="space-y-3 md:space-y-4">
             <!-- Name -->
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Name
                 </label>
-                <flux:input id="name" type="text" wire:model="name" />
+                <flux:input id="name" type="text" wire:model="name" class="w-full" />
                 @error('name')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    <p class="text-red-500 text-xs md:text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -129,9 +129,9 @@
                 <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Email
                 </label>
-                <flux:input id="email" type="email" wire:model="email" />
+                <flux:input id="email" type="email" wire:model="email" class="w-full" />
                 @error('email')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    <p class="text-red-500 text-xs md:text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -140,9 +140,9 @@
                 <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Password
                 </label>
-                <flux:input id="password" type="password" wire:model="password" />
+                <flux:input id="password" type="password" wire:model="password" class="w-full" />
                 @error('password')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    <p class="text-red-500 text-xs md:text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -151,23 +151,23 @@
                 <label for="role" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Role
                 </label>
-                <flux:select id="role" wire:model="role">
+                <flux:select id="role" wire:model="role" class="w-full">
                     <option value="">-- Select Role --</option>
                     <option value="admin">Admin</option>
                     <option value="sbstaff">SbStaff</option>
                     <option value="user">User</option>
                 </flux:select>
                 @error('role')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    <p class="text-red-500 text-xs md:text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
             <!-- Actions -->
-            <div class="flex justify-end gap-2">
-                <flux:modal.close>
-                    <flux:button type="button" variant="ghost">Cancel</flux:button>
+            <div class="flex flex-col sm:flex-row justify-end gap-2 pt-2 md:pt-4 border-t border-gray-200 dark:border-gray-700 mt-4 md:mt-6 md:border-none">
+                <flux:modal.close class="order-2 sm:order-1">
+                    <flux:button type="button" variant="ghost" class="w-full sm:w-auto text-sm md:text-base py-2 md:py-2.5">Cancel</flux:button>
                 </flux:modal.close>
-                <flux:button type="submit">Save</flux:button>
+                <flux:button type="submit" class="order-1 sm:order-2 w-full sm:w-auto text-sm md:text-base py-2 md:py-2.5">Save</flux:button>
             </div>
         </form>
     </div>

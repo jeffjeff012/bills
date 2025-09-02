@@ -78,51 +78,64 @@
 
 <body class="bg-[#FDFDFC] text-[#1b1b18] min-h-screen">
     <!-- Sticky Header -->
-    <div class="sticky top-0 z-50 w-full bg-white border-b border-gray-200 dark:border-gray-800 shadow-sm">
-        <header class="mx-auto w-full max-w-7xl px-4 py-4">
-            <div class="flex items-center justify-between">
-                <!-- Logo (Left side) -->
-                <div class="flex">
-                    <div class="flex items-center gap-2">
-                        <img src="/images/final.png" alt="Logo" class="h-[110px] w-auto" />
-                    </div>
-
-                    <div class="flex items-center space-x-2">
-                        <span class="text-xl font-bold gradient-text">Bayambang Bills Forum</span>
-                    </div>
-                </div>
-                
-                <!-- Navigation / Auth Buttons (Right side) -->
-                @if (Route::has('login'))
-                    <nav class="flex items-center gap-4">
-                        @auth
-                            <a href="{{ url('/dashboard') }}" class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">Dashboard</a>
-                        @else
-                            <a 
-                                href="{{ route('login') }}" 
-                                class="inline-block px-5 py-1.5 text-[#1b1b18] dark:text-black 
-                                    border border-gray-400 rounded-lg 
-                                    text-xl leading-normal transition-all duration-200 
-                                    hover:bg-blue-300 hover:border-blue-600"
-                            >
-                                Log in
-                            </a>
-                            @if (Route::has('register'))
-                                <a 
-                                    href="{{ route('register') }}"
-                                    class="inline-block px-5 py-1.5 text-white bg-blue-600 hover:bg-blue-700 dark:text-white rounded-lg text-xl leading-normal transition-colors duration-200"
-                                >
-                                    Register
-                                </a>
-                            @endif
-                        @endauth
-                    </nav>
-                @endif
+<div class="sticky top-0 z-50 w-full bg-white border-b border-gray-200 dark:border-gray-800 shadow-sm">
+    <header class="mx-auto w-full max-w-7xl px-4 py-3 sm:py-4">
+        <div class="flex items-center justify-between">
+            <!-- Logo (Left side) -->
+            <div class="flex items-center gap-2">
+                <img 
+                    src="/images/final.png" 
+                    alt="Logo" 
+                    class="h-12 w-auto sm:h-[110px]" 
+                />
+                <span class="text-base font-bold gradient-text sm:text-xl">
+                    Bayambang Bills Forum
+                </span>
             </div>
-        </header>
-    </div>
-
+            
+            <!-- Navigation / Auth Buttons (Right side) -->
+            @if (Route::has('login'))
+                <nav class="flex items-center gap-2 sm:gap-4">
+                    @auth
+                        <a href="{{ url('/dashboard') }}" 
+                           class="inline-block px-5 py-1.5 text-sm 
+                                  border text-[#1b1b18] dark:text-[#EDEDEC] 
+                                  border-[#19140035] hover:border-[#1915014a] 
+                                  dark:border-[#3E3E3A] dark:hover:border-[#62605b] 
+                                  rounded-sm leading-normal">
+                            Dashboard
+                        </a>
+                    @else
+                        <a 
+                            href="{{ route('login') }}" 
+                            class="inline-block px-5 py-1.5 text-xl 
+                                   border border-gray-400 rounded-lg 
+                                   text-[#1b1b18] dark:text-black 
+                                   transition-all duration-200 
+                                   hover:bg-blue-300 hover:border-blue-600 "
+                                   
+                        >
+                            Log in
+                        </a>
+                        @if (Route::has('register'))
+                            <a 
+                                href="{{ route('register') }}"
+                                class="inline-block px-5 py-1.5 text-xl 
+                                       text-white bg-blue-600 hover:bg-blue-700 
+                                       dark:text-white rounded-lg 
+                                       transition-colors duration-200"
+                            >
+                                Register
+                            </a>
+                        @endif
+                    @endauth
+                </nav>
+            @endif
+        </div>
+    </header>
 </div>
+
+
     
     {{-- <!-- Navigation -->
     <nav class="bg-white/80 dark:bg-white-800/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
@@ -174,26 +187,39 @@
     <!-- Stats Section -->
     <section class="py-8 bg-white dark:bg-gray-800 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Changed grid-cols-1 to grid-cols-2 -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <div class="text-center animate-fade-in">
-                    <div class="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">{{ number_format($totalBills) }}</div>
+                    <div class="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">
+                        {{ number_format($totalBills) }}
+                    </div>
                     <div class="text-gray-600 dark:text-gray-400">Bills Published</div>
                 </div>
+
                 <div class="text-center animate-fade-in" style="animation-delay: 0.2s;">
-                    <div class="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">{{ number_format($userEngagement, 0) }}%</div>
+                    <div class="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">
+                        {{ number_format($userEngagement, 0) }}%
+                    </div>
                     <div class="text-gray-600 dark:text-gray-400">User Engagement</div>
                 </div>
+
                 <div class="text-center animate-fade-in" style="animation-delay: 0.4s;">
-                    <div class="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">{{ number_format($totalComments) }}</div>
+                    <div class="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">
+                        {{ number_format($totalComments) }}
+                    </div>
                     <div class="text-gray-600 dark:text-gray-400">Total Comments</div>
                 </div>
+
                 <div class="text-center animate-fade-in" style="animation-delay: 0.6s;">
-                    <div class="text-4xl font-bold text-red-600 dark:text-red-400 mb-2">  {{ number_format($totalVotes) }}</div>
+                    <div class="text-4xl font-bold text-red-600 dark:text-red-400 mb-2">
+                        {{ number_format($totalVotes) }}
+                    </div>
                     <div class="text-gray-600 dark:text-gray-400">Community Votes</div>
                 </div>
             </div>
         </div>
     </section>
+
 
     <!-- Featured Bills Section -->
     <section id="featured-bills" class="py-40 bg-gray-50 dark:bg-gray-900">
@@ -338,7 +364,7 @@
 
                                         <!-- Action button -->
                                         <a href="{{ route('bills.show', $mostCommentedBill->id) }}" 
-                                        class="relative z-[9999] bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-all duration-300 hover:shadow-lg">
+                                        class="relative bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-all duration-300 hover:shadow-lg">
                                             View Details →
                                         </a>
                                     </div>
