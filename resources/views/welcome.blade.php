@@ -98,7 +98,7 @@
                     <nav class="flex items-center gap-2 sm:gap-2">
                         @auth
                             <a href="{{ url('/dashboard') }}" 
-                            class="inline-block px-5 py-1.5 text-sm 
+                            class="inline-block px-5 py-1.5 text-sm
                                     border text-[#1b1b18] dark:text-[#EDEDEC] 
                                     border-[#19140035] hover:border-[#1915014a] 
                                     dark:border-[#3E3E3A] dark:hover:border-[#62605b] 

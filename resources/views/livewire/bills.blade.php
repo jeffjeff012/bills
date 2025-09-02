@@ -100,7 +100,7 @@
     @endforelse
 </tbody>
 </table>
-
+</div>
     <div class="mt-4">
         {{ $bills->links() }}
     </div>
@@ -128,5 +128,5 @@
             </div>
         </div>
     </flux:modal>
-</div>
+
 </div>
