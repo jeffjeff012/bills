@@ -40,9 +40,11 @@
         </header>
 
         @if($otherBills->count())
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($otherBills as $bill)
-                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 overflow-hidden">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 overflow-hidden 
+                                flex flex-col">
+
                         <!-- Card Header -->
                         <div class="px-6 pt-6 pb-4">
                             <h4 class="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">
@@ -51,26 +53,28 @@
                         </div>
 
                         <!-- Card Body -->
-                        <div class="px-6 pb-4">
-                            <p class="text-gray-600 dark:text-gray-300 line-clamp-3">
-                                {{ Str::limit($bill->content, 120) }}
-                            </p>
-                        </div>
+                        @if(str_word_count($bill->title) < 10)
+                            <div class="px-6 pb-4">
+                                <p class="text-gray-600 dark:text-gray-300 line-clamp-3">
+                                    {{ Str::limit($bill->content, 120) }}
+                                </p>
+                            </div>
+                        @endif
 
                         <!-- Card Footer -->
-                        <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-200 dark:border-gray-600 flex justify-between items-center">
+                        <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-200 dark:border-gray-600 
+                                    flex justify-between items-center mt-auto">
                             <span class="text-sm text-gray-600 dark:text-gray-400">
                                 {{ $bill->comments_count }} comments
                             </span>
                             <a href="{{ route('bills.show', $bill->id) }}"
-                               class="bg-blue-600 text-white px-3 py-1.5 rounded-lg text-sm hover:bg-blue-700 transition">
+                            class="bg-blue-600 text-white px-3 py-1.5 rounded-lg text-sm hover:bg-blue-700 transition">
                                 View →
                             </a>
                         </div>
                     </div>
                 @endforeach
             </div>
-
             <div class="mt-6">
                 {{ $otherBills->links() }}
             </div>
