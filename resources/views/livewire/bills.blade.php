@@ -1,5 +1,5 @@
 <div>
-    <div class="relative mb-6 w-full">
+    {{-- <div class="relative mb-6 w-full"> --}}
         <flux:heading size="xl" level="1">{{ __('Report of Bills') }}</flux:heading>
         <flux:subheading size="lg" class="mb-6">{{ __('Make and add changes') }}</flux:subheading>
         <flux:separator variant="subtle" />
@@ -32,13 +32,14 @@
                 <p>{{ $value }}</p>
             </div>
         @endsession
-    </div>
+    {{-- </div> --}}
 
     <livewire:create-bill />
 
     <livewire:edit-bill />
 
     {{-- Bills Table --}}
+<div class="overflow-x-auto mt-4 rounded-md shadow-sm">
     <table class="table-auto w-full bg-gray-300 dark:bg-slate-800 text-white dark:text-white shadow-md rounded-md mt-5">
     <thead class="bg-neutral-700 dark:bg-slate-900">
     <tr>
@@ -127,4 +128,5 @@
             </div>
         </div>
     </flux:modal>
+</div>
 </div>

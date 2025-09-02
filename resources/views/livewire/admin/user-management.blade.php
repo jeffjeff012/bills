@@ -35,74 +35,74 @@
     </div>
 
     <div class="overflow-x-auto mt-4 rounded-md shadow-sm"> {{-- slightly rounded --}}
-      <table class="min-w-full text-sm text-left text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 rounded-md"> {{-- slightly rounded --}}
-    <thead class="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-semibold text-xs uppercase tracking-wider border-b border-gray-200 dark:border-gray-600"> {{-- bold --}}
-        <tr>
-            <th class="px-6 py-3 font-bold">Name</th>
-            <th class="px-6 py-3 font-bold">Email</th>
-            <th class="px-6 py-3 font-bold">Role</th>
-            <th class="px-6 py-3 font-bold">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @forelse ($users as $user)
-            @php
-                $rowBg = $loop->iteration % 2 === 1
-                    ? 'bg-gray-100 dark:bg-gray-900'
-                    : 'bg-white dark:bg-gray-800';
-            @endphp
-
-            <tr class="{{ $rowBg }} hover:bg-lime-100 dark:hover:bg-gray-700 border-b border-gray-100 dark:border-gray-600">
-                <td class="px-6 py-4 text-black dark:text-gray-200">{{ $user->name }}</td>
-                <td class="px-6 py-4 text-gray-700 dark:text-gray-300">{{ $user->email ?? 'No email used' }}</td>
-                <td class="px-6 py-4">
+        <table class="min-w-full text-sm text-left text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 rounded-md"> {{-- slightly rounded --}}
+            <thead class="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-semibold text-xs uppercase tracking-wider border-b border-gray-200 dark:border-gray-600"> {{-- bold --}}
+                <tr>
+                    <th class="px-6 py-3 font-bold">Name</th>
+                    <th class="px-6 py-3 font-bold">Email</th>
+                    <th class="px-6 py-3 font-bold">Role</th>
+                    <th class="px-6 py-3 font-bold">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($users as $user)
                     @php
-                        $roleName = strtolower($user->role->name ?? 'N/A');
-
-                        $badgeSettings = match($roleName) {
-                            'admin' => ['color' => 'lime', 'textColor' => 'text-black dark:text-white-800'], 
-                            'user' => ['color' => 'yellow', 'textColor' => 'text-black dark:text-white-800'],
-                            'sbstaff' => ['color' => 'blue', 'textColor' => 'text-black dark:text-white-800'], 
-                            default => ['color' => 'gray', 'textColor' => 'text-white dark:text-gray-200'],
-                        };
+                        $rowBg = $loop->iteration % 2 === 1
+                            ? 'bg-gray-100 dark:bg-gray-900'
+                            : 'bg-white dark:bg-gray-800';
                     @endphp
 
-                    <flux:badge 
-                        color="{{ $badgeSettings['color'] }}" 
-                        size="lg" 
-                        pill 
-                        class="{{ $badgeSettings['textColor'] }}"
-                    >
-                        {{ ucfirst($roleName) }}
-                    </flux:badge>
-                </td>
-                <td class="">
-                    <flux:button
-                        icon="pencil-square"
-                        wire:click="edit({{ $user->id }})"
-                        class="!bg-transparent !border-none !shadow-none !text-blue-800 dark:!text-blue-200 hover:!text-blue-600 hover:underline dark:hover:!text-blue-300 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
-                        variant="ghost"
-                    >
-                        Edit
-                    </flux:button>
+                    <tr class="{{ $rowBg }} hover:bg-lime-100 dark:hover:bg-gray-700 border-b border-gray-100 dark:border-gray-600">
+                        <td class="px-6 py-4 text-black dark:text-gray-200">{{ $user->name }}</td>
+                        <td class="px-6 py-4 text-gray-700 dark:text-gray-300">{{ $user->email ?? 'No email used' }}</td>
+                        <td class="px-6 py-4">
+                            @php
+                                $roleName = strtolower($user->role->name ?? 'N/A');
 
-                    <flux:button
-                        icon="user-minus"
-                        wire:click="confirmDelete({{ $user->id }})"
-                        class="!bg-transparent !border-none !shadow-none !text-red-800 dark:!text-red-400 hover:!text-red-600 hover:underline dark:hover:!text-red-300 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
-                        variant="ghost"
-                    >
-                        Delete
-                    </flux:button>
-                </td>
-            </tr>
-        @empty
-            <tr>
-                <td colspan="4" class="px-6 py-4 text-center text-gray-400 dark:text-gray-500">No users found.</td>
-            </tr>
-        @endforelse
-    </tbody>
-</table>
+                                $badgeSettings = match($roleName) {
+                                    'admin' => ['color' => 'lime', 'textColor' => 'text-black dark:text-white-800'], 
+                                    'user' => ['color' => 'yellow', 'textColor' => 'text-black dark:text-white-800'],
+                                    'sbstaff' => ['color' => 'blue', 'textColor' => 'text-black dark:text-white-800'], 
+                                    default => ['color' => 'gray', 'textColor' => 'text-white dark:text-gray-200'],
+                                };
+                            @endphp
+
+                            <flux:badge 
+                                color="{{ $badgeSettings['color'] }}" 
+                                size="lg" 
+                                pill 
+                                class="{{ $badgeSettings['textColor'] }}"
+                            >
+                                {{ ucfirst($roleName) }}
+                            </flux:badge>
+                        </td>
+                        <td class="">
+                            <flux:button
+                                icon="pencil-square"
+                                wire:click="edit({{ $user->id }})"
+                                class="!bg-transparent !border-none !shadow-none !text-blue-800 dark:!text-blue-200 hover:!text-blue-600 hover:underline dark:hover:!text-blue-300 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
+                                variant="ghost"
+                            >
+                                Edit
+                            </flux:button>
+
+                            <flux:button
+                                icon="user-minus"
+                                wire:click="confirmDelete({{ $user->id }})"
+                                class="!bg-transparent !border-none !shadow-none !text-red-800 dark:!text-red-400 hover:!text-red-600 hover:underline dark:hover:!text-red-300 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
+                                variant="ghost"
+                            >
+                                Delete
+                            </flux:button>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="4" class="px-6 py-4 text-center text-gray-400 dark:text-gray-500">No users found.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
         <div class="mt-4">
             {{ $users->links() }}
         </div>
