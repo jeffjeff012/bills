@@ -6,6 +6,7 @@
     <div class="p-6 bg-white dark:bg-gray-800 shadow rounded-xl">
         <h2 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-4">
             Activity Logs
+              <flux:separator class="mt-2" variant="subtle" />
         </h2>
 
         @if ($logs->count() > 0)

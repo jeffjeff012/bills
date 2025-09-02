@@ -80,7 +80,7 @@
                     <flux:button
                         icon="pencil-square"
                         wire:click="edit({{ $user->id }})"
-                        class="!bg-transparent !border-none !shadow-none !text-blue-800 dark:!text-blue-400 hover:!text-blue-600 hover:underline dark:hover:!text-blue-300 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
+                        class="!bg-transparent !border-none !shadow-none !text-blue-800 dark:!text-blue-200 hover:!text-blue-600 hover:underline dark:hover:!text-blue-300 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
                         variant="ghost"
                     >
                         Edit
