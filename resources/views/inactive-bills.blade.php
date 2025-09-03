@@ -39,41 +39,50 @@
         <!-- Enhanced Bills Grid -->
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             @foreach ($bills as $bill)
-                <a href="{{ route('inactive-blog', $bill->id) }}" class="group">
-                    <div class="relative p-6 rounded-xl border-2 border-amber-200 dark:border-amber-800/50 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-800 dark:to-gray-900 shadow-md hover:shadow-xl hover:scale-[1.02] hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300 ease-in-out">
-                        
-                        <!-- Status Badge -->
-                        <div class="absolute top-4 right-4">
-                            <span class="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300 rounded-full">
-                                <div class="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></div>
-                                {{ __('Inactive') }}
-                            </span>
-                        </div>
+                <a href="{{ route('inactive-blog', $bill->id) }}" 
+                    class="group flex flex-col h-full">
+                        <div class="relative p-6 flex flex-col flex-1 rounded-xl border-2 border-amber-200 
+                                    dark:border-amber-800/50 bg-gradient-to-br from-amber-50 to-orange-50 
+                                    dark:from-gray-800 dark:to-gray-900 shadow-md hover:shadow-xl 
+                                    hover:scale-[1.02] hover:border-amber-300 dark:hover:border-amber-700 
+                                    transition-all duration-300 ease-in-out">
 
-                        <!-- Bill Content -->
-                        <div class="pr-16">
-                            <h2 class="font-bold text-xl text-gray-900 dark:text-white mb-3 group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors duration-200 line-clamp-2">
-                                {{ $bill->title }}
-                            </h2>
-                            
-                            <p class="text-base text-gray-700 dark:text-gray-300 mb-4 line-clamp-3 leading-relaxed">
-                                {{ \Illuminate\Support\Str::words($bill->content, 20, '...') }}
-                            </p>
+                            <!-- Status Badge -->
+                            <div class="absolute top-4 right-4">
+                                <span class="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium 
+                                            bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300 rounded-full">
+                                    <div class="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></div>
+                                    {{ __('Inactive') }}
+                                </span>
+                            </div>
 
-                            <!-- Engagement Stats -->
-                            <div class="flex items-center gap-4 mb-4">
-                                <div class="flex items-center gap-1.5 text-sm text-gray-600 dark:text-gray-400">
-                                    <flux:icon.hand-thumb-up class="w-4 h-4 text-green-500" />
-                                    <span class="font-medium">{{ number_format($bill->likes) }}</span>
-                                </div>
-                                <div class="flex items-center gap-1.5 text-sm text-gray-600 dark:text-gray-400">
-                                    <flux:icon.hand-thumb-down class="w-4 h-4 text-red-500" />
-                                    <span class="font-medium">{{ number_format($bill->dislikes) }}</span>
+                            <!-- Bill Content -->
+                            <div class="pr-16">
+                                <h2 class="font-bold text-xl text-gray-900 dark:text-white mb-3 
+                                        group-hover:text-amber-700 dark:group-hover:text-amber-300 
+                                        transition-colors duration-200 line-clamp-2">
+                                    {{ $bill->title }}
+                                </h2>
+                                
+                                <p class="text-base text-gray-700 dark:text-gray-300 mb-4 line-clamp-3 leading-relaxed">
+                                    {{ \Illuminate\Support\Str::words($bill->content, 20, '...') }}
+                                </p>
+
+                                <!-- Engagement Stats -->
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="flex items-center gap-1.5 text-sm text-gray-600 dark:text-gray-400">
+                                        <flux:icon.hand-thumb-up class="w-4 h-4 text-green-500" />
+                                        <span class="font-medium">{{ number_format($bill->likes) }}</span>
+                                    </div>
+                                    <div class="flex items-center gap-1.5 text-sm text-gray-600 dark:text-gray-400">
+                                        <flux:icon.hand-thumb-down class="w-4 h-4 text-red-500" />
+                                        <span class="font-medium">{{ number_format($bill->dislikes) }}</span>
+                                    </div>
                                 </div>
                             </div>
 
-                            <!-- End Date -->
-                            <div class="flex items-center gap-2 text-sm">
+                            <!-- End Date (sticks to bottom) -->
+                            <div class="mt-auto flex items-center gap-2 text-sm">
                                 <flux:icon.calendar-days class="w-4 h-4 text-red-500" />
                                 <span class="text-red-600 dark:text-red-400 font-medium">
                                     {{ __('Ended') }} {{ \Carbon\Carbon::parse($bill->due_date)->format('M j, Y') }}
@@ -82,14 +91,13 @@
                                     ({{ \Carbon\Carbon::parse($bill->due_date)->diffForHumans() }})
                                 </span>
                             </div>
-                        </div>
 
-                        <!-- Hover Indicator -->
-                        <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                            <flux:icon.arrow-top-right-on-square class="w-4 h-4 text-amber-600 dark:text-amber-400" />
+                            <!-- Hover Indicator -->
+                            <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                <flux:icon.arrow-top-right-on-square class="w-4 h-4 text-amber-600 dark:text-amber-400" />
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
             @endforeach
         </div>
 
