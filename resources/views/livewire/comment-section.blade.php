@@ -4,7 +4,7 @@
     @endphp
 
     {{-- Only show comment box for normal Users --}}
-    @if(auth()->check() && auth()->user()->role === UserRole::User)
+    @if(!$readonly && auth()->check() && auth()->user()->role === UserRole::User)
         <form wire:submit.prevent="submitComment" class="mb-4">
             <textarea wire:model="content" class="w-full p-2 border rounded" placeholder="Write a comment..."></textarea>
             <button type="submit" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded">Post Comment</button>
@@ -52,17 +52,19 @@
                     <p class="mt-1">{{ $comment->content }}</p>
 
                     {{-- Actions --}}
-                    <div class="mt-10 space-x-2">
-                        @can('update', $comment)
-                            @if($comment->canEdit())
-                                <button wire:click="startEditing({{ $comment->id }})" class="text-blue-500">Edit</button>
-                            @endif
-                        @endcan
+                    @if(!$readonly)
+                        <div class="mt-10 space-x-2">
+                            @can('update', $comment)
+                                @if($comment->canEdit())
+                                    <button wire:click="startEditing({{ $comment->id }})" class="text-blue-500">Edit</button>
+                                @endif
+                            @endcan
 
-                        @can('delete', $comment)
-                            <button wire:click="confirmCommentDeletion({{ $comment->id }})" class="text-red-500">Delete</button>
-                        @endcan
-                    </div>
+                            @can('delete', $comment)
+                                <button wire:click="confirmCommentDeletion({{ $comment->id }})" class="text-red-500">Delete</button>
+                            @endcan
+                        </div>
+                    @endif
 
                     {{-- Delete confirmation modal --}}
                     <flux:modal name="delete-comment" class="min-w-[22rem]" wire:model="confirmingCommentDeletion">

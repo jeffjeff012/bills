@@ -1,5 +1,4 @@
 <x-layouts.app :title="__('Bills')">
-    <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900">
         <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
             <!--content -->
 
@@ -31,7 +30,7 @@
                     <div class="relative bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 px-8 py-12">
                         <div class="absolute inset-0 bg-black/10"></div>
                         <div class="relative z-10">
-                            <h1 class="text-4xl md:text-5xl font-bold text-center text-white leading-tight">
+                            <h1 class="text-4xl md:text-5xl sm:text-lg font-bold text-center text-white leading-tight">
                                 {{ $bill->title }}
                             </h1>
                         </div>
@@ -41,25 +40,25 @@
                     </div>
 
                     <div class="flex items-center justify-center space-x-3 mt-5">
-                                <div class="w-10 h-10 bg-gray-100 dark:bg-zinc-700 rounded-full flex items-center justify-center">
-                                    <svg class="w-5 h-5 text-gray-600 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                    </svg>
-                                </div>
-                                <div class="flex">
-                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Authored by</p>
-                                    <p class="ml-1 text-sm text-gray-500 dark:text-zinc-400">
-                                        {{ $bill->authored_by ?? 'Unknown' }}
-                                    </p>
-                                </div>
-                            </div>
+                        <div class="w-10 h-10 bg-gray-100 dark:bg-zinc-700 rounded-full flex items-center justify-center">
+                            <svg class="w-5 h-5 text-gray-600 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                        </div>
+                        <div class="flex">
+                            <p class="text-sm font-medium text-gray-900 dark:text-white">Authored by</p>
+                            <p class="ml-1 text-sm text-gray-500 dark:text-zinc-400">
+                                {{ $bill->authored_by ?? 'Unknown' }}
+                            </p>
+                        </div>
+                    </div>
                     
                     <!-- Content Section -->
-                    <div class="px-20 py-8 space-y-8">
+                    <div class="px-6 sm:px-10 md:px-16 lg:px-20 py-8 space-y-8">
                         
                         <!-- Bill Content -->
                         <div class="prose prose-lg max-w-none dark:prose-invert prose-p:m-0 prose-headings:m-0">
-                            <div class="text-gray-700 dark:text-zinc-300 leading-relaxed text-lg font-light">
+                            <div class="text-gray-700 dark:text-zinc-300 leading-relaxed lg:text-lg sm:text-xs font-light">
                                 {!! nl2br(e($bill->content)) !!}
                             </div>
                         </div>
@@ -155,5 +154,4 @@
                 </div>
             </div>
         </div>
-    </div>
 </x-layouts.app>

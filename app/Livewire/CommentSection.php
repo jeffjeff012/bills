@@ -13,6 +13,7 @@ class CommentSection extends Component
     
     public $bill;
     public $content;
+    public $readonly = false;
 
     public $editingCommentId = null;
     public $editedContent = '';
