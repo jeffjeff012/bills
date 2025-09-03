@@ -108,7 +108,7 @@
                         @else
                             <a 
                                 href="{{ route('login') }}" 
-                                class="inline-block px-5 py-1.5 text-xl 
+                                class="inline-block px-5 py-1.5 lg:text-xl sm:text-xs
                                     border border-gray-400 rounded-lg 
                                     text-[#1b1b18] dark:text-black 
                                     transition-all duration-200 
@@ -120,7 +120,7 @@
                             @if (Route::has('register'))
                                 <a 
                                     href="{{ route('register') }}"
-                                    class="inline-block px-5 py-1.5 text-xl 
+                                    class="inline-block px-5 py-1.5 lg:text-xl sm:text-xs
                                         text-white bg-blue-600 hover:bg-blue-700 
                                         dark:text-white rounded-lg 
                                         transition-colors duration-200"
