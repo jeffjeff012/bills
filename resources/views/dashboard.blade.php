@@ -148,6 +148,12 @@
                 </div>
             @endforelse
         </div>
+         <!-- Results Summary -->
+        <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+            <p class="text-sm text-gray-500 dark:text-gray-400 text-center">
+                {{ __('Showing') }} {{ $bills->count() }} {{ Str::plural('active bill', $bills->count()) }}
+            </p>
+        </div>
     </div>
     <div class="mt-4 px-2 md:px-4">
         {{ $bills->links() }}
