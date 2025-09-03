@@ -36,15 +36,15 @@ class Bill extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-
             ->logOnly([
-                    'title',
-                    'content', 
-                    'user_id',
-                    'due_date',
-                    'authored_by',
-                    'attachment',
-            ]);
+                'title',
+                'content',
+                'user_id',
+                'due_date',
+                'authored_by',
+                'attachment',
+            ])
+            ->dontLogIfAttributesChangedOnly(['likes', 'dislikes']); // ✅ chained here
     }
 
     protected $casts = [

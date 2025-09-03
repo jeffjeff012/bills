@@ -6,7 +6,7 @@
     <div class="p-6 bg-white dark:bg-gray-800 shadow rounded-xl">
         <h2 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-4">
             Activity Logs
-              <flux:separator class="mt-2" variant="subtle" />
+            <flux:separator class="mt-2" variant="subtle" />
         </h2>
 
         @if ($logs->count() > 0)
@@ -14,10 +14,14 @@
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                     <thead class="bg-gray-100 dark:bg-gray-800">
                         <tr>
-                            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">Date/Time</th>
-                            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">User</th>
-                            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">Action</th>
-                            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">On What</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">
+                                Date/Time</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">User
+                            </th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">
+                                Action</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">On
+                                What</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
@@ -29,9 +33,13 @@
                                 <td class="px-4 py-2 text-sm text-gray-600 dark:text-gray-300">
                                     {{ $log->causer?->name ?? 'System' }}
                                 </td>
-                                <td class="px-4 py-2 text-sm text-gray-600 dark:text-gray-300"> 
-                                    @if($log->subject_type === App\Models\Like::class && $log->description === 'created')
-                                        Added a Like
+                                <td class="px-4 py-2 text-sm text-gray-600 dark:text-gray-300">
+                                    @if ($log->subject_type === App\Models\Like::class && $log->description === 'created')
+                                        @if ($log->subject && $log->subject->like)
+                                            Liked the post
+                                        @else
+                                            Disliked the post
+                                        @endif
                                     @elseif($log->subject_type === App\Models\Comment::class && $log->description === 'created')
                                         Added a Comment
                                     @elseif($log->description === 'updated' && isset($log->properties['attributes'], $log->properties['old']))
@@ -39,15 +47,21 @@
                                             $changed = [];
                                             foreach ($log->properties['attributes'] as $field => $newValue) {
                                                 $oldValue = $log->properties['old'][$field] ?? null;
-                                                if ($oldValue !== $newValue) {
-                                                    $changed[] = str_replace('_', ' ', $field);
+
+                                                // Special case: like/dislike toggle
+                                                if ($field === 'like' && $oldValue !== $newValue) {
+                                                    $changed[] = $newValue ? 'Liked the post' : 'Disliked the post';
+                                                } elseif ($oldValue !== $newValue) {
+                                                    $changed[] = 'Updated the ' . str_replace('_', ' ', $field);
                                                 }
                                             }
                                         @endphp
 
-                                        @if(count($changed))
-                                            @foreach($changed as $field)
-                                                Updated the {{ $field }}@if(!$loop->last), @endif
+                                        @if (count($changed))
+                                            @foreach ($changed as $change)
+                                                {{ $change }}@if (!$loop->last)
+                                                    ,
+                                                @endif
                                             @endforeach
                                         @else
                                             Updated
@@ -58,8 +72,8 @@
                                 </td>
                                 <td class="px-4 py-2 text-sm text-gray-600 dark:text-gray-300">
                                     {{ class_basename($log->subject_type) }}
-                                    @if($log->subject)
-                                        @if($log->subject_type === App\Models\Bill::class)
+                                    @if ($log->subject)
+                                        @if ($log->subject_type === App\Models\Bill::class)
                                             - "{{ $log->subject->title }}"
                                         @elseif($log->subject_type === App\Models\Comment::class)
                                             - "{{ Str::limit($log->subject->content, 30) }}"
@@ -83,7 +97,8 @@
             <div class="text-center py-10">
                 <flux:icon.inbox class="mx-auto h-12 w-12 text-gray-400" />
                 <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No Activity Logs</h3>
-                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">All activities will appear here once available.</p>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">All activities will appear here once available.
+                </p>
             </div>
         @endif
     </div>
