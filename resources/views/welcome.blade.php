@@ -79,10 +79,10 @@
 <body class="bg-[#FDFDFC] text-[#1b1b18] min-h-screen">
     <!-- Sticky Header -->
     <div class="sticky top-0 z-50 w-full bg-white border-b border-gray-200 dark:border-gray-800 shadow-sm">
-        <header class="mx-auto w-full max-w-7xl px-4 py-3 sm:py-4">
+        <header class="mx-auto w-full max-w-7xl px-4 py-3 sm:py-2">
             <div class="flex items-center justify-between">
                 <!-- Logo (Left side) -->
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 ">
                     <img 
                         src="/images/final.png" 
                         alt="Logo" 

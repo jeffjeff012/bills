@@ -30,7 +30,7 @@
                     <div class="relative bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 px-8 py-12">
                         <div class="absolute inset-0 bg-black/10"></div>
                         <div class="relative z-10">
-                            <h1 class="text-4xl md:text-5xl sm:text-lg font-bold text-center text-white leading-tight">
+                            <h1 class="text-lg sm:text-4xl font-bold text-center text-white leading-tight">
                                 {{ $bill->title }}
                             </h1>
                         </div>
