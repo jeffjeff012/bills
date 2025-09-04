@@ -21,11 +21,11 @@
             </a>
         </div>
         <!-- Bill Card -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden">
+        <div class="bg-white dark:bg-black-300 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden">
             <!-- Card Header -->
             <div class="bg-blue-50 dark:bg-blue-900/20 px-6 py-6">
-                <<div class="flex items-center gap-4 flex-wrap">
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+                <div class="flex items-center gap-4 flex-wrap">
+                    <h2 class="text-lg sm:text-2xl font-bold text-gray-900 dark:text-black">
                         {{ $bill->title }}
                     </h2>
                     <p class="text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-zinc-800 px-3 py-1 rounded-lg">
@@ -57,7 +57,7 @@
                 </div>
 
 
-                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                <p class="text-gray-700 dark:text-gray-800 leading-relaxed">
                     {{ $bill->content ?? 'This legislation aims to reform healthcare accessibility and reduce costs through innovative policy measures.' }}
                 </p>
             </div>
@@ -67,8 +67,8 @@
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
                     Comments ({{ $bill->comments->count() ?? '3' }})
                 </h3>
-
-                @php
+                <livewire:comment-section :bill="$bill" :readonly="true" />
+                {{-- @php
                     $sampleComments = [
                         ['user' => 'Dr. Sarah Johnson', 'content' => 'This bill addresses critical healthcare gaps. The funding mechanisms are well-structured.'],
                         ['user' => 'Michael Chen', 'content' => 'I support the direction, but we need more specific implementation timelines.'],
@@ -89,7 +89,7 @@
                     <p class="text-gray-500 dark:text-gray-400 text-center py-8">
                         No comments yet.
                     </p>
-                @endforelse
+                @endforelse --}}
             </div>
         </div>
     </div>

@@ -82,7 +82,7 @@
         <header class="mx-auto w-full max-w-7xl px-4 py-3 sm:py-2">
             <div class="flex items-center justify-between">
                 <!-- Logo (Left side) -->
-                <div class="flex items-center gap-2 ">
+                <div class="flex items-center gap-1">
                     <img 
                         src="/images/final.png" 
                         alt="Logo" 
@@ -95,7 +95,7 @@
                 
                 <!-- Navigation / Auth Buttons (Right side) -->
                 @if (Route::has('login'))
-                    <nav class="flex items-center gap-2 sm:gap-2">
+                    <nav class="flex items-center gap-1 sm:gap-2">
                         @auth
                             <a href="{{ url('/dashboard') }}" 
                             class="inline-block px-5 py-1.5 text-sm
