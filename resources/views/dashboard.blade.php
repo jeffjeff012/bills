@@ -65,9 +65,9 @@
                                         <span class="truncate">{{ $bill->authored_by ?? 'Unknown' }}</span>
                                     </div>
 
-                                    <p class="text-gray-500 dark:text-gray-400 text-xs">
+                                    {{-- <p class="text-gray-500 dark:text-gray-400 text-xs">
                                         {{ __('Published') }} {{ $bill->created_at->diffForHumans() }}
-                                    </p>
+                                    </p> --}}
                                 </div>
                             </a>
                         </div>
@@ -120,6 +120,10 @@
                                     </svg>
                                     <span class="font-medium">{{ number_format($bill->comments_count) }}</span>
                                 </div>
+
+                                <p class="text-gray-500 dark:text-gray-400 text-xs">
+                                        {{ __('Published') }} {{ $bill->created_at->diffForHumans() }}
+                                </p>
                             </div>
                         </div>
                     </div>
