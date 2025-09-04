@@ -27,7 +27,7 @@
                 <div class="max-w-4xl mx-auto bg-white dark:bg-zinc-800 rounded-2xl shadow-xl border border-gray-100 dark:border-zinc-700 overflow-hidden">
                     
                     <!-- Header Section with Gradient -->
-                    <div class="relative bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 px-8 py-12">
+                    <div class="relative bg-gradient-to-r from-blue-600 via-skyblue-600 to-blue-500 px-8 py-12">
                         <div class="absolute inset-0 bg-black/10"></div>
                         <div class="relative z-10">
                             <h1 class="text-lg sm:text-4xl font-bold text-center text-white leading-tight">
@@ -108,20 +108,6 @@
                                     </p>
                                 </div>
                             </div>
-
-                            {{-- <div class="flex items-center space-x-3">
-                                <div class="w-10 h-10 bg-gray-100 dark:bg-zinc-700 rounded-full flex items-center justify-center">
-                                    <svg class="w-5 h-5 text-gray-600 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Author</p>
-                                    <p class="text-sm text-gray-500 dark:text-zinc-400">
-                                        {{ $bill->authored_by ?? 'Unknown' }}
-                                    </p>
-                                </div>
-                            </div> --}}
 
                                 <!-- Interactive Like/Dislike Section -->
                             @if(auth()->user()->role === \App\Enums\UserRole::User)

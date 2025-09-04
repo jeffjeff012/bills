@@ -70,7 +70,7 @@ class StaffController extends Controller
             'bills',
             'users',
             'hotBill',
-            'mostCommentedBill'
+            'mostCommentedBill',
         ));
     }
 

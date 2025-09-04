@@ -112,8 +112,6 @@ Route::get('/staff/bills/{bill}', [StaffController::class, 'showBillDetails'])->
 
 Route::get('/bills/{bill}', [BillController::class, 'show'])->name('bills.show');
 
-
-
 //Facebook Legend
 Route::get('/auth/facebook', [FacebookController::class, 'facebookpage']);
 Route::get('/auth/facebook/callback', [FacebookController::class, 'facebookredirect']);

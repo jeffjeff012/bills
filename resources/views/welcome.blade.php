@@ -332,7 +332,7 @@
                                 <!-- Card Header -->
                                 <div class="px-6 pt-6 pb-4">
                                     <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-800 mb-2">
-                                        Most mostCommented Bill
+                                        Most Commented Bill
                                     </h3>
                                     <h4 class="text-xl font-bold text-gray-800 dark:text-gray-700 mb-2">
                                         {{ $mostCommentedBill->title }}

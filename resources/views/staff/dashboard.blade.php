@@ -125,10 +125,12 @@
                             </div>
                             
                             {{-- Action button --}}
-                            <a href="{{ route('bills.index') }}" 
-   class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors">
-    View Details →
-</a>
+                             @if($hotBill)
+                                <a href="{{ route('bill', $hotBill->id) }}"
+                                class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors">
+                                View Bill →
+                                </a>
+                            @endif
 
                         </div>
                     </div>
@@ -199,11 +201,12 @@
                             </div>
                             
                             {{-- Action button --}}
-                            <a href="{{ route('bills.index') }}" 
+                            @if($mostCommentedBill)
+                                <a href="{{ route('bill', $mostCommentedBill->id) }}"
                                 class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors">
-                                    View Details →
-                            </a>
-
+                                View Bill →
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>
