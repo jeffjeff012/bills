@@ -72,7 +72,21 @@
                 backdrop-filter: blur(10px);
                 border: 1px solid rgba(255, 255, 255, 0.2);
             }
-        
+            
+            @media (min-width: 640px) {
+            .nav-auth-cta {
+                font-size: 1.25rem !important; /* 20px */
+                line-height: 1.2 !important;
+                padding-block: 0.5rem !important;  /* vertical padding */
+                padding-inline: 1.25rem !important; /* horizontal padding */
+                border-radius: 0.5rem !important;
+            }
+
+            /* Optional: larger for desktop/laptop >=1024px */
+            @media (min-width: 1024px) {
+                .nav-auth-cta { font-size: 1.3rem !important; /* 24px */ }
+            }
+            }
     </style>
     </head>
 
@@ -107,25 +121,28 @@
                             </a>
                         @else
                             <a 
-                                href="{{ route('login') }}" 
-                                class="inline-block px-5 py-1.5 lg:text-xl sm:text-xs
+                            href="{{ route('login') }}" 
+                            class="nav-auth-cta inline-block 
+                                    text-xs px-3 py-1           /* phones */
+                                    sm:text-xl sm:px-5 sm:py-2  /* ≥640px (tablets, laptops, desktops) */
+                                    lg:text-2xl                 /* ≥1024px (bigger laptops/desktops) */
                                     border border-gray-400 rounded-lg 
                                     text-[#1b1b18] dark:text-black 
                                     transition-all duration-200 
-                                    hover:bg-blue-300 hover:border-blue-600 "
-                                    
-                            >
-                                Log in
+                                    hover:bg-blue-300 hover:border-blue-600">
+                            Log in
                             </a>
                             @if (Route::has('register'))
                                 <a 
-                                    href="{{ route('register') }}"
-                                    class="inline-block px-5 py-1.5 lg:text-xl sm:text-xs
+                                href="{{ route('register') }}"
+                                class="nav-auth-cta inline-block 
+                                        text-xs px-3 py-1
+                                        sm:text-xl sm:px-5 sm:py-2
+                                        lg:text-2xl
                                         text-white bg-blue-600 hover:bg-blue-700 
                                         dark:text-white rounded-lg 
-                                        transition-colors duration-200"
-                                >
-                                    Register
+                                        transition-colors duration-200">
+                                Register
                                 </a>
                             @endif
                         @endauth
@@ -377,10 +394,10 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h6m-6 4h10M5 6a2 2 0 00-2 2v8a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2H5z"/>
                                         </svg>
                                     </div>
-                                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                                    <h3 class="text-lg font-semibold text-gray-800 dark:text-black-200">
                                         No Bill Available
                                     </h3>
-                                    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                                    <p class="mt-2 text-sm text-gray-600 dark:text-black-400">
                                         There’s currently no most commented bill. Once a bill gets comments, it will show up here.
                                     </p>
                                 </div>
