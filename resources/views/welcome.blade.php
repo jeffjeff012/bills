@@ -74,18 +74,18 @@
             }
             
             @media (min-width: 640px) {
-            .nav-auth-cta {
-                font-size: 1.25rem !important; /* 20px */
-                line-height: 1.2 !important;
-                padding-block: 0.5rem !important;  /* vertical padding */
-                padding-inline: 1.25rem !important; /* horizontal padding */
-                border-radius: 0.5rem !important;
-            }
+                .nav-auth-cta {
+                    font-size: 1.25rem !important; /* 20px */
+                    line-height: 1.2 !important;
+                    padding-block: 0.5rem !important;  /* vertical padding */
+                    padding-inline: 1.25rem !important; /* horizontal padding */
+                    border-radius: 0.5rem !important;
+                }
 
-            /* Optional: larger for desktop/laptop >=1024px */
-            @media (min-width: 1024px) {
-                .nav-auth-cta { font-size: 1.3rem !important; /* 24px */ }
-            }
+                /* Optional: larger for desktop/laptop >=1024px */
+                @media (min-width: 1024px) {
+                    .nav-auth-cta { font-size: 1.3rem !important; /* 24px */ }
+                }
             }
     </style>
     </head>
@@ -109,7 +109,7 @@
                 
                 <!-- Navigation / Auth Buttons (Right side) -->
                 @if (Route::has('login'))
-                    <nav class="flex items-center gap-1 sm:gap-2">
+                    <nav class="flex flex-wrap sm:flex-wrap items-center gap-1 sm:gap-2 ml-50">
                         @auth
                             <a href="{{ url('/dashboard') }}" 
                             class="inline-block px-5 py-1.5 text-sm
