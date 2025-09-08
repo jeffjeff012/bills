@@ -468,7 +468,7 @@
             <p class="text-xl text-white/90 mb-8">
                 Join thousands of engaged citizens tracking legislation and making a difference in their communities.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <div class="flex gap-4 justify-center">
                 <a href="{{ route('login') }}"
                 class="bg-white text-gray-900 px-8 py-3 rounded-full font-semibold 
                         hover:bg-gray-100 transition-all duration-300 shadow-lg 
