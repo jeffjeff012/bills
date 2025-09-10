@@ -61,7 +61,9 @@
                             @endcan
 
                             @can('delete', $comment)
-                                <button wire:click="confirmCommentDeletion({{ $comment->id }})" class="text-red-500">Delete</button>
+                                @if($comment->canDelete())
+                                    <button wire:click="confirmCommentDeletion({{ $comment->id }})" class="text-red-500">Delete</button>
+                                @endif                            
                             @endcan
                         </div>
                     @endif

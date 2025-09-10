@@ -44,6 +44,12 @@ class Comment extends Model
         return $this->user_id === auth()->id() && $this->created_at->diffInMinutes(now()) <= 5;
     }
 
+    public function canDelete()
+    {
+        return $this->user_id === auth()->id() 
+            && $this->created_at->diffInMinutes(now()) <= 5;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

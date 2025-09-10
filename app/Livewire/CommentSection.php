@@ -44,6 +44,7 @@ class CommentSection extends Component
         $this->content = '';
     }
 
+    
     public function startEditing($commentId)
     {
         $comment = Comment::findOrFail($commentId);
@@ -97,9 +98,12 @@ class CommentSection extends Component
         $comment = Comment::findOrFail($commentId);
 
         $this->authorize("delete", $comment);
-        // if ($comment->user_id !== auth()->id()) {
-        //     abort(403);
-        // }
+
+        // Restrict delete if more than 5 minutes have passed
+        if ($comment->created_at->diffInMinutes(now()) > 5) {
+            session()->flash('error', 'You can only delete your comment within 5 minutes of posting.');
+            return;
+        }
 
         $this->confirmingCommentDeletion = true;
         $this->commentToDelete = $commentId;
@@ -108,11 +112,16 @@ class CommentSection extends Component
     public function deleteComment()
     {
         $comment = Comment::findOrFail($this->commentToDelete);
-        
+
         $this->authorize("delete", $comment);
-        // if ($comment->user_id !== auth()->id()) {
-        //     abort(403);
-        // }
+
+        // Restrict delete if more than 5 minutes have passed
+        if ($comment->created_at->diffInMinutes(now()) > 5) {
+            session()->flash('error', 'Deleting time has expired. You can only delete within 5 minutes.');
+            $this->confirmingCommentDeletion = false;
+            $this->commentToDelete = null;
+            return;
+        }
 
         $comment->delete();
 
