@@ -10,10 +10,14 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Gate;
 use App\Enums\UserRole;
 use Illuminate\Support\Facades\Storage;
-
+use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 class EditBill extends Component
 {
+    use WithFileUploads;
+    use WithPagination;
+
     public $title, $content, $billId, $due_date, $authored_by;
     public $attachment;
     public $currentAttachment; 

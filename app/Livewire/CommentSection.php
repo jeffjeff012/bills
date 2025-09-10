@@ -96,9 +96,10 @@ class CommentSection extends Component
     {
         $comment = Comment::findOrFail($commentId);
 
-        if ($comment->user_id !== auth()->id()) {
-            abort(403);
-        }
+        $this->authorize("delete", $comment);
+        // if ($comment->user_id !== auth()->id()) {
+        //     abort(403);
+        // }
 
         $this->confirmingCommentDeletion = true;
         $this->commentToDelete = $commentId;
@@ -107,10 +108,11 @@ class CommentSection extends Component
     public function deleteComment()
     {
         $comment = Comment::findOrFail($this->commentToDelete);
-
-        if ($comment->user_id !== auth()->id()) {
-            abort(403);
-        }
+        
+        $this->authorize("delete", $comment);
+        // if ($comment->user_id !== auth()->id()) {
+        //     abort(403);
+        // }
 
         $comment->delete();
 
