@@ -68,6 +68,9 @@ html {
   scroll-behavior: smooth;
 }
 
+[x-cloak] {
+    display: none !important;
+}
 
 
 /* \[:where(&)\]:size-4 {
