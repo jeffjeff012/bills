@@ -174,8 +174,8 @@
             <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
                 <div class="text-center animate-fade-in-up">
                     <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold text-white mb-6">
-                        Dapat <span class="text-yellow-300">Alam</span><br>
-                        <span class="text-blue-300">Mo!</span>
+                       Bayambang, <span class="text-yellow-300">Dapat Alam Mo!</span><br>
+                        <span class="text-blue-300">Ang mga batas na ipapatupad.</span>
                     </h1>
                     <p class="text-xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
                         Stay informed about bills and legislation that matter to you. 
@@ -421,7 +421,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-black mb-4">
-                    Why Choose <span class="gradient-text">BillTracker</span>?
+                    Experience <span class="gradient-text">Bills Forum</span>
                 </h2>
             </div>
             
@@ -453,7 +453,7 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-black mb-2">Transparent Process</h3>
-                    <p class="text-gray-600 dark:font-bold dark:text-gray-800">Follow the complete journey of bills from introduction to final vote.</p>
+                    <p class="text-gray-600 dark:font-bold dark:text-gray-800">Posting of bills to be passed.</p>
                 </div>
             </div>
         </div>
@@ -466,14 +466,14 @@
                 Ready to Make Your Voice Heard?
             </h2>
             <p class="text-xl text-white/90 mb-8">
-                Join thousands of engaged citizens tracking legislation and making a difference in their communities.
+                Join thousands of engaged Bayambanguenous legislation and making a difference in Bayambang.
             </p>
             <div class="flex gap-4 justify-center">
                 <a href="{{ route('login') }}"
                 class="bg-white text-gray-900 px-8 py-3 rounded-full font-semibold 
                         hover:bg-gray-100 transition-all duration-300 shadow-lg 
                         hover:shadow-xl hover:-translate-y-1 inline-block">
-                    Get Started Today
+                    Be Involved now!
                 </a>
 
                 {{-- <button class="glass-effect text-white px-8 py-3 rounded-full font-semibold hover:bg-white/20 transition-all duration-300">
