@@ -81,7 +81,7 @@
                                             - "on {{ $log->subject->bill->title }}"
                                         @endif
                                     @else
-                                        N/A
+                                        deleted
                                     @endif
                                 </td>
                             </tr>

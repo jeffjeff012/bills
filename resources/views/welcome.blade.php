@@ -508,7 +508,7 @@
                 Ready to Make Your Voice Heard?
             </h2>
             <p class="text-xl text-white/90 mb-8">
-                Join thousands of engaged Bayambanguenous legislation and making a difference in Bayambang.
+                Join thousands of engaged Bayambangueños legislation and making a difference in Bayambang.
             </p>
             <div class="flex gap-4 justify-center">
                 <a href="{{ route('login') }}"
