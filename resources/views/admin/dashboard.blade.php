@@ -77,12 +77,12 @@
     </div>
 
     {{-- Container for both cards --}}
-    <div class="flex flex-col lg:flex-row gap-8 mt-15">
+    <div class="flex flex-col lg:flex-row gap-8 mt-15 items-stretch">
         {{-- Most Liked Bill Card --}}
         <div class="flex-1">
-            <div class="w-full max-w-2xl mx-auto"> 
+            <div class="h-full flex flex-col w-full max-w-2xl mx-auto"> 
                 @if($hotBill)
-                    <div class="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+                    <div class="flex flex-col h-full relative bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow duration-300 overflow-hidden">
                         
                         {{-- HOT Badge --}}
                         <div class="absolute top-4 right-4 z-10">
@@ -99,8 +99,8 @@
                             </h3>
                         </div>
 
-                        {{-- Card Body --}}
-                        <div class="px-6 pb-4">
+                        {{-- Card Body (flex-grow makes it expand evenly) --}}
+                        <div class="px-6 pb-4 flex-grow">
                             <h4 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">
                                 {{ $hotBill->title }}
                             </h4>
@@ -109,10 +109,9 @@
                             </p>
                         </div>
 
-                        {{-- Card Footer --}}
+                        {{-- Card Footer sticks at bottom --}}
                         <div class="px-6 py-4 bg-red-50 dark:bg-gray-700/50 border-t border-gray-100 dark:border-gray-600">
                             <div class="flex items-center justify-between">
-                                {{-- Likes count --}}
                                 <div class="flex items-center gap-2">
                                     <div class="w-8 h-8 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
                                         <svg class="w-4 h-4 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 20 20">
@@ -123,30 +122,11 @@
                                         {{ $hotBill->likes_count }} likes
                                     </span>
                                 </div>
-                                
-                                {{-- Action button --}}
-                                @if($hotBill)
-                                    <a href="{{ route('bill', $hotBill->id) }}"
+                                <a href="{{ route('bill', $hotBill->id) }}"
                                     class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors">
                                     View Bill →
-                                    </a>
-                                @endif
+                                </a>
                             </div>
-                        </div>
-                    </div>
-                @else
-                    {{-- Empty state card --}}
-                    <div class="w-full">
-                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-12 text-center">
-                            <div class="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                </svg>
-                            </div>
-                            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">No bills yet</h3>
-                            <p class="text-gray-500 dark:text-gray-400 max-w-sm mx-auto">
-                                The bill with the most likes will appear here
-                            </p>
                         </div>
                     </div>
                 @endif
@@ -155,9 +135,9 @@
 
         {{-- Most Commented Bill Card --}}
         <div class="flex-1">
-            <div class="w-full max-w-2xl mx-auto"> 
+            <div class="h-full flex flex-col w-full max-w-2xl mx-auto"> 
                 @if($mostCommentedBill)
-                    <div class="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+                    <div class="flex flex-col h-full relative bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow duration-300 overflow-hidden">
                         
                         {{-- TRENDING Badge --}}
                         <div class="absolute top-4 right-4 z-10">
@@ -175,7 +155,7 @@
                         </div>
 
                         {{-- Card Body --}}
-                        <div class="px-6 pb-4">
+                        <div class="px-6 pb-4 flex-grow">
                             <h4 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">
                                 {{ $mostCommentedBill->title }}
                             </h4>
@@ -184,10 +164,9 @@
                             </p>
                         </div>
 
-                        {{-- Card Footer --}}
+                        {{-- Card Footer sticks at bottom --}}
                         <div class="px-6 py-4 bg-blue-50 dark:bg-gray-700/50 border-t border-gray-100 dark:border-gray-600">
                             <div class="flex items-center justify-between">
-                                {{-- Comments count --}}
                                 <div class="flex items-center gap-2">
                                     <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
                                         <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 20 20">
@@ -198,36 +177,18 @@
                                         {{ $mostCommentedBill->comments_count }} comments
                                     </span>
                                 </div>
-                                
-                                {{-- Action button --}}
-                                @if($mostCommentedBill)
-                                    <a href="{{ route('bill', $mostCommentedBill->id) }}"
+                                <a href="{{ route('bill', $mostCommentedBill->id) }}"
                                     class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors">
                                     View Bill →
-                                    </a>
-                                @endif
+                                </a>
                             </div>
-                        </div>
-                    </div>
-                @else
-                    {{-- Empty state card --}}
-                    <div class="w-full">
-                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-12 text-center">
-                            <div class="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                                </svg>
-                            </div>
-                            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">No bills yet</h3>
-                            <p class="text-gray-500 dark:text-gray-400 max-w-sm mx-auto">
-                                The bill with the most comments will appear here
-                            </p>
                         </div>
                     </div>
                 @endif
             </div>
         </div>
     </div>
+
 </div>
 </x-layouts.app>
 

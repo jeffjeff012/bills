@@ -34,13 +34,13 @@ class CreateBill extends Component
     {
         $this->validate();
 
-        // ✅ Initialize $path
+        //Initialize $path
         $path = null;
 
-        // ✅ Save file if uploaded
+        //Save file if uploaded
         if ($this->attachment) {
             $path = $this->attachment->store('attachments', 'public'); 
-            // stored in storage/app/public/attachments
+            //stored in storage/app/public/attachments
         }
 
         Bill::create([
@@ -49,7 +49,7 @@ class CreateBill extends Component
             'due_date'    => Carbon::parse($this->due_date)->endOfDay(),
             'user_id'     => auth()->id(),
             'authored_by' => $this->authored_by,
-            'attachment'  => $path, // ✅ safe, always defined
+            'attachment'  => $path, //safe, always defined
         ]);
 
         $this->reset();

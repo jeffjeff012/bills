@@ -294,9 +294,11 @@
             </div>
 
             <!-- Your existing bill cards code goes here -->
-            <div class="flex flex-col lg:flex-row gap-8 mt-20">
+            {{-- @if(!$combinedBill)
+            <div class="flex flex-col lg:flex-row gap-8 mt-20"> --}}
                 <!-- Most Liked Bill Card -->
-                <div class="flex-1 animate-fade-in-up" style="animation-delay: 0.2s;">
+                 {{-- @include('bills.hot-bill-card', ['hotBill' => $hotBill]) --}}
+                {{-- <div class="flex-1 animate-fade-in-up" style="animation-delay: 0.2s;">
                     <div class="w-full max-w-2xl mx-auto h-full"> 
                         <div class="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 
                                     hover:shadow-2xl transition-all duration-500 overflow-hidden card-hover 
@@ -369,11 +371,12 @@
                             @endif
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 {{-- End of hotBills --}}
                 
                 <!-- Most Commented Bill Card -->
-                <div class="flex-1 animate-fade-in-up" style="animation-delay: 0.4s;">
+                {{-- @include('bills.most-commented-bill-card', ['mostCommentedBill' => $mostCommentedBill]) --}}
+                {{-- <div class="flex-1 animate-fade-in-up" style="animation-delay: 0.4s;">
                     <div class="w-full max-w-2xl mx-auto h-full"> 
                         <div class="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 
                                     hover:shadow-2xl transition-all duration-500 overflow-hidden card-hover 
@@ -446,16 +449,90 @@
                             @endif
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 {{-- End of Most Commented Bill --}}
-            </div>
+            {{-- </div>
+            @endif --}}
+
+        <div class="flex flex-col lg:flex-row gap-8 mt-20">
+            @if($combinedBill)
+                <!-- Single Card for HOT + TRENDING -->
+                <div class="flex-1 animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="w-full max-w-2xl mx-auto h-full"> 
+                        <div class="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 
+                                    hover:shadow-2xl transition-all duration-500 overflow-hidden card-hover flex flex-col h-full">
+
+                            <!-- POPULAR Badge -->
+                            <div class="absolute top-4 right-4 z-10">
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold 
+                                            bg-purple-600 text-white shadow-md animate-pulse">
+                                    <svg class="w-4 h-4 mr-1 text-white" xmlns="http://www.w3.org/2000/svg" fill="currentColor" 
+                                        viewBox="0 0 24 24">
+                                        <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.782 
+                                                1.402 8.172L12 18.896l-7.336 3.868 
+                                                1.402-8.172L.132 9.21l8.2-1.192L12 .587z"/>
+                                    </svg>
+                                    Popular
+                                </span>
+                            </div>
+
+
+                            <!-- Card Content -->
+                            <div class="px-6 pt-4 pb-4">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-200 mb-2">
+                                    <em>This bill is relevant</em>
+                                </h3>
+                                <h4 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">
+                                    {{ $combinedBill->title }}
+                                </h4>
+                            </div>
+
+                            @if(str_word_count($combinedBill->title) <= 10)
+                            <div class="px-6 pb-4 flex-1">
+                                <p class="text-gray-600 dark:text-gray-300 line-clamp-3 leading-relaxed">
+                                    {{ Str::limit($combinedBill->content, 150) }}
+                                </p>
+                            </div>
+                            @endif
+
+                            <div class="px-6 py-4 bg-gradient-to-r from-orange-50 to-blue-50 dark:from-gray-700/50 dark:to-gray-700/50 
+                                        border-t border-gray-100 dark:border-gray-600 mt-auto">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex gap-4">
+                                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                            🔥 {{ $combinedBill->likes_count }} likes
+                                        </span>
+                                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                            💬 {{ $combinedBill->comments_count }} comments
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('bills.show', $combinedBill->id) }}" 
+                                    class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-all duration-300 hover:shadow-lg">
+                                        View Details →
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @else
+                {{-- If they are different bills, show both cards separately --}}
+                @include('bills.hot-bill-card', ['hotBill' => $hotBill])
+                @include('bills.most-commented-bill-card', ['mostCommentedBill' => $mostCommentedBill])
+            @endif
         </div>
+
+        {{-- View other bills button --}}
         <div class="text-center mt-8">
             <a href="{{ route('bills.other') }}"
             class="inline-block bg-blue-600 text-white px-6 py-2.5 rounded-lg font-medium shadow hover:bg-blue-700 transition">
                 View Other Bills →
             </a>
         </div>
+        </div>
+        
+        
+
     </section>
         
     <!-- Features Section -->

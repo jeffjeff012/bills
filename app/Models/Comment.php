@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Bill;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
-
+// use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Comment extends Model
 {
     use LogsActivity;
+    // use SoftDeletes;
 
     protected $fillable = [
         'user_id',

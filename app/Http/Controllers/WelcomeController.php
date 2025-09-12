@@ -32,6 +32,14 @@ class WelcomeController extends Controller
             ->orderByDesc('comments_count')
             ->first();
 
+        
+        // If both are the same bill, merge them
+        $combinedBill = null;
+        if ($hotBill && $mostCommentedBill && $hotBill->id === $mostCommentedBill->id) {
+            $combinedBill = \App\Models\Bill::withCount(['likes', 'comments'])
+                ->find($hotBill->id);
+        }
+
         // Basic stats
         $totalBills = Bill::count();
         $totalComments = Comment::count(); 
@@ -69,7 +77,8 @@ class WelcomeController extends Controller
             'totalComments',
             'totalVotes',
             'userEngagement',
-            'otherBills'
+            'otherBills',
+            'combinedBill'
         ));
     }
 }

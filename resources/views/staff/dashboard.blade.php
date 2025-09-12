@@ -79,9 +79,9 @@
     <div class="flex flex-col lg:flex-row gap-8 mt-15">
         {{-- Most Liked Bill Card --}}
         <div class="flex-1">
-            <div class="w-full max-w-2xl mx-auto"> 
+            <div class="h-full flex flex-col w-full max-w-2xl mx-auto"> 
                 @if($hotBill)
-                    <div class="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+                    <div class="flex flex-col h-full relative bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow duration-300 overflow-hidden">
                         
                         {{-- HOT Badge --}}
                         <div class="absolute top-4 right-4 z-10">
@@ -99,7 +99,7 @@
                         </div>
 
                         {{-- Card Body --}}
-                        <div class="px-6 pb-4">
+                        <div class="px-6 pb-4 flex-grow">
                             <h4 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">
                                 {{ $hotBill->title }}
                             </h4>
@@ -155,9 +155,9 @@
 
         {{-- Most Commented Bill Card --}}
         <div class="flex-1">
-            <div class="w-full max-w-2xl mx-auto"> 
+            <div class="h-full flex flex-col w-full max-w-2xl mx-auto"> 
                 @if($mostCommentedBill)
-                    <div class="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+                    <div class="flex flex-col h-full relative bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow duration-300 overflow-hidden">
                         
                         {{-- TRENDING Badge --}}
                         <div class="absolute top-4 right-4 z-10">
@@ -175,7 +175,7 @@
                         </div>
 
                         {{-- Card Body --}}
-                        <div class="px-6 pb-4">
+                        <div class="px-6 pb-4 flex-grow">
                             <h4 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">
                                 {{ $mostCommentedBill->title }}
                             </h4>
@@ -255,8 +255,8 @@
                 </table>
             </div>
             <div class="mt-4">
-            {{ $users->withQueryString()->fragment('all-users-section')->links() }}
-        </div>
+                {{ $users->withQueryString()->fragment('all-users-section')->links() }}
+            </div>
 
             <div class="flex justify-end mt-4">
                 <a href="#top" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition">

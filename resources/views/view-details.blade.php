@@ -30,6 +30,7 @@
                             <h2 class="text-xl font-semibold text-gray-900 dark:text-white leading-tight">
                                 {{ $bill->title }}
                             </h2>
+
                             @php
                                 $dueDate = \Carbon\Carbon::parse($bill->due_date);
                                 $isExpired = $dueDate->isPast();
@@ -56,11 +57,13 @@
                         </div>
 
                         <!-- Bill Content -->
+                        @if(str_word_count($bill->title) <= 10)
                         <div class="prose prose-sm max-w-none mb-4">
-                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                            <p class="text-gray-700 dark:text-gray-300 line-clamp-2 leading-relaxed">
                                 {{ \Illuminate\Support\Str::words($bill->content, 50, '...') }}
                             </p>
                         </div>
+                        @endif
                     </div>
 
                     <!-- Bill Footer -->

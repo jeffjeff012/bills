@@ -76,7 +76,7 @@
                                     </div>
                                     <div class="flex-1">
                                         <h3 class="text-sm font-semibold text-blue-900 dark:text-blue-100">
-                                            PDF Attachment Available
+                                            Continue reading
                                         </h3>
                                         <a href="{{ Storage::url($bill->attachment) }}" target="_blank" 
                                            class="inline-flex items-center mt-2 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium text-sm transition-colors duration-200">
@@ -109,7 +109,7 @@
                                 </div>
                             </div>
 
-                                <!-- Interactive Like/Dislike Section -->
+                            <!-- Interactive Like/Dislike Section -->
                             @if(auth()->user()->role === \App\Enums\UserRole::User)
                             <div class="flex justify-center">
                                 <div class="bg-white dark:bg-gray-700 rounded-2xl p-4 shadow-lg border border-gray-200 dark:border-gray-600">
