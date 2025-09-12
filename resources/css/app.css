@@ -72,6 +72,19 @@ html {
     display: none !important;
 }
 
+@keyframes growPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.animate-grow-pulse {
+  animation: growPulse 3s ease-in-out infinite;
+}
+
 
 /* \[:where(&)\]:size-4 {
     @apply size-4;
