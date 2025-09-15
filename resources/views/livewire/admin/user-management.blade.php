@@ -146,6 +146,17 @@
                 @enderror
             </div>
 
+            <!-- Confirm Password -->
+            <div>
+                <label for="password_confirmation" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Confirm Password
+                </label>
+                <flux:input id="password_confirmation" type="password" wire:model="password_confirmation" class="w-full" />
+                @error('password_confirmation')
+                    <p class="text-red-500 text-xs md:text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+            
             <!-- Role -->
             <div>
                 <label for="role" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">

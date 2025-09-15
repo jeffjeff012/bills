@@ -11,6 +11,7 @@ class UserManagement extends Component
 {
     use WithPagination;
 
+    public $password_confirmation;
     public $editUserId;
     public $editName;
     public $editEmail;
@@ -44,7 +45,7 @@ class UserManagement extends Component
         $this->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6',
+            'password' => 'required|min:6|confirmed',
             'role' => 'required|in:admin,sbstaff,user',
         ]);
 
@@ -55,7 +56,7 @@ class UserManagement extends Component
             'role' => UserRole::from($this->role),
         ]);
 
-        $this->reset(['name','email','password','role']);
+        $this->reset(['name','email','password', 'password_confirmation','role']);
         $this->showCreateUserModal = false;
 
         session()->flash('success', 'User created successfully!');
