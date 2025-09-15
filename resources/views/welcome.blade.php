@@ -498,7 +498,7 @@
                                 <div class="px-6 py-4 bg-gradient-to-r from-orange-50 to-blue-50 dark:from-gray-700/50 dark:to-gray-700/50 
                                             border-t border-gray-100 dark:border-gray-600 mt-auto">
                                     <div class="flex items-center justify-between">
-                                        <div class="flex gap-4">
+                                        <div class="flex flex-col sm:!flex-row gap-2 sm:gap-4">
                                             <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
                                                 🔥 {{ $combinedBill->likes_count }} likes
                                             </span>
