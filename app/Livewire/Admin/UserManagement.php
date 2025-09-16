@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\User;
 use Livewire\WithPagination;
 use App\Enums\UserRole;
+use Illuminate\Support\Facades\Auth;
 
 class UserManagement extends Component
 {
@@ -102,11 +103,11 @@ class UserManagement extends Component
         $user = \App\Models\User::findOrFail($this->userToDelete);
 
         // Optional: Prevent self-deletion
-        if (auth()->id() === $user->id) {
-            $this->dispatch('notify', message: 'You cannot delete your own account.', type: 'warning');
-            $this->confirmingUserDeletion = false;
-            return;
-        }
+        // if (auth()->id() === $user->id) {
+        //     $this->dispatch('notify', message: 'You cannot delete your own account.', type: 'warning');
+        //     $this->confirmingUserDeletion = false;
+        //     return;
+        // }
 
         $user->delete();
         $this->confirmingUserDeletion = false;
@@ -114,10 +115,11 @@ class UserManagement extends Component
 
         session()->flash('success', 'User deleted successfully.');
     }
+
     public function render()
     {
         return view('livewire.admin.user-management', [
-            'users' => User::paginate(8),
+             'users' => User::where('id', '!=', Auth::id())->paginate(8),
         ]);
     }
 }
