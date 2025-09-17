@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Schema;
 use App\Models\User;
 use App\Models\Bill;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -13,11 +14,15 @@ class AdminController extends Controller
     {
         $user = auth()->user();
 
-        // if (!in_array($user->role, ['Admin', 'SbStaff'])) {
-        //     abort(403); // forbidden for everyone else
-        // }
+        
+        $today = Carbon::today()->toDateString();
 
-        $bills = Bill::with('comments')->get();
+        $bills = Bill::with('comments')->orderByRaw(
+            "CASE WHEN due_date IS NULL OR due_date >= ? THEN 0 ELSE 1 END",
+            [$today]
+        )
+        ->orderBy('created_at', 'desc')
+        ->get();
         return view('view-details', compact('bills'));
     }
 

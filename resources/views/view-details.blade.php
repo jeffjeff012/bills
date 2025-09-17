@@ -1,10 +1,9 @@
 <x-layouts.app :title="'All Bills'">
-    <div class="max-w-4xl mx-auto px-4 py-6">
         <!-- Header Section -->
         <div class="mb-8">
             <div class="relative mb-6 w-full">
                 <flux:heading size="xl" level="1" class="text-gray-900 dark:text-white">
-                    {{ __('Report of Bills') }}</flux:heading>
+                    {{ __('Published Bills') }}</flux:heading>
                 <flux:subheading size="lg" class="mb-6 text-gray-600 dark:text-gray-300">{{ __('Data from users') }}
                 </flux:subheading>
                 <flux:separator variant="subtle" class="border-gray-200 dark:border-gray-700" />
@@ -20,7 +19,7 @@
         </div>
 
         <!-- Bills Grid -->
-        <div class="grid gap-6 md:gap-8">
+        <div class="grid gap-4 md:gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
             @forelse ($bills as $bill)
                 <article
                     class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm hover:shadow-md dark:hover:shadow-lg dark:hover:shadow-gray-900/25 transition-all duration-300 overflow-hidden">
@@ -37,14 +36,14 @@
                                 $daysDiff = abs($dueDate->diffInDays(now()));
                             @endphp
                             <span
-                                class="flex-shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $isExpired ? 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300' : 'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300' }}">
+                                class="flex-shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $isExpired ? 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300' : 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300' }}">
                                 @if ($isExpired)
                                     <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
                                             d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
                                             clip-rule="evenodd" />
                                     </svg>
-                                    Expired
+                                    Inactive
                                 @else
                                     <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
@@ -120,7 +119,7 @@
 
                             <a href="{{ route('bill', $bill->id) }}"
                                 class="inline-flex items-center justify-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-medium rounded-lg transition-colors w-full sm:w-auto">
-                                View Bill
+                                View
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 5l7 7-7 7" />
@@ -149,5 +148,4 @@
                 <p class="text-sm text-gray-500">Showing {{ count($bills) }} bills</p>
             </div>
         @endif
-    </div>
 </x-layouts.app>

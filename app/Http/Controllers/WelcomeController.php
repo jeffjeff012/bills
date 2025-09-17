@@ -34,7 +34,6 @@ class WelcomeController extends Controller
 
         
         // If both are the same bill, merge them
-        // If both are the same bill, merge them
         $combinedBill = null;
         if (
             $hotBill &&
