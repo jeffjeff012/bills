@@ -285,7 +285,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Section Header -->
             <div class="text-center mb-16 animate-fade-in-up">
-                <h2 class="text-3xl lg:text-4xl font-bold text-purple-900 dark:text-gray mb-4">
+                <h2 class="text-3xl lg:text-4xl font-bold text-blue-500 dark:text-gray-500 mb-4">
                     Featured <span class="gradient-text">Bills</span>
                 </h2>
                 <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
@@ -479,17 +479,17 @@
 
                                 <!-- Card Content -->
                                 <div class="px-6 pt-4 pb-4">
-                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-200 mb-2">
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-black-200 mb-2">
                                         <em>This bill is relevant</em>
                                     </h3>
-                                    <h4 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">
+                                    <h4 class="text-xl font-bold text-gray-800 dark:text-black-100 mb-2">
                                         {{ $combinedBill->title }}
                                     </h4>
                                 </div>
 
                                 @if(str_word_count($combinedBill->title) <= 10)
                                 <div class="px-6 pb-4 flex-1">
-                                    <p class="text-gray-600 dark:text-gray-300 line-clamp-3 leading-relaxed">
+                                    <p class="text-gray-600 dark:text-black-300 line-clamp-3 leading-relaxed">
                                         {{ Str::limit($combinedBill->content, 150) }}
                                     </p>
                                 </div>
@@ -499,10 +499,10 @@
                                             border-t border-gray-100 dark:border-gray-600 mt-auto">
                                     <div class="flex items-center justify-between">
                                         <div class="flex flex-col sm:!flex-row gap-2 sm:gap-4">
-                                            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                            <span class="text-sm font-medium text-gray-700 dark:text-black-300">
                                                 🔥 {{ $combinedBill->likes_count }} likes
                                             </span>
-                                            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                            <span class="text-sm font-medium text-gray-700 dark:text-black-300">
                                                 💬 {{ $combinedBill->comments_count }} comments
                                             </span>
                                         </div>
