@@ -34,11 +34,20 @@ class WelcomeController extends Controller
 
         
         // If both are the same bill, merge them
+        // If both are the same bill, merge them
         $combinedBill = null;
-        if ($hotBill && $mostCommentedBill && $hotBill->id === $mostCommentedBill->id) {
-            $combinedBill = \App\Models\Bill::withCount(['likes', 'comments'])
-                ->find($hotBill->id);
+        if (
+            $hotBill &&
+            $mostCommentedBill &&
+            $hotBill->id === $mostCommentedBill->id
+        ) {
+            $candidate = Bill::withCount(['likes', 'comments'])->find($hotBill->id);
+
+            if ($candidate->likes_count > 0 && $candidate->comments_count > 0) {
+                $combinedBill = $candidate;
+            }
         }
+
 
         // Basic stats
         $totalBills = Bill::count();
