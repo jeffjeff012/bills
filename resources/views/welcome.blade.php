@@ -455,7 +455,7 @@
             @endif --}}
 
             <div class="flex flex-col lg:flex-row gap-8 mt-20">
-                @if($combinedBill)
+                @if($combinedBill && ($combinedBill->likes_count > 0 || $combinedBill->comments_count > 0))
                     <!-- Single Card for HOT + TRENDING -->
                     <div class="flex-1 animate-fade-in-up animate-grow" style="animation-delay: 0.2s;">
                         <div class="w-full max-w-2xl mx-auto h-full"> 
