@@ -5,7 +5,7 @@
 
     {{-- Only show comment box for normal Users --}}
     @if(!$readonly && auth()->check() && auth()->user()->role === UserRole::User)
-        <form wire:submit.prevent="submitComment" class="mb-4">
+        <form wire:submit.prevent="submitComment" class="mb-4 text-xs lg:text-lg">
             <textarea wire:model="content" class="w-full p-2 border rounded" placeholder="Write a comment..."></textarea>
             <button type="submit" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded">Post Comment</button>
         </form>
@@ -44,12 +44,12 @@
                 {{-- Editing state --}}
                 @if($editingCommentId === $comment->id)
                     <textarea wire:model="editedContent" class="w-full p-2 border rounded mt-2"></textarea>
-                    <div class="mt-2 space-x-2">
+                    <div class="mt-2 space-x-2 ">
                         <button wire:click="updateComment" class="px-3 py-1 bg-green-500 text-white rounded">Save</button>
                         <button wire:click="$set('editingCommentId', null)" class="px-3 py-1 bg-gray-400 text-white rounded">Cancel</button>
                     </div>
                 @else
-                    <p class="mt-1 ">{{ $comment->content }}</p>
+                    <p class="mt-1 text-xs lg:text-lg">{{ $comment->content }}</p>
 
                     {{-- Actions --}}
                     @if(!$readonly)
@@ -91,7 +91,7 @@
             </div>
        @empty
             {{-- Empty state --}}
-            <div class="flex flex-col items-center justify-center py-10 px-6 border-2 border-dashed border-gray-300 dark:border-zinc-600 rounded-xl bg-gray-50 dark:bg-zinc-800/50">
+            <div class="text-xs lg:text-lg flex flex-col items-center justify-center py-10 px-6 border-2 border-dashed border-gray-300 dark:border-zinc-600 rounded-xl bg-gray-50 dark:bg-zinc-800/50">
                 <flux:icon name="chat-bubble-left-right" class="w-10 h-10 text-gray-400 dark:text-zinc-500 mb-3" />
                 <p class="text-gray-600 dark:text-gray-400 font-medium">No comments yet</p>
                 @if(auth()->check() && auth()->user()->role === UserRole::User)

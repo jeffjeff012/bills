@@ -45,9 +45,9 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                             </svg>
                         </div>
-                        <div class="flex">
-                            <p class="text-sm font-medium text-gray-900 dark:text-white">Authored by</p>
-                            <p class="ml-1 text-sm text-gray-500 dark:text-zinc-400">
+                        <div class="flex ">
+                            <p class="text-xs lg:text-lg font-medium text-gray-900 dark:text-white">Authored by</p>
+                            <p class="ml-1 text-xs lg:text-lg text-gray-500 dark:text-zinc-400">
                                 {{ $bill->authored_by ?? 'Unknown' }}
                             </p>
                         </div>
@@ -58,7 +58,7 @@
                         
                         <!-- Bill Content -->
                         <div class="prose prose-lg max-w-none dark:prose-invert prose-p:m-0 prose-headings:m-0">
-                            <div class="text-gray-700 dark:text-zinc-300 leading-relaxed lg:text-lg sm:text-xs font-light">
+                            <div class="text-gray-700 dark:text-zinc-300 leading-relaxed text-xs lg:text-lg  font-light">
                                 {!! nl2br(e($bill->content)) !!}
                             </div>
                         </div>
