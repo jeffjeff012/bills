@@ -6,7 +6,7 @@
 
                             <!-- HOT Badge -->
                             <div class="absolute top-4 right-4 z-10">
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-orange-500 text-white shadow-md animate-pulse">
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-red-500 text-white shadow-md animate-pulse">
                                     <span class="mr-1">🔥</span>
                                     HOT
                                 </span>
