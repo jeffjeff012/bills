@@ -47,12 +47,13 @@
 
             <!-- Mobile: Stack buttons vertically, Desktop: Side by side -->
             <div class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2 pt-4 md:pt-0">
-                <flux:button 
-                    variant="outline" 
-                    class="w-full md:w-auto order-2 md:order-1"
-                    wire:click="$dispatch('modal.close', { name: 'create-bill' })">
-                    Cancel
-                </flux:button>
+                <flux:modal.close name="create-bill">
+                    <flux:button 
+                        variant="outline" 
+                        class="w-full md:w-auto order-2 md:order-1">
+                        Cancel
+                    </flux:button>
+                </flux:modal.close>
                 <flux:spacer class="hidden md:block" />
                 <flux:button 
                     type="submit" 
