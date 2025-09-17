@@ -22,7 +22,10 @@
         <div class="grid gap-4 md:gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
             @forelse ($bills as $bill)
                 <article
-                    class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm hover:shadow-md dark:hover:shadow-lg dark:hover:shadow-gray-900/25 transition-all duration-300 overflow-hidden">
+                    class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 
+                        rounded-xl shadow-sm hover:shadow-md dark:hover:shadow-lg 
+                        dark:hover:shadow-gray-900/25 transition-all duration-300 
+                        overflow-hidden flex flex-col h-full">
                     <!-- Bill Header -->
                     <div class="p-6 pb-4">
                         <div class="flex items-start justify-between gap-4 mb-3">
@@ -66,7 +69,7 @@
                     </div>
 
                     <!-- Bill Footer -->
-                    <div class="px-6 pb-6">
+                    <div class="px-6 pb-6 mt-auto">
                         <!-- Voting Stats -->
                         <div class="flex items-center gap-6 mb-4">
                             <div class="flex items-center gap-2">
