@@ -102,7 +102,7 @@
                         <div
                             class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-4 border-t border-gray-100">
                             <div
-                                class="flex items-center gap-2 text-sm {{ $isExpired ? 'text-red-600' : 'text-gray-600' }}">
+                                class="flex items-center gap-2 text-sm {{ $isExpired ? 'text-red-600 dark:text-orange-300' : 'text-gray-600 dark:text-gray-50' }}">
                                 <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
