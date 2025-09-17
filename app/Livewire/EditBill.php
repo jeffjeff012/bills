@@ -84,6 +84,15 @@ class EditBill extends Component
         Flux::modal('edit-bill')->close();
     }
 
+    public function cancel()
+    {
+        // Reset any form fields if you want
+        $this->reset(['title', 'content', 'authored_by', 'due_date', 'attachment']);
+
+        // Close the modal
+        Flux::modal('edit-bill')->close();
+    }
+
     public function render()
     {
         return view('livewire.edit-bill');

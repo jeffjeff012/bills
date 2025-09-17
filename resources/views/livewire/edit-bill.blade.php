@@ -70,9 +70,11 @@
         @error('attachment') <span class="text-red-500 text-xs md:text-sm">{{ $message }}</span> @enderror
     </div>
 
-            <div class="flex">
+            <div class="flex gap-2">
                 <flux:spacer />
-
+                <flux:button type="button" variant="outline" wire:click="cancel">
+                    Cancel
+                </flux:button>
                 <flux:button type="submit" variant="primary" wire:click="update">Update</flux:button>
             </div>
         </div>
