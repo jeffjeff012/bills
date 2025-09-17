@@ -46,7 +46,7 @@
                             </svg>
                         </div>
                         <div class="flex ">
-                            <p class="text-xs lg:text-lg font-medium text-gray-900 dark:text-white">Authored by</p>
+                            <p class="text-xs lg:text-lg  font-medium text-gray-900 dark:text-white">Authored by</p>
                             <p class="ml-1 text-xs lg:text-lg text-gray-500 dark:text-zinc-400">
                                 {{ $bill->authored_by ?? 'Unknown' }}
                             </p>

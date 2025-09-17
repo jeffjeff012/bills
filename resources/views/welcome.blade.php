@@ -92,7 +92,7 @@
 
 <body class="bg-[#FDFDFC] text-[#1b1b18] min-h-screen">
     <!-- Sticky Header -->
-    <div class="sticky top-0 z-50 w-full bg-white border-b border-gray-200 dark:border-gray-800 shadow-sm">
+    <div class="sticky top-0 z-50 w-full bg-gray-50 dark:bg-gray-700 dark:text-gray-50 border-b border-gray-200 dark:border-gray-800 shadow-sm">
         <header class="mx-auto w-full max-w-7xl px-4 py-3 sm:py-2">
             <div class="flex items-center justify-between">
                 <!-- Logo (Left side) -->
@@ -102,7 +102,7 @@
                         alt="Logo" 
                         class="h-12 w-auto sm:h-[110px]" 
                     />
-                    <span class="text-base font-bold gradient-text sm:text-xl">
+                    <span class="text-black-800 dark:text-gray-50 text-base font-bold gradient-text sm:text-xl">
                         Bayambang Bills Forum
                     </span>
                 </div>
@@ -119,7 +119,7 @@
                             </a>
                         @else
                             <a href="{{ route('login') }}" 
-                            class="nav-auth-cta inline-block text-xl px-5 py-2 border border-gray-400 rounded-lg text-[#1b1b18] dark:text-black transition-all duration-200 hover:bg-blue-300 hover:border-blue-600">
+                            class="nav-auth-cta inline-block text-xl px-5 py-2 border border-gray-400 rounded-lg text-gray-900 dark:text-gray-50 transition-all duration-200 hover:bg-blue-300 hover:border-blue-600">
                                 Log in
                             </a>
                             @if (Route::has('register'))
@@ -244,7 +244,7 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="py-8 bg-white dark:bg-gray-800 transition-colors duration-300">
+    <section class="py-8 dark:bg-gray-800 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Changed grid-cols-1 to grid-cols-2 -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -279,13 +279,12 @@
         </div>
     </section>
 
-
     <!-- Featured Bills Section -->
     <section id="featured-bills" class="py-40 bg-gray-50 dark:bg-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Section Header -->
             <div class="text-center mb-16 animate-fade-in-up">
-                <h2 class="text-3xl lg:text-4xl font-bold text-blue-500 dark:text-gray-500 mb-4">
+                <h2 class="text-3xl lg:text-4xl font-bold text-blue-500 dark:text-gray-50 mb-4">
                     Featured <span class="gradient-text">Bills</span>
                 </h2>
                 <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
@@ -533,10 +532,10 @@
     </section>
         
     <!-- Features Section -->
-    <section id="features-section" class="py-40 bg-white dark:bg-gray-800">
+    <section id="features-section" class="py-40 dark:bg-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-black mb-4">
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-gray-50 mb-4">
                     Experience <span class="gradient-text">Bills Forum</span>
                 </h2>
             </div>
@@ -548,8 +547,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-black mb-2">Real-time Updates</h3>
-                    <p class="text-gray-600 dark:font-bold dark:text-gray-800">Stay updated with the latest bill progress and voting results in real-time.</p>
+                    <h3 class="text-black-600 text-xl font-bold dark:text-gray-50 mb-2">Real-time Updates</h3>
+                    <p class="text-gray-600 dark:font-bold dark:text-gray-200">Stay updated with the latest bill progress and voting results in real-time.</p>
                 </div>
                 
                 <div class="text-center p-6 rounded-xl bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 card-hover animate-fade-in-up" style="animation-delay: 0.2s;">
@@ -558,8 +557,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-black mb-2">Community Discussion</h3>
-                    <p class="text-gray-600 dark:font-bold dark:text-gray-800">Engage in meaningful discussions with fellow citizens about important legislation.</p>
+                    <h3 class="text-black-600 text-xl font-bold text-gray-900 dark:text-gray-50 mb-2">Community Discussion</h3>
+                    <p class="text-gray-600 dark:font-bold dark:text-gray-200">Engage in meaningful discussions with fellow citizens about important legislation.</p>
                 </div>
                 
                 <div class="text-center p-6 rounded-xl bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 card-hover animate-fade-in-up" style="animation-delay: 0.4s;">
@@ -568,17 +567,17 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-black mb-2">Transparent Process</h3>
-                    <p class="text-gray-600 dark:font-bold dark:text-gray-800">Posting of bills to be passed.</p>
+                    <h3 class="text-black-600 text-xl font-bold text-gray-900 dark:text-gray-50 mb-2">Transparent Process</h3>
+                    <p class="text-gray-600 dark:font-bold dark:text-gray-200">Posting of bills to be passed.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="py-10 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
+    <section class="py-10 bg-gradient-to-r from-blue-600 via-skyblue-600 to-blue-600">
         <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">
+            <h2 class="text-3xl lg:text-4xl font-bold text-white">
                 Ready to Make Your Voice Heard?
             </h2>
             <p class="text-xl text-white/90 mb-8">
