@@ -129,7 +129,7 @@
                             </div>
                         </div>
                     </div>
-                 @else
+                @else
                     {{-- Empty State --}}
                     <div class="flex flex-col items-center justify-center h-full text-center bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-10">
                         <div class="w-16 h-16 mb-4 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30">
