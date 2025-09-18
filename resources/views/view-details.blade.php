@@ -34,8 +34,8 @@
                             </h2>
 
                             @php
-                                $dueDate = \Carbon\Carbon::parse($bill->due_date);
-                                $isExpired = $dueDate->isPast();
+                                $dueDate = \Carbon\Carbon::parse($bill->due_date)->endOfDay();
+                                $isExpired = now()->greaterThan($dueDate);
                                 $daysDiff = abs($dueDate->diffInDays(now()));
                             @endphp
                             <span
