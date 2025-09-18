@@ -2,10 +2,11 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\Bill;
 use App\Models\Comment;
+use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class CommentSection extends Component
 {
@@ -131,14 +132,51 @@ class CommentSection extends Component
         $this->commentToDelete = null;
     }
 
+    public function toggleHide($commentId)
+    {
+        $comment = Comment::findOrFail($commentId);
+
+        $user = auth()->user();
+        $role = is_object($user->role) && property_exists($user->role, 'value')
+            ? $user->role->value
+            : $user->role;
+
+        // Allow only staff/admin
+        if (in_array($role, ['sbstaff', 'admin'])) {
+            $comment->is_hidden = ! $comment->is_hidden;
+            $comment->save();
+        }
+    }
+
+
+    public function getCommentsProperty()
+    {
+        $query = $this->bill
+            ->comments()
+            ->with('user')
+            ->orderBy('created_at', 'desc');
+
+        if (Auth::check()) {
+            $user = Auth::user();
+            $role = is_object($user->role) && property_exists($user->role, 'value')
+                ? $user->role->value
+                : $user->role;
+
+            if (!in_array($role, ['sbstaff', 'admin'])) {
+                $query->where('is_hidden', false);
+            }
+        } else {
+            // guest → only visible comments
+            $query->where('is_hidden', false);
+        }
+
+        return $query->paginate(10);
+    }
+
     public function render()
     {
-         return view('livewire.comment-section', [
-            'comments' => $this->bill
-                ->comments()
-                ->with('user')
-                ->latest()
-                ->paginate(10), // or paginate() with a number
+        return view('livewire.comment-section', [
+            'comments' => $this->comments, 
         ]);
     }
 }
