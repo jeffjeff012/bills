@@ -110,10 +110,15 @@
                                 </svg>
 
                                 @if ($isExpired)
+                                    <span class="font-medium"> {{ $dueDate->diffForHumans() }}</span>
+                                @else
+                                    <span class="font-medium">{{ $dueDate->diffForHumans() }}</span>
+                                @endif
+                                {{-- @if ($isExpired)
                                     <span class="font-medium">Ended {{ $dueDate->diffForHumans() }}</span>
                                 @else
-                                    <span class="font-medium">Ends {{ $dueDate->diffForHumans() }}</span>
-                                @endif
+                                    <span class="font-medium">Ends{{ $dueDate->diffForHumans() }}</span>
+                                @endif --}}
 
                                 <span class="hidden sm:inline text-gray-400">•</span>
                                 <span
@@ -147,8 +152,11 @@
 
         <!-- Load More or Pagination could go here -->
         @if (count($bills) > 0)
-            <div class="mt-12 text-center">
+        <!-- Results Summary -->
+        <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+            <div class="text-center">
                 <p class="text-sm text-gray-500">Showing {{ count($bills) }} bills</p>
             </div>
+        </div>
         @endif
 </x-layouts.app>
