@@ -36,8 +36,12 @@ class StaffController extends Controller
         $user = auth()->user();
 
         // Redirect Admin if they try to access Staff dashboard
-        if ($user->role === \App\Enums\UserRole::Admin) {
+        if ($user->role === \App\Enums\UserRole::Admin ) {
             return redirect()->route('admin.dashboard');
+        }
+
+        if ($user->role === \App\Enums\UserRole::User ) {
+            return redirect()->route('dashboard');
         }
 
         $users = User::paginate(5);

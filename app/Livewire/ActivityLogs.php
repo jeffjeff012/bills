@@ -12,21 +12,6 @@ class ActivityLogs extends Component
 
     public $perPage = 10;
 
-    public function mount()
-    {
-        $user = auth()->user();
-
-        // If not logged in
-        if (!$user) {
-            abort(403, 'Unauthorized.');
-        }
-
-        // Allow only Admins
-        if ($user->role !== \App\Enums\UserRole::Admin) {
-            abort(403, 'You are not allowed to access this page.');
-        }
-    }
-    
     public function render()
     {
         // Clean up old logs before fetching

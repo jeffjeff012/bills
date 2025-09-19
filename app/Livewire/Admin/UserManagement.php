@@ -25,22 +25,6 @@ class UserManagement extends Component
     public bool $showCreateUserModal = false;
 
 
-    public function mount()
-    {
-        $user = auth()->user();
-
-        if ($user->role == UserRole::SbStaff) {
-            return redirect()->route('staff.dashboard'); // SbStaff dashboard
-        }
-
-        if ($user->role == UserRole::User) {
-            return redirect()->route('dashboard'); // User dashboard
-        }
-
-        // Admins continue normally
-    }
-
-
     public function createUser()
     {
         $this->validate([

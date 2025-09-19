@@ -4,31 +4,33 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 use App\Enums\UserRole;
-use Illuminate\Support\Facades\Auth;
 
 class RoleMiddleware
 {
     /**
      * Handle an incoming request.
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next)
+    public function handle($request, Closure $next)
     {
         $user = auth()->user();
 
-        if (! $user) {
+        if (!$user) {
             return redirect()->route('login');
         }
 
-        // Allow Admin and SbStaff
-        if (in_array($user->role, [UserRole::Admin->value, UserRole::SbStaff->value], true)) {
-            return $next($request);
+        switch ($user->role) {
+            case \App\Enums\UserRole::Admin:
+                return $next($request); 
+            case \App\Enums\UserRole::SbStaff:
+                return $next($request); 
+            case \App\Enums\UserRole::User:
+            default:
+                return redirect()->route('dashboard');
         }
-
-        // Block normal Users
-        abort(403, 'Unauthorized');
-
     }
 
-    
 }

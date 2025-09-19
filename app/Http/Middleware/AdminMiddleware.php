@@ -26,7 +26,7 @@ class AdminMiddleware
             case \App\Enums\UserRole::Admin:
                 return $next($request); 
             case \App\Enums\UserRole::SbStaff:
-                return $next($request);  
+                abort(403); 
             case \App\Enums\UserRole::User:
             default:
                 return redirect()->route('dashboard');
