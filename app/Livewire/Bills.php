@@ -25,7 +25,7 @@ class Bills extends Component
             'comments'
         ])
         ->orderBy('created_at', 'desc')
-        ->paginate(5);
+        ->paginate(7);
 
         return view('livewire.bills', [
             'bills' => $bills,   
