@@ -16,49 +16,49 @@ class CreateBill extends Component
     public $title;
     public $content;
     public $due_date;
-    public $authored_by;
+    public $contributorType = '';
+    public $authored_by = '';
+    public $sponsored_by = '';
     public $attachment;
     
     protected function rules()
     {
+
         return [
             'title'       => 'required|string|unique:bills,title|max:255',
             'content'     => 'required|string',
             'due_date'    => 'required|date',
-            'authored_by' => 'required|string|max:255',
+            'due_date' => 'required|date',
+            'contributorType' => 'required|in:author,sponsor',
+            'authored_by' => 'required_if:contributorType,author',
+            'sponsored_by' => 'required_if:contributorType,sponsor',
             'attachment'  => 'nullable|file|mimes:pdf|max:5120', // 5MB max
         ];
     }
+
 
     public function save()
     {
         $this->validate();
 
-        //Initialize $path
-        $path = null;
-
-        //Save file if uploaded
-        if ($this->attachment) {
-            $path = $this->attachment->store('attachments', 'public'); 
-            //stored in storage/app/public/attachments
-        }
+        $path = $this->attachment
+            ? $this->attachment->store('attachments', 'public')
+            : null;
 
         Bill::create([
             'title'       => $this->title,
             'content'     => $this->content,
             'due_date'    => Carbon::parse($this->due_date)->endOfDay(),
             'user_id'     => auth()->id(),
-            'authored_by' => $this->authored_by,
-            'attachment'  => $path, //safe, always defined
+            'contributorType' => $this->contributorType,
+            'authored_by' => $this->contributorType === 'author' ? $this->authored_by : null,
+            'sponsored_by' => $this->contributorType === 'sponsor' ? $this->sponsored_by : null,
+            'attachment'  => $path,
         ]);
-
-        $this->reset();
-
-        Flux::modal('create-bill')->close();
 
         session()->flash('success', 'Bill created successfully');
 
-        $this->redirectRoute('report-of-bills', navigate: true);
+        return $this->redirectRoute('report-of-bills', navigate: true);
     }
 
     public function render()

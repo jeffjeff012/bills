@@ -2,95 +2,71 @@
 
 namespace App\Livewire;
 
-use Flux\Flux;
 use App\Models\Bill;
 use Livewire\Component;
-use Livewire\Attributes\On;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Gate;
-use App\Enums\UserRole;
-use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
-use Livewire\WithPagination;
+use Carbon\Carbon;
 
 class EditBill extends Component
 {
     use WithFileUploads;
-    use WithPagination;
 
-    public $title, $content, $billId, $due_date, $authored_by;
+    public Bill $bill;
+    public $title;
+    public $content;
+    public $due_date;
+    public $contributorType = '';
+    public $authored_by = '';
+    public $sponsored_by = '';
     public $attachment;
-    public $currentAttachment; 
-    #[On('edit-bill')] 
-    public function edit($id)
+    public $currentAttachment;
+
+    public function mount(Bill $bill)
     {
-        $bill = Bill::with('user')->findOrFail($id);
-
-        if (
-            auth()->user()->role === UserRole::SbStaff &&
-            $bill->user &&
-            $bill->user->role === UserRole::Admin
-        ) {
-            abort(403, 'Unauthorized: Staff cannot edit bills created by Admin.');
-        }
-
-        $this->billId = $id;
+        $this->bill = $bill;
         $this->title = $bill->title;
         $this->content = $bill->content;
-        $this->authored_by = $bill->authored_by;
-        $this->due_date = $bill->due_date ? \Carbon\Carbon::parse($bill->due_date)->format('Y-m-d') : null;
+        $this->due_date = $bill->due_date ? $bill->due_date->format('Y-m-d') : '';
+        $this->contributorType = $bill->contributorType ?? '';
+        $this->authored_by = $bill->authored_by ?? '';
+        $this->sponsored_by = $bill->sponsored_by ?? '';
         $this->currentAttachment = $bill->attachment;
-
-        Flux::modal('edit-bill')->show();
     }
 
-    public function update() 
+    protected function rules()
     {
-        $this->validate([
-            'title' => ['required', 'string', 'max:255', Rule::unique('bills', 'title')->ignore($this->billId)],
-            'content' => ['required', 'string'],
-            'authored_by' => ['nullable', 'string', 'max:255'],
-            'due_date' => ['required', 'date'],
+        return [
+            'title' => 'required|string|max:255|unique:bills,title,' . $this->bill->id,
+            'content' => 'required|string',
+            'due_date' => 'required|date',
+            'contributorType' => 'required|in:author,sponsor',
+            'authored_by' => 'required_if:contributorType,author',
+            'sponsored_by' => 'required_if:contributorType,sponsor',
+            'attachment' => 'nullable|file|mimes:pdf|max:5120',
+        ];
+    }
+
+    public function update()
+    {
+        $this->validate();
+
+        $path = $this->attachment
+            ? $this->attachment->store('attachments', 'public')
+            : $this->currentAttachment;
+
+        $this->bill->update([
+            'title' => $this->title,
+            'content' => $this->content,
+            'due_date' => Carbon::parse($this->due_date)->endOfDay(),
+            'contributorType' => $this->contributorType,
+            'authored_by' => $this->contributorType === 'author' ? $this->authored_by : null,
+            'sponsored_by' => $this->contributorType === 'sponsor' ? $this->sponsored_by : null,
+            'attachment' => $path,
         ]);
 
-        $bill = Bill::with('user')->findOrFail($this->billId);
+        session()->flash('success', 'Bill updated successfully');
 
-        if (
-            auth()->user()->role === UserRole::SbStaff &&
-            $bill->user &&
-            $bill->user->role === UserRole::Admin
-        ) {
-            abort(403, 'Unauthorized: Staff cannot edit bills created by Admin.');
-        }
-
-        $bill->title = $this->title;
-        $bill->content = $this->content;
-        $bill->authored_by = $this->authored_by;
-        $bill->due_date = $this->due_date;
-            if ($this->attachment) {
-            // delete old file if exists
-            if ($bill->attachment && Storage::exists($bill->attachment)) {
-                Storage::delete($bill->attachment);
-            }
-
-           $bill->attachment = $this->attachment->store('attachments', 'public');
-            $this->currentAttachment = $bill->attachment; 
-        }
-        $bill->save();
-
-        session()->flash('success', 'Bill updated successfully.');
-        $this->reset(['attachment']);
-        $this->redirectRoute('report-of-bills', navigate: true);
-        Flux::modal('edit-bill')->close();
-    }
-
-    public function cancel()
-    {
-        // Reset any form fields if you want
-        $this->reset(['title', 'content', 'authored_by', 'due_date', 'attachment']);
-
-        // Close the modal
-        Flux::modal('edit-bill')->close();
+        return $this->redirectRoute('report-of-bills', navigate: true);
     }
 
     public function render()
