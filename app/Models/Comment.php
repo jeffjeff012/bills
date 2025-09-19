@@ -18,6 +18,7 @@ class Comment extends Model
         'bill_id',
         'content',
         'title',
+        'is_hidden',
     ];
 
      protected static $logAttributes = [
@@ -25,6 +26,7 @@ class Comment extends Model
         'bill_id',
         'content',
         'title',
+        'is_hidden',
     ];
 
     public function getActivitylogOptions(): LogOptions
@@ -36,8 +38,13 @@ class Comment extends Model
                     'bill_id',
                     'content',
                     'title',
+                    'is_hidden',
             ]);
     }
+
+    protected $casts = [
+        'is_hidden' => 'boolean',
+    ];
 
     // In App\Models\Comment.php
     public function canEdit(): bool

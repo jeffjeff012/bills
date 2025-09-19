@@ -11,7 +11,7 @@
     <div class="max-w-4xl mx-auto">
         <!-- Back to Home Button -->
         <div class="mb-6">
-            <a href="/" class="group inline-flex items-center px-6 py-3 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200/50 dark:border-gray-700/50 hover:border-blue-300 dark:hover:border-blue-600">
+            <a href="/other-bills" class="group inline-flex items-center px-6 py-3 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200/50 dark:border-gray-700/50 hover:border-blue-300 dark:hover:border-blue-600">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-600 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                 </svg>
@@ -33,6 +33,7 @@
                     </p>
                 </div>
 
+                @if ($bill->attachment)
                 <div class="flex mt-3 items-center gap-4 p-4 bg-blue-50 dark:bg-gray-800 border border-blue-200 dark:border-gray-700 rounded-lg shadow-sm">
                     <!-- Icon -->
                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-md bg-blue-100 dark:bg-blue-900/40">
@@ -55,6 +56,7 @@
                         </a>
                     </div>
                 </div>
+                @endif
 
 
                 <p class="text-gray-700 dark:text-gray-800 leading-relaxed">

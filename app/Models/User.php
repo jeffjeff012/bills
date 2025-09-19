@@ -52,6 +52,10 @@ class User extends Authenticatable
         ];
     }
 
+    public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
     /**
      * Get the user's initials
      */

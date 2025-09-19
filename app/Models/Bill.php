@@ -22,6 +22,8 @@ class Bill extends Model
         'due_date',
         'authored_by',
         'attachment',
+        'contributorType',
+        'sponsored_by',
     ];
 
     protected static $logAttributes = [
@@ -41,7 +43,9 @@ class Bill extends Model
                 'content',
                 'user_id',
                 'due_date',
+                'contributorType',
                 'authored_by',
+                'sponsored_by',
                 'attachment',
             ])
             ->dontLogIfAttributesChangedOnly(['likes', 'dislikes']); // ✅ chained here
@@ -50,6 +54,19 @@ class Bill extends Model
     protected $casts = [
         'due_date' => 'date', 
     ];
+
+    public function getContributorDisplayAttribute()
+    {
+         if ($this->contributorType === 'author') {
+            return $this->authored_by ?? 'Unknown Author';
+        } elseif ($this->contributorType === 'sponsor') {
+            return $this->sponsored_by ? "Sponsored by {$this->sponsored_by}" : 'Unknown Sponsor';
+        }
+        
+        if ($this->authored_by) {
+            return $this->authored_by;
+        }
+    }
 
     // Relationships
     public function user()

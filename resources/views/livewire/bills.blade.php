@@ -4,9 +4,15 @@
         <flux:subheading size="lg" class="mb-6">{{ __('Make and add changes') }}</flux:subheading>
         <flux:separator variant="subtle" />
 
-        <flux:modal.trigger name="create-bill">
+        {{-- <flux:modal.trigger name="create-bill">
             <flux:button class="mt-4">Create New</flux:button>
-        </flux:modal.trigger>
+        </flux:modal.trigger> --}}
+
+        <a href="{{ route('bills.create') }}" >
+            <flux:button variant="primary" class="mt-6">
+                Create New Bill
+            </flux:button>
+        </a>
 
         <!-- Notice -->
         @if(auth()->user()->role !== \App\Enums\UserRole::Admin)
@@ -32,14 +38,15 @@
                 <p>{{ $value }}</p>
             </div>
         @endsession
+
     {{-- </div> --}}
 
-    <livewire:create-bill />
+    {{-- <livewire:create-bill /> --}}
 
-    <livewire:edit-bill />
+    {{-- <livewire:edit-bill /> --}}
 
     {{-- Bills Table --}}
-<div class="overflow-x-auto mt-4 rounded-md shadow-sm">
+<div class="overflow-x-auto mt-2 rounded-md shadow-sm">
     <table class="table-auto w-full bg-gray-300 dark:bg-slate-800 text-white dark:text-white shadow-md rounded-md mt-5">
     <thead class="bg-neutral-700 dark:bg-slate-900">
     <tr>
@@ -69,15 +76,16 @@
             <td class="px-4 py-2 text-center text-black dark:text-white">{{ $bill->comments_count }}</td>
             <td class="px-4 py-2 text-center space-x-2">
                 @can('update', $bill)
-                    <flux:button
-                        icon="pencil-square"
-                        wire:click="edit({{ $bill->id }})"
-                        class="!bg-transparent !border-none !shadow-none !text-blue-800 dark:!text-white hover:!text-blue-800 hover:underline dark:hover:!text-blue-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
-                        variant="ghost"
-                    >
-                        Edit
-                    </flux:button>
-                @endcan
+    <a href="{{ route('bills.edit', $bill) }}">
+        <flux:button
+            icon="pencil-square"
+            class="!bg-transparent !border-none !shadow-none !text-blue-800 dark:!text-white hover:!text-blue-800 hover:underline dark:hover:!text-blue-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
+            variant="ghost"
+        >
+            Edit
+        </flux:button>
+    </a>
+@endcan
 
                 @can('delete', $bill)
                     <flux:button

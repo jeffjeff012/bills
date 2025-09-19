@@ -45,12 +45,24 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                             </svg>
                         </div>
-                        <div class="flex ">
-                            <p class="text-xs lg:text-lg  font-medium text-gray-900 dark:text-white">Authored by</p>
-                            <p class="ml-1 text-xs lg:text-lg text-gray-500 dark:text-zinc-400">
-                                {{ $bill->authored_by ?? 'Unknown' }}
-                            </p>
-                        </div>
+<div class="flex ">
+    @if($bill->contributorType === 'author')
+        <p class="text-xs lg:text-lg font-medium text-gray-900 dark:text-white">Authored by</p>
+        <p class="ml-1 text-xs lg:text-lg text-gray-500 dark:text-zinc-400">
+            <span class="truncate">{{ $bill->authored_by }}</span>
+        </p>
+    @elseif($bill->contributorType === 'sponsor')
+        <p class="text-xs lg:text-lg font-medium text-gray-900 dark:text-white">Sponsored by</p>
+        <p class="ml-1 text-xs lg:text-lg text-gray-500 dark:text-zinc-400">
+            <span class="truncate">{{ $bill->sponsored_by }}</span>
+        </p>
+    @else
+        <p class="text-xs lg:text-lg font-medium text-gray-900 dark:text-white">Contributor</p>
+        <p class="ml-1 text-xs lg:text-lg text-gray-500 dark:text-zinc-400">
+            <span class="truncate">Unknown</span>
+        </p>
+    @endif
+</div>
                     </div>
                     
                     <!-- Content Section -->
