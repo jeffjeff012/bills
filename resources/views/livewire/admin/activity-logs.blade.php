@@ -33,41 +33,97 @@
                                 <td class="px-4 py-2 text-sm text-gray-600 dark:text-gray-300">
                                     {{ $log->causer?->name ?? 'System' }}
                                 </td>
-                                <td class="px-4 py-2 text-sm text-gray-600 dark:text-gray-300">
+                                <td class="px-4 py-2 text-gray-600 dark:text-gray-300">
                                     @if ($log->subject_type === App\Models\Like::class && $log->description === 'created')
                                         @if ($log->subject && $log->subject->like)
-                                            Liked the post
+                                            <span
+                                                class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                                                Liked the post
+                                            </span>
                                         @else
-                                            Disliked the post
+                                            <span
+                                                class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
+                                                Disliked the post
+                                            </span>
                                         @endif
                                     @elseif($log->subject_type === App\Models\Comment::class && $log->description === 'created')
-                                        Added a Comment
+                                        <span
+                                            class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                                            Added a Comment
+                                        </span>
                                     @elseif($log->description === 'updated' && isset($log->properties['attributes'], $log->properties['old']))
                                         @php
                                             $changed = [];
                                             foreach ($log->properties['attributes'] as $field => $newValue) {
                                                 $oldValue = $log->properties['old'][$field] ?? null;
 
-                                                // Special case: like/dislike toggle
                                                 if ($field === 'like' && $oldValue !== $newValue) {
-                                                    $changed[] = $newValue ? 'Liked the post' : 'Disliked the post';
+                                                    $changed[] = $newValue
+                                                        ? [
+                                                            'text' => 'Liked the post',
+                                                            'class' =>
+                                                                'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+                                                        ]
+                                                        : [
+                                                            'text' => 'Disliked the post',
+                                                            'class' =>
+                                                                'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
+                                                        ];
+                                                } elseif ($field === 'is_hidden' && $oldValue !== $newValue) {
+                                                    $changed[] = $newValue
+                                                        ? [
+                                                            'text' => 'Hide a comment',
+                                                            'class' =>
+                                                                'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
+                                                        ]
+                                                        : [
+                                                            'text' => 'Unhide a comment',
+                                                            'class' =>
+                                                                'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
+                                                        ];
                                                 } elseif ($oldValue !== $newValue) {
-                                                    $changed[] = 'Updated the ' . str_replace('_', ' ', $field);
+                                                    $changed[] = [
+                                                        'text' => 'Updated the ' . str_replace('_', ' ', $field),
+                                                        'class' =>
+                                                            'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200',
+                                                    ];
                                                 }
                                             }
                                         @endphp
 
                                         @if (count($changed))
                                             @foreach ($changed as $change)
-                                                {{ $change }}@if (!$loop->last)
-                                                    ,
-                                                @endif
+                                                <span
+                                                    class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium {{ $change['class'] }}">
+                                                    {{ $change['text'] }}
+                                                </span>
                                             @endforeach
                                         @else
-                                            Updated
+                                            <span
+                                                class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-700 dark:text-gray-200">
+                                                Updated
+                                            </span>
                                         @endif
                                     @else
-                                        {{ ucfirst($log->description) }}
+                                        @if ($log->description === 'created')
+                                            <span
+                                                class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium 
+                                                bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                                                Created
+                                            </span>
+                                        @elseif ($log->description === 'deleted')
+                                            <span
+                                                class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium 
+                                                    bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
+                                                Deleted
+                                            </span>
+                                        @else
+                                            <span
+                                                class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium 
+                                                    bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200">
+                                                {{ ucfirst($log->description) }}
+                                            </span>
+                                        @endif
                                     @endif
                                 </td>
                                 <td class="px-4 py-2 text-sm text-gray-600 dark:text-gray-300">
