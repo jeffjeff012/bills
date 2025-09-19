@@ -29,7 +29,24 @@
                         {{ $bill->title }}
                     </h2>
                     <p class="text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-zinc-800 px-3 py-1 rounded-lg">
-                        Authored by <span class="font-medium text-gray-800 dark:text-gray-200">{{ $bill->authored_by }}</span>
+                        <div class="flex ">
+                            @if($bill->contributorType === 'author')
+                                <p class="text-xs lg:text-lg font-medium text-gray-900 dark:text-white">Authored by</p>
+                                <p class="ml-1 text-xs lg:text-lg text-gray-500 dark:text-zinc-400">
+                                    <span class="truncate">{{ $bill->authored_by }}</span>
+                                </p>
+                            @elseif($bill->contributorType === 'sponsor')
+                                <p class="text-xs lg:text-lg font-medium text-gray-900 dark:text-white">Sponsored by</p>
+                                <p class="ml-1 text-xs lg:text-lg text-gray-500 dark:text-zinc-400">
+                                    <span class="truncate">{{ $bill->sponsored_by }}</span>
+                                </p>
+                            @else
+                                <p class="text-xs lg:text-lg font-medium text-gray-900 dark:text-white">Contributor</p>
+                                <p class="ml-1 text-xs lg:text-lg text-gray-500 dark:text-zinc-400">
+                                    <span class="truncate">Unknown</span>
+                                </p>
+                            @endif
+                        </div>                    
                     </p>
                 </div>
 
@@ -59,7 +76,7 @@
                 @endif
 
 
-                <p class="text-gray-700 dark:text-gray-800 leading-relaxed">
+                <p class=" mt-5 text-gray-700 dark:text-gray-800 leading-relaxed">
                     {{ $bill->content ?? 'This legislation aims to reform healthcare accessibility and reduce costs through innovative policy measures.' }}
                 </p>
             </div>

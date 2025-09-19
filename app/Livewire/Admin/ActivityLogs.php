@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Admin;
 
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -21,7 +21,7 @@ class ActivityLogs extends Component
             ->latest()
             ->paginate($this->perPage);
 
-        return view('livewire.activity-logs', [
+        return view('livewire.admin.activity-logs', [
             'logs' => $logs,
         ]);
     }

@@ -2,7 +2,7 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Header -->
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Create New Bill</h1>
+            <h1 class="text-lg lg:text-3xl font-bold text-gray-900 dark:text-white">Create New Bill</h1>
             <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Fill in the details below to create a new bill.</p>
         </div>
 
@@ -12,7 +12,7 @@
 
                 <!-- Basic Information Section -->
                 <div class="p-6 sm:p-8">
-                    <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
+                    <h2 class="text-sm lg:text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
                         <svg class="w-5 h-5 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
                             <path fill-rule="evenodd"
@@ -22,7 +22,7 @@
                         Basic Information
                     </h2>
 
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="text-xs lg:text-lg grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <div class="lg:col-span-2">
                             <flux:input label="Title" wire:model="title" placeholder="Enter bill title"
                                 class="text-lg font-medium" />
@@ -41,7 +41,7 @@
 
                 <!-- Contributor Information Section -->
                 <div class="p-6 sm:p-8 bg-gray-50 dark:bg-gray-800/50">
-                    <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
+                    <h2 class="text-sm lg:text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
                         <svg class="w-5 h-5 mr-2 text-green-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
                                 clip-rule="evenodd" />
@@ -124,7 +124,7 @@
 
                 <!-- File Upload Section -->
                 <div class="p-6 sm:p-8">
-                    <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
+                    <h2 class="text-sm lg:text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
                         <svg class="w-5 h-5 mr-2 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd"
                                 d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z"

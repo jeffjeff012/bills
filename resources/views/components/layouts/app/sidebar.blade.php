@@ -33,8 +33,8 @@
                         {{ __('Report of Bills') }}
                     </flux:navlist.item>
                     <flux:navlist.item icon="clipboard-document-list" 
-                                    :href="route('activity.logs')" 
-                                    :current="request()->routeIs('activity.logs')" 
+                                    :href="route('admin.activity.logs')" 
+                                    :current="request()->routeIs('admin.activity.logs')" 
                                     wire:navigate>
                         {{ __('Activity Logs') }}
                     </flux:navlist.item>                   

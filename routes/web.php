@@ -3,11 +3,11 @@
 use App\Livewire\Bills;
 use App\Livewire\EditBill;
 use App\Livewire\CreateBill;
-use App\Livewire\ActivityLogs;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Appearance;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Admin\ActivityLogs;
 use App\Livewire\Admin\UserManagement;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BlogController;
@@ -61,9 +61,9 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         // User management
         Route::get('/user-management', UserManagement::class)->name('user-management');
+        // Activity Logs
+        Route::get('/activity-logs', ActivityLogs::class)->name('activity.logs');
     });
-    // Activity Logs
-    Route::get('/activity-logs', ActivityLogs::class)->name('activity.logs');
 });
 
 //hybrid means middleware for admin and sbstaff
