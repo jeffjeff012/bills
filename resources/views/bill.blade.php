@@ -4,7 +4,7 @@
 
         @php
             $user = auth()->user();
-            $backUrl = match ($user->role) {
+            $backUrl = match($user->role) {
                 \App\Enums\UserRole::Admin, \App\Enums\UserRole::SbStaff => '/bills',
                 default => '/dashboard',
             };
