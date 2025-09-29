@@ -30,7 +30,7 @@
                 </a>
 
             {{-- images in split login --}}
-            <div class="flex p-4 ">
+            <div class="flex ">
                 <div class="group mt-10 mr-4 relative z-10 block max-w-sm p-6 border border-gray-200 rounded-lg shadow-sm backdrop-blur-md bg-white/30 dark:bg-white/10 transition-transform duration-300 ease-in-out hover:scale-105 hover:ring-2 hover:ring-blue-400/50">
                     <svg class="shake-on-group-hover mb-20 w-20 h-20 text-gray-800 dark:text-white"
                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
