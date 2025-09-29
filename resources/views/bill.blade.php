@@ -123,26 +123,36 @@
                     <!-- Meta Information -->
                     <div class="grid md:grid-cols-2 gap-6">
                         <div class="flex items-center space-x-3">
-                            <div
-                                class="w-10 h-10 bg-gray-100 dark:bg-zinc-700 rounded-full flex items-center justify-center">
-                                <svg class="w-5 h-5 text-gray-600 dark:text-zinc-400" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-900 dark:text-white">Published</p>
-                                <p class="text-sm text-gray-500 dark:text-zinc-400">
-                                    {{ $bill->created_at->diffForHumans() }}
-                                </p>
-                            </div>
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-gray-100 dark:bg-zinc-700 rounded-full flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-gray-600 dark:text-zinc-400" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900 dark:text-white">Published</p>
+                                        <p class="text-sm text-gray-500 dark:text-zinc-400">
+                                            {{ $bill->created_at->diffForHumans() }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-gray-100 dark:bg-zinc-700 rounded-full flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" />
+                                        </svg>
 
-                            <div>
-                                <p class="text-sm font-medium text-gray-900 dark:text-white">Committee</p>
-                                <p class="text-sm text-gray-500 dark:text-zinc-400">
-                                    {{ $bill->committee->name ?? 'No committee assigned' }}
-                                </p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900 dark:text-white">Committee</p>
+                                        <p class="text-sm text-gray-500 dark:text-zinc-400">
+                                            {{ $bill->committee->name ?? 'No committee assigned' }}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
