@@ -5,9 +5,9 @@ use App\Livewire\EditBill;
 use App\Livewire\CreateBill;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\Password;
-use App\Livewire\Settings\Appearance;
-use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\ActivityLogs;
+use App\Livewire\Committees\ManageCommittee;
+use App\Livewire\Settings\Appearance;
 use App\Livewire\Admin\UserManagement;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BlogController;
@@ -17,6 +17,7 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\Route;
 
 // Root URL shows welcome page
 Route::get('/', function () {
@@ -38,13 +39,6 @@ Route::middleware(['auth', 'verified', 'user'])
             ->name('inactive-blog');
     });
 
-// Route::middleware(['auth', 'admin'])->group(function () {
-//     // //Notes Route
-//     // Route::get('notes', Bills::class)->name('notes');
-//     Route::get('settings/password', Password::class)->name('settings.password');
-//     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
-// });
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/bill/{bill}', [BlogController::class, 'show'])->name('bill');
 
@@ -55,7 +49,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
-    
     Route::prefix('admin')->name('admin.')->group(function () {
         // Admin dashboard
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
@@ -75,7 +68,10 @@ Route::middleware(['auth', 'verified', 'hybrid'])->group(function () {
         Route::get('/bills/create', CreateBill::class)->name('create');
         Route::get('/bills/{bill}/edit', EditBill::class)->name('edit');
     });
+    Route::get('/committees/manage', ManageCommittee::class)
+        ->name('committees.manage');
 });
+
 
 // Public view and routes, no need middleware
 Route::controller(BillController::class)
@@ -95,4 +91,10 @@ Route::view('/facebook-legend/data-deletion', 'facebook-legend.data-deletion')->
 Route::get("auth/google", [GoogleController:: class, "redirectToGoogle"])->name("redirect.google");
 Route::get("auth/google/callback", [GoogleController:: class, "handleGoogleCallback"]);
 
+// Route::middleware(['auth', 'admin'])->group(function () {
+//     // //Notes Route
+//     // Route::get('notes', Bills::class)->name('notes');
+//     Route::get('settings/password', Password::class)->name('settings.password');
+//     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
+// });
 require __DIR__ . '/auth.php';

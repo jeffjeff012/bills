@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    <div class="overflow-x-auto mt-4 rounded-md shadow-sm"> {{-- slightly rounded --}}
+    <div class="overflow-x-auto mt-4 rounded-md shadow-sm">
         <table class="min-w-full text-sm text-left text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 rounded-md"> {{-- slightly rounded --}}
             <thead class="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-semibold text-xs uppercase tracking-wider border-b border-gray-200 dark:border-gray-600"> {{-- bold --}}
                 <tr>

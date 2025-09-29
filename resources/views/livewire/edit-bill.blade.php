@@ -36,6 +36,25 @@
                         <div>
                             <flux:input label="Due Date" type="date" wire:model="due_date" class="w-full" />
                         </div>
+
+                        <div class="lg:col-span-2">
+                            <label for="committee_id"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                Committee
+                            </label>
+                            <select id="committee_id" wire:model="committee_id"
+                                class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600
+                                        dark:bg-gray-700 dark:text-white shadow-sm focus:border-blue-500
+                                        focus:ring-blue-500 sm:text-sm px-3 py-3">
+                                <option value="">-- Select Committee --</option>
+                                @foreach ($committees as $committee)
+                                    <option value="{{ $committee->id }}">{{ $committee->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('committee_id')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
                 </div>
 
@@ -134,26 +153,33 @@
                     </h2>
 
                     <!-- Current Attachment Display -->
-                    @if($currentAttachment)
-                        <div class="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                    @if ($currentAttachment)
+                        <div
+                            class="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-3">
                                     <div class="p-2 bg-blue-100 dark:bg-blue-900/50 rounded-lg">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-blue-600 dark:text-blue-400">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0-1.125.504-1.125 1.125V11.25a9 9 0 0 0-9-9Z" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor"
+                                            class="w-5 h-5 text-blue-600 dark:text-blue-400">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0-1.125.504-1.125 1.125V11.25a9 9 0 0 0-9-9Z" />
                                         </svg>
                                     </div>
                                     <div>
                                         <p class="font-medium text-blue-900 dark:text-blue-100">Current Document</p>
-                                        <p class="text-sm text-blue-700 dark:text-blue-300">PDF file attached to this bill</p>
+                                        <p class="text-sm text-blue-700 dark:text-blue-300">PDF file attached to this
+                                            bill</p>
                                     </div>
                                 </div>
-                                <a href="{{ Storage::url($currentAttachment) }}" 
-                                target="_blank" 
-                                class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors duration-200">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                <a href="{{ Storage::url($currentAttachment) }}" target="_blank"
+                                    class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors duration-200">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                     </svg>
                                     View PDF
                                 </a>
@@ -165,7 +191,8 @@
                         <flux:input type="file" label="Upload PDF Attachment" wire:model="attachment"
                             accept="application/pdf"
                             class="file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
-                        <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">PDF files only, max 10MB. Upload a new file to replace the current one.</p>
+                        <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">PDF files only, max 10MB. Upload a new
+                            file to replace the current one.</p>
                     </div>
                 </div>
 

@@ -12,7 +12,7 @@
     @endif
 
     {{-- Success flash message --}}
-    {{-- @if (session('success'))
+    @if (session('success'))
         <div
             x-data="{ show: true }"
             x-show="show"
@@ -28,8 +28,8 @@
         >
             <p class="font-semibold">{{ session('success') }}</p>
         </div>
-    @endif --}}
-    <x-toast on="toast" />
+    @endif
+    {{-- <x-toast on="toast" /> --}}
     <div>
         @forelse($comments as $comment)
             <div class="p-2 border-b text-xs sm:text-lg  {{ $comment->is_hidden ? 'opacity-60' : '' }}">
@@ -152,6 +152,30 @@
         @endforelse
     </div>
 
+    {{-- Delete --}}
+    <flux:modal name="delete-bill" class="min-w-[22rem]" wire:model="showDeleteModal">
+        <div class="space-y-6">
+            <div>
+                <flux:heading size="lg">Delete bill?</flux:heading>
+
+                <flux:text class="mt-2">
+                    <p>You're about to delete this project.</p>
+                    <p>This action cannot be reversed.</p>
+                </flux:text>
+            </div>
+
+            <div class="flex gap-2">
+                <flux:spacer />
+
+                <flux:modal.close>
+                    <flux:button variant="ghost">Cancel</flux:button>
+                </flux:modal.close>
+
+                <flux:button type="button" variant="danger" wire:click="deleteBill()">Delete bill</flux:button>
+            </div>
+        </div>
+    </flux:modal>
+    
     {{-- Pagination --}}
     <div class="mt-4">
         {{ $comments->links() }}

@@ -1,5 +1,5 @@
 <div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="w-full mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Header -->
         <div class="mb-8">
             <h1 class="text-lg lg:text-3xl font-bold text-gray-900 dark:text-white">Create New Bill</h1>
@@ -32,9 +32,27 @@
                             <flux:textarea label="Content" wire:model="content"
                                 placeholder="Enter bill content and details" rows="8" class="resize-none" />
                         </div>
-
                         <div>
                             <flux:input label="Due Date" type="date" wire:model="due_date" class="w-full" />
+                        </div>
+
+                        <div class="lg:col-span-2">
+                            <label for="committee_id"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                Committee
+                            </label>
+                            <select id="committee_id" wire:model="committee_id"
+                                class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 
+                                        dark:bg-gray-700 dark:text-white shadow-sm focus:border-blue-500 
+                                        focus:ring-blue-500 sm:text-sm px-3 py-3">
+                                <option value="">-- Select Committee --</option>
+                                @foreach ($committees as $committee)
+                                    <option value="{{ $committee->id }}">{{ $committee->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('committee_id')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                 </div>

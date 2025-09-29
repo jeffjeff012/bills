@@ -32,6 +32,14 @@
                                     wire:navigate>
                         {{ __('Report of Bills') }}
                     </flux:navlist.item>
+                    <flux:navlist.item 
+                        icon="building-library" 
+                        :href="route('committees.manage')" 
+                        :current="request()->routeIs('committees.manage')" 
+                        wire:navigate
+                    >
+                        {{ __('Committees') }}
+                    </flux:navlist.item>
                     <flux:navlist.item icon="clipboard-document-list" 
                                     :href="route('admin.activity.logs')" 
                                     :current="request()->routeIs('admin.activity.logs')" 
@@ -48,7 +56,16 @@
                                     :current="request()->routeIs('bills.index')" 
                                     wire:navigate>
                         {{ __('Bills') }}
-                    </flux:navlist.item>                 
+                    </flux:navlist.item>
+                    <flux:navlist.item 
+                        icon="building-library" 
+                        :href="route('committees.manage')" 
+                        :current="request()->routeIs('committees.manage')" 
+                        wire:navigate
+                    >
+                        {{ __('Committees') }}
+                    </flux:navlist.item>
+
                 @endif
 
                 @if (auth()->user()->role === App\Enums\UserRole::User)

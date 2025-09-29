@@ -2,10 +2,11 @@
 
 namespace App\Livewire;
 
+use Carbon\Carbon;
 use App\Models\Bill;
 use Livewire\Component;
+use App\Models\Committee;
 use Livewire\WithFileUploads;
-use Carbon\Carbon;
 
 class EditBill extends Component
 {
@@ -20,6 +21,9 @@ class EditBill extends Component
     public $sponsored_by = '';
     public $attachment;
     public $currentAttachment;
+    public $committee_id;
+    public $committees = [];
+    
 
     public function mount(Bill $bill)
     {
@@ -31,6 +35,8 @@ class EditBill extends Component
         $this->authored_by = $bill->authored_by ?? '';
         $this->sponsored_by = $bill->sponsored_by ?? '';
         $this->currentAttachment = $bill->attachment;
+        $this->committees = Committee::orderBy('name')->get();
+        $this->committee_id = $bill->committee_id;
     }
 
     protected function rules()
@@ -43,6 +49,7 @@ class EditBill extends Component
             'authored_by' => 'required_if:contributorType,author',
             'sponsored_by' => 'required_if:contributorType,sponsor',
             'attachment' => 'nullable|file|mimes:pdf|max:5120',
+            'committee_id' => 'required|exists:committees,id',
         ];
     }
 
@@ -62,6 +69,7 @@ class EditBill extends Component
             'authored_by' => $this->contributorType === 'author' ? $this->authored_by : null,
             'sponsored_by' => $this->contributorType === 'sponsor' ? $this->sponsored_by : null,
             'attachment' => $path,
+            'committee_id' => $this->committee_id,
         ]);
 
         session()->flash('success', 'Bill updated successfully');

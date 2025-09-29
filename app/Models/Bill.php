@@ -24,6 +24,7 @@ class Bill extends Model
         'attachment',
         'contributorType',
         'sponsored_by',
+        'committee_id',
     ];
 
     protected static $logAttributes = [
@@ -33,6 +34,7 @@ class Bill extends Model
         'due_date',
         'authored_by',
         'attachment',
+        'committee_id',
     ];
 
     public function getActivitylogOptions(): LogOptions
@@ -47,8 +49,9 @@ class Bill extends Model
                 'authored_by',
                 'sponsored_by',
                 'attachment',
+                'committee_id',
             ])
-            ->dontLogIfAttributesChangedOnly(['likes', 'dislikes']); // ✅ chained here
+            ->dontLogIfAttributesChangedOnly(['likes', 'dislikes']);
     }
 
     protected $casts = [
@@ -78,6 +81,12 @@ class Bill extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function committee()
+    {
+        return $this->belongsTo(\App\Models\Committee::class);
+    }
+
 
    // Likes relationship
     public function likes()

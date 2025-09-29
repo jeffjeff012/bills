@@ -48,6 +48,11 @@
                             @endif
                         </div>                    
                     </p>
+                    <div>
+                        <p class="text-sm text-gray-500 dark:text-zinc-400">
+                            <span class="font-bold"> Committee</span> {{ $bill->committee->name ?? 'No committee assigned' }}
+                        </p>
+                    </div>
                 </div>
 
                 @if ($bill->attachment)

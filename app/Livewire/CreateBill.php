@@ -7,7 +7,7 @@ use App\Models\Bill;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
-
+use App\Models\Committee;
 
 class CreateBill extends Component
 {
@@ -20,7 +20,15 @@ class CreateBill extends Component
     public $authored_by = '';
     public $sponsored_by = '';
     public $attachment;
+    public $committee_id;  
+    public $committees = [];
     
+    
+    public function mount()
+    {
+        $this->committees = Committee::orderBy('name')->get();
+    }
+
     protected function rules()
     {
 
@@ -33,12 +41,14 @@ class CreateBill extends Component
             'authored_by' => 'required_if:contributorType,author',
             'sponsored_by' => 'required_if:contributorType,sponsor',
             'attachment'  => 'nullable|file|mimes:pdf|max:5120', // 5MB max
+            'committee_id' => 'required|exists:committees,id',
         ];
     }
 
 
     public function save()
     {
+       
         $this->validate();
 
         $path = $this->attachment
@@ -54,6 +64,7 @@ class CreateBill extends Component
             'authored_by' => $this->contributorType === 'author' ? $this->authored_by : null,
             'sponsored_by' => $this->contributorType === 'sponsor' ? $this->sponsored_by : null,
             'attachment'  => $path,
+            'committee_id' => $this->committee_id,
         ]);
 
         session()->flash('success', 'Bill created successfully');
