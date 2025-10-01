@@ -32,7 +32,7 @@
     <table class="w-full border-collapse">
         <thead>
             <tr class="text-gray-100 dark:text-gray-50 bg-neutral-700 dark:bg-slate-900">
-                <th class="px-4 py-2 text-left">ID</th>
+                <th class="px-4 py-2 text-left">#</th>
                 <th class="px-4 py-2 text-left">Name</th>
                 <th class="px-4 py-2 text-center">Actions</th>
             </tr>
@@ -40,7 +40,7 @@
         <tbody>
             @forelse ($committees as $committee)
                 <tr class="border-t bg-neutral-700 dark:bg-slate-700">
-                    <td class="px-4 py-2">{{ $committee->id }}</td>
+                    <td class="px-4 py-2">{{ $loop->iteration }}</td>
                     <td class="px-4 py-2">{{ $committee->name }}</td>
                     <td class="px-4 py-2 text-center">
                         <flux:button icon="pencil-square" wire:click="editCommittee({{ $committee->id }})"

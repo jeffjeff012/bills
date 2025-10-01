@@ -152,11 +152,12 @@
                         Attachments
                     </h2>
 
-                    <!-- Current Attachment Display -->
                     @if ($currentAttachment)
                         <div
                             class="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                            <div class="flex items-center justify-between">
+                            <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+
+                                {{-- Left: Icon + Info --}}
                                 <div class="flex items-center gap-3">
                                     <div class="p-2 bg-blue-100 dark:bg-blue-900/50 rounded-lg">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -172,20 +173,35 @@
                                             bill</p>
                                     </div>
                                 </div>
-                                <a href="{{ Storage::url($currentAttachment) }}" target="_blank"
-                                    class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors duration-200">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                    </svg>
-                                    View PDF
-                                </a>
+
+                                {{-- Right: Actions (buttons grouped together) --}}
+                                <div class="flex items-center gap-2">
+                                    <a href="{{ Storage::url($currentAttachment) }}" target="_blank"
+                                        class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors duration-200">
+                                        <svg class="size-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                        </svg>
+                                        <span class="hidden lg:block">View PDF</span>
+                                    </a>
+
+                                    <button type="button" wire:click="confirmRemoveAttachment"
+                                        class="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors duration-200">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="size-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                        </svg>
+                                        <span class="hidden lg:block">Remove</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     @endif
+
 
                     <div class="max-w-md">
                         <flux:input type="file" label="Upload PDF Attachment" wire:model="attachment"
@@ -215,13 +231,43 @@
                                     d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                     clip-rule="evenodd" />
                             </svg>
-                            <span>Update Bill</span>
+                            <span>Update</span>
                         </div>
                     </flux:button>
                 </div>
             </form>
         </div>
     </div>
+
+    <x-confirm-modal :show="$showRemoveAttachmentModal" title="Confirm Removal"
+        message="Removing this attachment is irreversible. Do you want to proceed?"
+        cancelAction="$set('showRemoveAttachmentModal', false)" confirmAction="removeCurrentAttachment" />
+    {{-- @if ($showRemoveAttachmentModal)
+        <div class="fixed inset-0 flex items-center justify-center z-50 bg-black/50">
+            <div
+                class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-3 lg:p-6
+                    w-[80%] w-[10rem] lg:w-[20rem] max-w-[95%]">
+                <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                    Confirm Removal
+                </h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-6">
+                    Removing this attachment is irreversible. Do you want to proceed?
+                </p>
+                <div class="flex justify-end gap-3">
+                    <button wire:click="$set('showRemoveAttachmentModal', false)"
+                        class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600">
+                        Cancel
+                    </button>
+                    <button wire:click="removeCurrentAttachment"
+                        class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                        Remove
+                    </button>
+                </div>
+            </div>
+        </div>
+    @endif --}}
+
+
 </div>
 
 {{-- <style>
