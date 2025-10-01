@@ -100,9 +100,23 @@ class EditBill extends Component
 
     public function removeCurrentAttachment()
     {
-        $this->removeAttachment = true;
-        $this->currentAttachment = null; 
-        $this->showRemoveAttachmentModal = false;
+        // $this->removeAttachment = true;
+        // $this->currentAttachment = null;
+        
+        if ($this->currentAttachment) {
+            // Delete the file from storage
+            Storage::delete($this->currentAttachment);
+
+            // Update the database
+            $this->bill->update([
+                'attachment' => null,
+            ]);
+
+            // Clear local state
+            $this->currentAttachment = null;
+
+            $this->showRemoveAttachmentModal = false;
+        }
     }
 
     public function render()

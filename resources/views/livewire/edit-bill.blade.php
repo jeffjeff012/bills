@@ -239,9 +239,13 @@
         </div>
     </div>
 
-    <x-confirm-modal :show="$showRemoveAttachmentModal" title="Confirm Removal"
+    <x-confirm-modal 
+        :show="$showRemoveAttachmentModal" 
+        title="Confirm Removal"
         message="Removing this attachment is irreversible. Do you want to proceed?"
-        cancelAction="$set('showRemoveAttachmentModal', false)" confirmAction="removeCurrentAttachment" />
+        cancelAction="$set('showRemoveAttachmentModal', false)" 
+        confirmAction="removeCurrentAttachment" 
+    />
     {{-- @if ($showRemoveAttachmentModal)
         <div class="fixed inset-0 flex items-center justify-center z-50 bg-black/50">
             <div
@@ -269,14 +273,3 @@
 
 
 </div>
-
-{{-- <style>
-@keyframes fade-in {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-fade-in {
-    animation: fade-in 0.3s ease-out forwards;
-}
-</style> --}}
