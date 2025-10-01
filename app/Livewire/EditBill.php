@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use App\Models\Bill;
 use Livewire\Component;
@@ -23,7 +24,8 @@ class EditBill extends Component
     public $currentAttachment;
     public $committee_id;
     public $committees = [];
-    
+    public $removeAttachment = false;
+    public $showRemoveAttachmentModal = false;
 
     public function mount(Bill $bill)
     {
@@ -49,7 +51,7 @@ class EditBill extends Component
             'authored_by' => 'required_if:contributorType,author',
             'sponsored_by' => 'required_if:contributorType,sponsor',
             'attachment' => 'nullable|file|mimes:pdf|max:5120',
-            'committee_id' => 'required|exists:committees,id',
+            'committee_id' => 'nullable|exists:committees,id',
         ];
     }
 
@@ -57,14 +59,28 @@ class EditBill extends Component
     {
         $this->validate();
 
-        $path = $this->attachment
-            ? $this->attachment->store('attachments', 'public')
-            : $this->currentAttachment;
+        // Default to current attachment
+        $path = $this->currentAttachment;
+
+        // If user uploaded a new one → replace
+        if ($this->attachment) {
+            $path = $this->attachment->store('attachments', 'public');
+        }
+
+        // If user requested to remove → null out
+        if ($this->removeAttachment) {
+            $path = null;
+
+            // (Optional) Delete the old file from storage
+            if ($this->currentAttachment && \Storage::disk('public')->exists($this->currentAttachment)) {
+                \Storage::disk('public')->delete($this->currentAttachment);
+            }
+        }
 
         $this->bill->update([
             'title' => $this->title,
             'content' => $this->content,
-            'due_date' => Carbon::parse($this->due_date)->endOfDay(),
+            'due_date' => \Carbon\Carbon::parse($this->due_date)->endOfDay(),
             'contributorType' => $this->contributorType,
             'authored_by' => $this->contributorType === 'author' ? $this->authored_by : null,
             'sponsored_by' => $this->contributorType === 'sponsor' ? $this->sponsored_by : null,
@@ -75,6 +91,18 @@ class EditBill extends Component
         session()->flash('success', 'Bill updated successfully');
 
         return $this->redirectRoute('report-of-bills', navigate: true);
+    }
+
+    public function confirmRemoveAttachment()
+    {
+        $this->showRemoveAttachmentModal = true;
+    }
+
+    public function removeCurrentAttachment()
+    {
+        $this->removeAttachment = true;
+        $this->currentAttachment = null; 
+        $this->showRemoveAttachmentModal = false;
     }
 
     public function render()
