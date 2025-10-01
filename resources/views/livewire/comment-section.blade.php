@@ -151,7 +151,7 @@
     </div>
 
     {{-- Delete --}}
-    <flux:modal name="delete-bill" class="min-w-[22rem]" wire:model="showDeleteModal">
+    <flux:modal name="delete-bill" class="min-w-[10rem] lg:min-w-[22rem]" wire:model="showDeleteModal">
         <div class="space-y-6">
             <div>
                 <flux:heading size="lg">Delete bill?</flux:heading>
