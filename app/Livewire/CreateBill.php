@@ -41,7 +41,7 @@ class CreateBill extends Component
             'authored_by' => 'required_if:contributorType,author',
             'sponsored_by' => 'required_if:contributorType,sponsor',
             'attachment'  => 'nullable|file|mimes:pdf|max:5120', // 5MB max
-            'committee_id' => 'required|exists:committees,id',
+            'committee_id' => 'nullable|exists:committees,id',
         ];
     }
 
