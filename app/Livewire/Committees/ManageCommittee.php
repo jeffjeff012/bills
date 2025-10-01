@@ -47,7 +47,7 @@ class ManageCommittee extends Component
         ]);
 
         $this->editingCommittee->update([
-            'name' => $this->name,
+            'name' => $this->editName,
         ]);
 
         $this->reset('editName', 'editingCommittee');
