@@ -35,30 +35,12 @@
                         <div>
                             <flux:input label="Due Date" type="date" wire:model="due_date" class="w-full" />
                         </div>
-
-                        {{-- <div class="lg:col-span-2">
-                            <label for="committee_id"
-                                class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                                Committee
-                            </label>
-                            <select id="committee_id" wire:model="committee_id"
-                                class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 
-                                        dark:bg-gray-700 dark:text-white shadow-sm focus:border-blue-500 
-                                        focus:ring-blue-500 sm:text-sm px-3 py-3">
-                                <option value="">-- Select Committee --</option>
-                                @foreach ($committees as $committee)
-                                    <option value="{{ $committee->id }}">{{ $committee->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('committee_id')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div> --}}
                     </div>
-
+                </div>
+                    
                     <!-- Contributor Information Section -->
-                    <div class="p-4 sm:p-8 bg-gray-50 dark:bg-gray-800/50">
+                <div class="p-6 sm:p-8">
+                    <div class="p-4 lg:p-2 bg-gray-50 dark:bg-gray-800/50">
                         <h2
                             class="text-sm lg:text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
                             <svg class="w-5 h-5 mr-2 text-green-600" fill="currentColor" viewBox="0 0 20 20">
@@ -72,8 +54,11 @@
                             <!-- Radio Button Selection with Cards -->
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div class="relative">
-                                    <input type="radio" wire:model.live="contributorType" value="author"
-                                        id="author-radio" class="sr-only">
+                                    <input type="radio" 
+                                           wire:model.live="contributorType" 
+                                           value="author"
+                                           id="author-radio" 
+                                           class="sr-only">
                                     <label for="author-radio" class="cursor-pointer block">
                                         <div
                                             class="p-4 border-2 rounded-lg transition-all duration-200
@@ -98,8 +83,11 @@
                                 </div>
 
                                 <div class="relative">
-                                    <input type="radio" wire:model.live="contributorType" value="sponsor"
-                                        id="sponsor-radio" class="sr-only">
+                                    <input type="radio" 
+                                           wire:model.live="contributorType" 
+                                           value="sponsor"
+                                           id="sponsor-radio" 
+                                           class="sr-only">
                                     <label for="sponsor-radio" class="cursor-pointer block">
                                         <div
                                             class="p-4 border-2 rounded-lg transition-all duration-200
