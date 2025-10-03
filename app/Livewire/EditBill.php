@@ -34,12 +34,20 @@ class EditBill extends Component
         $this->content = $bill->content;
         $this->due_date = $bill->due_date ? $bill->due_date->format('Y-m-d') : '';
         $this->contributorType = $bill->contributorType ?? '';
-        $this->authored_by = $bill->authored_by ?? '';
-        $this->sponsored_by = $bill->sponsored_by ?? '';
-        $this->currentAttachment = $bill->attachment;
+
+        // If Author, prefill author field
+        $this->authored_by = $bill->contributorType === 'author' ? $bill->authored_by : '';
+
+        // Committees dropdown
         $this->committees = Committee::orderBy('name')->get();
-        $this->committee_id = $bill->committee_id;
+
+        // If Sponsor, preselect committee
+        $this->committee_id = $bill->contributorType === 'sponsor' ? $bill->committee_id : null;
+
+        // Attachment
+        $this->currentAttachment = $bill->attachment;
     }
+
 
     protected function rules()
     {
@@ -49,12 +57,13 @@ class EditBill extends Component
             'due_date' => 'required|date',
             'contributorType' => 'required|in:author,sponsor',
             'authored_by' => 'required_if:contributorType,author',
-            'sponsored_by' => 'required_if:contributorType,sponsor',
+            'committee_id'   => 'required_if:contributorType,sponsor|exists:committees,id',
             'attachment' => 'nullable|file|mimes:pdf|max:5120',
-            'committee_id' => 'nullable|exists:committees,id',
         ];
     }
 
+    // 'committee_id' => 'nullable|exists:committees,id',
+    // 'sponsored_by' => 'required_if:contributorType,sponsor',
     public function update()
     {
         $this->validate();
@@ -78,14 +87,14 @@ class EditBill extends Component
         }
 
         $this->bill->update([
-            'title' => $this->title,
-            'content' => $this->content,
-            'due_date' => \Carbon\Carbon::parse($this->due_date)->endOfDay(),
+            'title'          => $this->title,
+            'content'        => $this->content,
+            'due_date'       => \Carbon\Carbon::parse($this->due_date)->endOfDay(),
             'contributorType' => $this->contributorType,
-            'authored_by' => $this->contributorType === 'author' ? $this->authored_by : null,
-            'sponsored_by' => $this->contributorType === 'sponsor' ? $this->sponsored_by : null,
-            'attachment' => $path,
-            'committee_id' => $this->committee_id,
+            'authored_by'    => $this->contributorType === 'author' ? $this->authored_by : null,
+            'sponsored_by'   => $this->contributorType === 'sponsor' ? $this->sponsored_by : null,
+            'committee_id'   => $this->contributorType === 'sponsor' ? $this->committee_id : null,
+            'attachment'     => $path,
         ]);
 
         session()->flash('success', 'Bill updated successfully');
@@ -93,6 +102,8 @@ class EditBill extends Component
         return $this->redirectRoute('report-of-bills', navigate: true);
     }
 
+    // 'committee_id' => $this->committee_id,
+    // 'sponsored_by' => $this->contributorType === 'sponsor' ? $this->sponsored_by : null,
     public function confirmRemoveAttachment()
     {
         $this->showRemoveAttachmentModal = true;
@@ -102,7 +113,7 @@ class EditBill extends Component
     {
         // $this->removeAttachment = true;
         // $this->currentAttachment = null;
-        
+
         if ($this->currentAttachment) {
             // Delete the file from storage
             Storage::delete($this->currentAttachment);

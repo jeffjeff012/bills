@@ -37,7 +37,7 @@
                             <flux:input label="Due Date" type="date" wire:model="due_date" class="w-full" />
                         </div>
 
-                        <div class="lg:col-span-2">
+                        {{-- <div class="lg:col-span-2">
                             <label for="committee_id"
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                                 Committee
@@ -54,7 +54,7 @@
                             @error('committee_id')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
@@ -132,9 +132,23 @@
                             @endif
 
                             @if ($contributorType === 'sponsor')
-                                <div class="animate-fade-in">
-                                    <flux:input label="Sponsor Name" wire:model="sponsored_by"
-                                        placeholder="Enter the sponsor's name or company" class="max-w-md" />
+                                <div class="lg:col-span-2">
+                                    <label for="committee_id"
+                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Committee
+                                    </label>
+                                    <select id="committee_id" wire:model="committee_id"
+                                        class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600
+                                        dark:bg-gray-700 dark:text-white shadow-sm focus:border-blue-500
+                                        focus:ring-blue-500 sm:text-sm px-3 py-3">
+                                        <option value="">-- Select Committee --</option>
+                                        @foreach ($committees as $committee)
+                                            <option value="{{ $committee->id }}">{{ $committee->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('committee_id')
+                                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             @endif
                         </div>
@@ -178,8 +192,8 @@
                                 <div class="flex items-center gap-2">
                                     <a href="{{ Storage::url($currentAttachment) }}" target="_blank"
                                         class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors duration-200">
-                                        <svg class="size-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor">
+                                        <svg class="size-5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -239,13 +253,9 @@
         </div>
     </div>
 
-    <x-confirm-modal 
-        :show="$showRemoveAttachmentModal" 
-        title="Confirm Removal"
+    <x-confirm-modal :show="$showRemoveAttachmentModal" title="Confirm Removal"
         message="Removing this attachment is irreversible. Do you want to proceed?"
-        cancelAction="$set('showRemoveAttachmentModal', false)" 
-        confirmAction="removeCurrentAttachment" 
-    />
+        cancelAction="$set('showRemoveAttachmentModal', false)" confirmAction="removeCurrentAttachment" />
     {{-- @if ($showRemoveAttachmentModal)
         <div class="fixed inset-0 flex items-center justify-center z-50 bg-black/50">
             <div

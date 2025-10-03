@@ -39,7 +39,7 @@
         </thead>
         <tbody>
             @forelse ($committees as $committee)
-                <tr class="border-t bg-neutral-700 dark:bg-slate-700">
+                <tr class="border-t bg-neutral-300 dark:bg-slate-700">
                     <td class="px-4 py-2">{{ $loop->iteration }}</td>
                     <td class="px-4 py-2">{{ $committee->name }}</td>
                     <td class="px-4 py-2 text-center">

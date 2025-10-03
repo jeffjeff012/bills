@@ -61,7 +61,7 @@
                         @elseif($bill->contributorType === 'sponsor')
                             <p class="text-xs lg:text-lg font-medium text-gray-900 dark:text-white">Sponsored by</p>
                             <p class="ml-1 text-xs lg:text-lg text-gray-500 dark:text-zinc-400">
-                                <span class="truncate">{{ $bill->sponsored_by }}</span>
+                                <span class="truncate">{{ $bill->committee->name }}</span>
                             </p>
                         @else
                             <p class="text-xs lg:text-lg font-medium text-gray-900 dark:text-white">Contributor</p>
@@ -139,7 +139,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="flex items-center space-x-3">
+                                {{-- <div class="flex items-center space-x-3">
                                     <div class="w-10 h-10 bg-gray-100 dark:bg-zinc-700 rounded-full flex items-center justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" />
@@ -152,7 +152,7 @@
                                             {{ $bill->committee->name ?? 'No committee assigned' }}
                                         </p>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 

@@ -36,7 +36,7 @@
                             <flux:input label="Due Date" type="date" wire:model="due_date" class="w-full" />
                         </div>
 
-                        <div class="lg:col-span-2">
+                        {{-- <div class="lg:col-span-2">
                             <label for="committee_id"
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                                 Committee
@@ -54,88 +54,111 @@
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
+                    </div> --}}
                     </div>
-                </div>
 
-                <!-- Contributor Information Section -->
-                <div class="p-6 sm:p-8 bg-gray-50 dark:bg-gray-800/50">
-                    <h2 class="text-sm lg:text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        Contributor Information
-                    </h2>
+                    <!-- Contributor Information Section -->
+                    <div class="p-4 sm:p-8 bg-gray-50 dark:bg-gray-800/50">
+                        <h2
+                            class="text-sm lg:text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            Contributor Information
+                        </h2>
 
-                    <div class="space-y-6">
-                        <!-- Radio Button Selection with Cards -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="relative">
-                                <input type="radio" wire:model.live="contributorType" value="author" id="author-radio"
-                                    class="sr-only">
-                                <label for="author-radio" class="cursor-pointer block">
-                                    <div
-                                        class="p-4 border-2 rounded-lg transition-all duration-200
+                        <div class="space-y-6">
+                            <!-- Radio Button Selection with Cards -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="relative">
+                                    <input type="radio" wire:model.live="contributorType" value="author"
+                                        id="author-radio" class="sr-only">
+                                    <label for="author-radio" class="cursor-pointer block">
+                                        <div
+                                            class="p-4 border-2 rounded-lg transition-all duration-200
                                                {{ $contributorType === 'author' ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500' }}">
-                                        <div class="flex items-center">
-                                            <div
-                                                class="w-4 h-4 border-2 rounded-full mr-3 flex items-center justify-center
+                                            <div class="flex items-center">
+                                                <div
+                                                    class="w-4 h-4 border-2 rounded-full mr-3 flex items-center justify-center
                                                        {{ $contributorType === 'author' ? 'border-blue-500 bg-blue-500' : 'border-gray-300 dark:border-gray-500' }}">
-                                                @if ($contributorType === 'author')
-                                                    <div class="w-2 h-2 bg-white rounded-full"></div>
-                                                @endif
-                                            </div>
-                                            <div>
-                                                <span class="font-medium text-gray-900 dark:text-white">Author</span>
-                                                <p class="text-sm text-gray-500 dark:text-gray-400">Written by an
-                                                    individual author</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <div class="relative">
-                                <input type="radio" wire:model.live="contributorType" value="sponsor"
-                                    id="sponsor-radio" class="sr-only">
-                                <label for="sponsor-radio" class="cursor-pointer block">
-                                    <div
-                                        class="p-4 border-2 rounded-lg transition-all duration-200
-                                               {{ $contributorType === 'sponsor' ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500' }}">
-                                        <div class="flex items-center">
-                                            <div
-                                                class="w-4 h-4 border-2 rounded-full mr-3 flex items-center justify-center
-                                                       {{ $contributorType === 'sponsor' ? 'border-blue-500 bg-blue-500' : 'border-gray-300 dark:border-gray-500' }}">
-                                                @if ($contributorType === 'sponsor')
-                                                    <div class="w-2 h-2 bg-white rounded-full"></div>
-                                                @endif
-                                            </div>
-                                            <div>
-                                                <span class="font-medium text-gray-900 dark:text-white">Sponsored</span>
-                                                <p class="text-sm text-gray-500 dark:text-gray-400">Sponsored by a
-                                                    company</p>
+                                                    @if ($contributorType === 'author')
+                                                        <div class="w-2 h-2 bg-white rounded-full"></div>
+                                                    @endif
+                                                </div>
+                                                <div>
+                                                    <span
+                                                        class="font-medium text-gray-900 dark:text-white">Author</span>
+                                                    <p class="text-sm text-gray-500 dark:text-gray-400">Written by an
+                                                        individual author</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Conditional Fields with Smooth Transitions -->
-                        <div class="min-h-[60px]">
-                            @if ($contributorType === 'author')
-                                <div class="animate-fade-in">
-                                    <flux:input label="Author Name" wire:model="authored_by"
-                                        placeholder="Enter the author's full name" class="max-w-md" />
+                                    </label>
                                 </div>
-                            @endif
 
-                            @if ($contributorType === 'sponsor')
-                                <div class="animate-fade-in">
+                                <div class="relative">
+                                    <input type="radio" wire:model.live="contributorType" value="sponsor"
+                                        id="sponsor-radio" class="sr-only">
+                                    <label for="sponsor-radio" class="cursor-pointer block">
+                                        <div
+                                            class="p-4 border-2 rounded-lg transition-all duration-200
+                                               {{ $contributorType === 'sponsor' ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500' }}">
+                                            <div class="flex items-center">
+                                                <div
+                                                    class="w-4 h-4 border-2 rounded-full mr-3 flex items-center justify-center
+                                                       {{ $contributorType === 'sponsor' ? 'border-blue-500 bg-blue-500' : 'border-gray-300 dark:border-gray-500' }}">
+                                                    @if ($contributorType === 'sponsor')
+                                                        <div class="w-2 h-2 bg-white rounded-full"></div>
+                                                    @endif
+                                                </div>
+                                                <div>
+                                                    <span
+                                                        class="font-medium text-gray-900 dark:text-white">Sponsored</span>
+                                                    <p class="text-sm text-gray-500 dark:text-gray-400">Sponsored by a
+                                                        committee</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Conditional Fields with Smooth Transitions -->
+                            <div class="min-h-[60px]">
+                                @if ($contributorType === 'author')
+                                    <div class="animate-fade-in">
+                                        <flux:input label="Author Name" wire:model="authored_by"
+                                            placeholder="Enter the author's full name" class="max-w-md" />
+                                    </div>
+                                @endif
+
+                                @if ($contributorType === 'sponsor')
+                                    <div class="w-1/2 lg:col-span-2 animate-fade-in">
+                                        <label for="committee_id"
+                                            class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                            Committee
+                                        </label>
+                                        <select id="committee_id" wire:model="committee_id"
+                                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 
+                                        dark:bg-gray-700 dark:text-white shadow-sm focus:border-blue-500 
+                                        focus:ring-blue-500 sm:text-sm px-3 py-3">
+                                            <option value="">-- Select Committee --</option>
+                                            @foreach ($committees as $committee)
+                                                <option value="{{ $committee->id }}">{{ $committee->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('committee_id')
+                                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                @endif
+                            </div>
+                            {{-- <div class="animate-fade-in">
                                     <flux:input label="Sponsor Name" wire:model="sponsored_by"
                                         placeholder="Enter the sponsor's name or company" class="max-w-md" />
-                                </div>
-                            @endif
+                                </div> --}}
+                           
                         </div>
                     </div>
                 </div>

@@ -16,14 +16,14 @@ class CreateBill extends Component
     public $title;
     public $content;
     public $due_date;
-    public $contributorType = '';
-    public $authored_by = '';
+    public $contributorType = 'author';
+    public $authored_by;
     public $sponsored_by = '';
     public $attachment;
-    public $committee_id;  
+    public $committee_id;
     public $committees = [];
-    
-    
+
+
     public function mount()
     {
         $this->committees = Committee::orderBy('name')->get();
@@ -31,24 +31,20 @@ class CreateBill extends Component
 
     protected function rules()
     {
-
         return [
-            'title'       => 'required|string|unique:bills,title|max:255',
-            'content'     => 'required|string',
-            'due_date'    => 'required|date',
-            'due_date' => 'required|date',
+            'title'          => 'required|string|unique:bills,title|max:255',
+            'content'        => 'required|string',
+            'due_date'       => 'required|date',
             'contributorType' => 'required|in:author,sponsor',
-            'authored_by' => 'required_if:contributorType,author',
-            'sponsored_by' => 'required_if:contributorType,sponsor',
-            'attachment'  => 'nullable|file|mimes:pdf|max:5120', // 5MB max
-            'committee_id' => 'nullable|exists:committees,id',
+            'authored_by'    => 'required_if:contributorType,author',
+            'committee_id'   => 'required_if:contributorType,sponsor|nullable|exists:committees,id',
+            'attachment'     => 'nullable|file|mimes:pdf|max:5120', // 5MB max
         ];
     }
 
 
     public function save()
     {
-       
         $this->validate();
 
         $path = $this->attachment
@@ -56,15 +52,14 @@ class CreateBill extends Component
             : null;
 
         Bill::create([
-            'title'       => $this->title,
-            'content'     => $this->content,
-            'due_date'    => Carbon::parse($this->due_date)->endOfDay(),
-            'user_id'     => auth()->id(),
+            'title'          => $this->title,
+            'content'        => $this->content,
+            'due_date'       => Carbon::parse($this->due_date)->endOfDay(),
+            'user_id'        => auth()->id(),
             'contributorType' => $this->contributorType,
-            'authored_by' => $this->contributorType === 'author' ? $this->authored_by : null,
-            'sponsored_by' => $this->contributorType === 'sponsor' ? $this->sponsored_by : null,
-            'attachment'  => $path,
-            'committee_id' => $this->committee_id,
+            'authored_by'    => $this->contributorType === 'author' ? $this->authored_by : null,
+            'committee_id'   => $this->contributorType === 'sponsor' ? $this->committee_id : null,
+            'attachment'     => $path,
         ]);
 
         session()->flash('success', 'Bill created successfully');
