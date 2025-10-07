@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Illuminate\Http\Request;
 
 #[Layout('components.layouts.auth')]
 class VerifyEmail extends Component
@@ -30,9 +31,9 @@ class VerifyEmail extends Component
     /**
      * Log the current user out of the application.
      */
-    public function logout(Logout $logout): void
+    public function logout(Logout $logout, Request $request): void
     {
-        $logout();
+        $logout($request);
 
         $this->redirect('/', navigate: true);
     }

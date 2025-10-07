@@ -18,6 +18,8 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\VerifyEmailController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 // Root URL shows welcome page
 Route::get('/', function () {
@@ -26,57 +28,64 @@ Route::get('/', function () {
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
-Route::get('staff/dashboard', [StaffController::class, 'dashboard'])
-    ->middleware(['auth', 'verified'])
-    ->name('staff.dashboard');
-
-// For Users: Route and Middleware
-Route::middleware(['auth', 'verified', 'user'])
-    ->group(function () {
-        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        Route::get('inactive-bills', [DashboardController::class, 'inactiveBills'])->name('inactive-bills');
-        Route::get('/inactive-blog/{bill}', [BlogController::class, 'showInactive'])
-            ->name('inactive-blog');
-    });
-
 Route::middleware(['auth'])->group(function () {
-    Route::get('/bill/{bill}', [BlogController::class, 'show'])->name('bill');
+    // Email verification notice page (Livewire component)
+    Route::get('/verify-email', \App\Livewire\Auth\VerifyEmail::class)
+        ->name('verification.notice');
 
+    // Email verification callback (controller)
+    Route::get('/verify-email/{id}/{hash}', VerifyEmailController::class)
+        ->middleware(['signed', 'throttle:6,1'])
+        ->name('verification.verify');
+    // Resend verification link (handled by Livewire's sendVerification)
+    
+    Route::get('/bill/{bill}', [BlogController::class, 'show'])->name('bill');
     Route::redirect('settings', 'settings/profile');
     Route::get('settings/profile', Profile::class)->name('settings.profile');
     Route::get('settings/password', Password::class)->name('settings.password');
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
-});
 
-Route::middleware(['auth', 'verified', 'admin'])->group(function () {
-    Route::prefix('admin')->name('admin.')->group(function () {
-        // Admin dashboard
-        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-        // User management
-        Route::get('/user-management', UserManagement::class)->name('user-management');
-        // Activity Logs
-        Route::get('/activity-logs', ActivityLogs::class)->name('activity.logs');
+    Route::middleware(['verified'])->group(function () {
+        Route::get('staff/dashboard', [StaffController::class, 'dashboard'])->name('staff.dashboard');
+        // For Users: Route and Middleware
+        Route::middleware(['user'])->group(function () {
+                Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+                Route::get('inactive-bills', [DashboardController::class, 'inactiveBills'])->name('inactive-bills');
+                Route::get('/inactive-blog/{bill}', [BlogController::class, 'showInactive'])
+                    ->name('inactive-blog');
+        });
+        
+        Route::middleware(['admin'])->group(function () {
+            Route::prefix('admin')->name('admin.')->group(function () {
+                // Admin dashboard
+                Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+                // User management
+                Route::get('/user-management', UserManagement::class)->name('user-management');
+                // Activity Logs
+                Route::get('/activity-logs', ActivityLogs::class)->name('activity.logs');
+            });
+        });
+        
+        //hybrid means middleware for admin and sbstaff
+        Route::middleware(['hybrid'])->group(function () {
+            Route::get('/report-of-bills', Bills::class)->name('report-of-bills');
+        
+            Route::name('bills.')->group(function () {
+                Route::get('/bills', [AdminController::class, 'viewDetails'])->name('index');
+                Route::get('/bills/create', CreateBill::class)->name('create');
+                Route::get('/bills/{bill}/edit', EditBill::class)->name('edit');
+            });
+            Route::get('/committees/manage', ManageCommittee::class)
+                ->name('committees.manage');
+        });
     });
-});
-
-//hybrid means middleware for admin and sbstaff
-Route::middleware(['auth', 'verified', 'hybrid'])->group(function () {
-    Route::get('/report-of-bills', Bills::class)->name('report-of-bills');
-
-    Route::name('bills.')->group(function () {
-        Route::get('/bills', [AdminController::class, 'viewDetails'])->name('index');
-        Route::get('/bills/create', CreateBill::class)->name('create');
-        Route::get('/bills/{bill}/edit', EditBill::class)->name('edit');
-    });
-    Route::get('/committees/manage', ManageCommittee::class)
-        ->name('committees.manage');
 });
 
 
 // Public view and routes, no need middleware
 Route::controller(BillController::class)
-    ->name('bills.')
-    ->group(function () {
+     ->name('bills.')
+     ->group(function () {
         Route::get('/other-bills', 'otherBills')->name('other');
         Route::get('/bills/{bill}', 'show')->name('show');
     });
