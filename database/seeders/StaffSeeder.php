@@ -18,7 +18,8 @@ class StaffSeeder extends Seeder
             "name" => "Staff User",
             "email" => "staff@gmail.com",
             "role" => UserRole::SbStaff,
-            "password" =>Hash::make("password")
+            "password" =>Hash::make("password"),
+            "email_verified_at" => now(),
         ]);
     }
 }
