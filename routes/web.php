@@ -19,7 +19,6 @@ use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 // Root URL shows welcome page
 Route::get('/', function () {
@@ -70,8 +69,8 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware(['hybrid'])->group(function () {
             Route::get('/report-of-bills', Bills::class)->name('report-of-bills');
         
+            Route::get('/bills', [AdminController::class, 'viewDetails'])->name('view-details');
             Route::name('bills.')->group(function () {
-                Route::get('/bills', [AdminController::class, 'viewDetails'])->name('index');
                 Route::get('/bills/create', CreateBill::class)->name('create');
                 Route::get('/bills/{bill}/edit', EditBill::class)->name('edit');
             });
@@ -89,6 +88,7 @@ Route::controller(BillController::class)
         Route::get('/other-bills', 'otherBills')->name('other');
         Route::get('/bills/{bill}', 'show')->name('show');
     });
+// Route::get('/bills', [AdminController::class, 'viewDetails'])->name('view-details');
 
 //Facebook Legend
 Route::get('/auth/facebook', [FacebookController::class, 'facebookpage']);
@@ -100,10 +100,4 @@ Route::view('/facebook-legend/data-deletion', 'facebook-legend.data-deletion')->
 Route::get("auth/google", [GoogleController:: class, "redirectToGoogle"])->name("redirect.google");
 Route::get("auth/google/callback", [GoogleController:: class, "handleGoogleCallback"]);
 
-// Route::middleware(['auth', 'admin'])->group(function () {
-//     // //Notes Route
-//     // Route::get('notes', Bills::class)->name('notes');
-//     Route::get('settings/password', Password::class)->name('settings.password');
-//     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
-// });
 require __DIR__ . '/auth.php';

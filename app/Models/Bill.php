@@ -17,7 +17,7 @@ class Bill extends Model
 
     protected $fillable = [
         'title',
-        'content', 
+        'content',
         'user_id',
         'due_date',
         'authored_by',
@@ -29,7 +29,7 @@ class Bill extends Model
 
     protected static $logAttributes = [
         'title',
-        'content', 
+        'content',
         'user_id',
         'due_date',
         'authored_by',
@@ -55,17 +55,17 @@ class Bill extends Model
     }
 
     protected $casts = [
-        'due_date' => 'date', 
+        'due_date' => 'date',
     ];
 
     public function getContributorDisplayAttribute()
     {
-         if ($this->contributorType === 'author') {
+        if ($this->contributorType === 'author') {
             return $this->authored_by ?? 'Unknown Author';
         } elseif ($this->contributorType === 'sponsor') {
             return $this->sponsored_by ? "Sponsored by {$this->sponsored_by}" : 'Unknown Sponsor';
         }
-        
+
         if ($this->authored_by) {
             return $this->authored_by;
         }
@@ -84,11 +84,11 @@ class Bill extends Model
 
     public function committee()
     {
-        return $this->belongsTo(\App\Models\Committee::class);
+        return $this->belongsTo(\App\Models\Committee::class)->withTrashed();
     }
 
 
-   // Likes relationship
+    // Likes relationship
     public function likes()
     {
         return $this->hasMany(Like::class)->where('like', true);
@@ -99,4 +99,6 @@ class Bill extends Model
     {
         return $this->hasMany(Like::class)->where('like', false);
     }
+
+
 }

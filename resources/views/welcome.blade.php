@@ -93,7 +93,7 @@
 <body class="bg-[#FDFDFC] text-[#1b1b18] min-h-screen">
     <!-- Sticky Header -->
     <div class="sticky top-0 z-50 w-full bg-gray-50 dark:bg-gray-700 dark:text-gray-50 border-b border-gray-200 dark:border-gray-800 shadow-sm">
-        <header class="mx-auto w-full max-w-7xl px-4 py-3 sm:py-2">
+        {{-- <header class="mx-auto w-full max-w-7xl px-4 py-3 sm:py-2">
             <div class="flex items-center justify-between">
                 <!-- Logo (Left side) -->
                 <div class="flex items-center gap-1">
@@ -109,104 +109,90 @@
                 
                 <!-- Navigation / Auth Buttons (Right side) -->
                 @if (Route::has('login'))
-                <nav class="relative">
-                    <!-- Desktop Navigation (hidden on mobile) -->
-                    <div class="hidden lg:flex flex-wrap items-center gap-2 ml-5">
-                        @auth
-                            <a href="{{ url('/dashboard') }}" 
-                            class="inline-block px-5 py-1.5 text-sm border text-[#1b1b18] dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm leading-normal">
-                                Dashboard
-                            </a>
-                        @else
-                            <a href="{{ route('login') }}" 
-                            class="nav-auth-cta inline-block text-xl px-5 py-2 border border-gray-400 rounded-lg text-gray-900 dark:text-gray-50 transition-all duration-200 hover:bg-blue-300 hover:border-blue-600">
-                                Log in
-                            </a>
-                            @if (Route::has('register'))
-                            <a href="{{ route('register') }}" 
-                            class="nav-auth-cta inline-block text-xl px-5 py-2 text-white bg-blue-600 hover:bg-blue-700 dark:text-white rounded-lg transition-colors duration-200">
-                                Register
-                            </a>
-                            @endif
-                        @endauth
-                    </div>
-
-
-                    <!-- Mobile Hamburger Menu (visible on mobile/tablet, hidden on laptop+) -->
-                    <div class="lg:hidden">
-                        <!-- Hamburger Button -->
-                        <button id="mobile-menu-button" 
-                                class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <span class="sr-only">Open main menu</span>
-                            <!-- Hamburger Icon -->
-                            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                            </svg>
-                        </button>
-
-                        <!-- Mobile Menu Dropdown -->
-                        <div id="mobile-menu" 
-                            class="hidden absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50">
-                            <div class="py-1">
-                                @auth
+                    <nav class="relative">
+                        <!-- Desktop Navigation (hidden on mobile) -->
+                        <div class="hidden lg:flex flex-wrap items-center gap-2 ml-5">
+                            @auth
                                 <a href="{{ url('/dashboard') }}" 
-                                class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                class="inline-block px-5 py-1.5 text-sm border text-[#1b1b18] dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm leading-normal">
                                     Dashboard
                                 </a>
-                                @else
+                            @else
                                 <a href="{{ route('login') }}" 
-                                class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                class="nav-auth-cta inline-block text-xl px-5 py-2 border border-gray-400 rounded-lg text-gray-900 dark:text-gray-50 transition-all duration-200 hover:bg-blue-300 hover:border-blue-600">
                                     Log in
                                 </a>
                                 @if (Route::has('register'))
                                 <a href="{{ route('register') }}" 
-                                class="block px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 mx-2 my-1 rounded">
+                                class="nav-auth-cta inline-block text-xl px-5 py-2 text-white bg-blue-600 hover:bg-blue-700 dark:text-white rounded-lg transition-colors duration-200">
                                     Register
                                 </a>
                                 @endif
-                                @endauth
+                            @endauth
+                        </div>
+
+                        <!-- Mobile Hamburger Menu (visible on mobile/tablet, hidden on laptop+) -->
+                        <div class="lg:hidden">
+                            <!-- Hamburger Button -->
+                            <button id="mobile-menu-button" 
+                                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <span class="sr-only">Open main menu</span>
+                                <!-- Hamburger Icon -->
+                                <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
+                            </button>
+
+                            <!-- Mobile Menu Dropdown -->
+                            <div id="mobile-menu" 
+                                class="hidden absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+                                <div class="py-1">
+                                    @auth
+                                        <a href="{{ url('/dashboard') }}" 
+                                        class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                            Dashboard
+                                        </a>
+                                        @else
+                                            <a href="{{ route('login') }}" 
+                                            class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                                Log in
+                                            </a>
+                                        @if (Route::has('register'))
+                                            <a href="{{ route('register') }}" 
+                                            class="block px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 mx-2 my-1 rounded">
+                                                Register
+                                            </a>
+                                        @endif
+                                    @endauth
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </nav>
+                    </nav>
 
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        const button = document.getElementById('mobile-menu-button');
-                        const menu = document.getElementById('mobile-menu');
-                        
-                        if (button && menu) {
-                            button.addEventListener('click', function() {
-                                menu.classList.toggle('hidden');
-                            });
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const button = document.getElementById('mobile-menu-button');
+                            const menu = document.getElementById('mobile-menu');
+                            
+                            if (button && menu) {
+                                button.addEventListener('click', function() {
+                                    menu.classList.toggle('hidden');
+                                });
 
-                            // Close menu when clicking outside
-                            document.addEventListener('click', function(event) {
-                                if (!button.contains(event.target) && !menu.contains(event.target)) {
-                                    menu.classList.add('hidden');
-                                }
-                            });
-                        }
-                    });
-                </script>
+                                // Close menu when clicking outside
+                                document.addEventListener('click', function(event) {
+                                    if (!button.contains(event.target) && !menu.contains(event.target)) {
+                                        menu.classList.add('hidden');
+                                    }
+                                });
+                            }
+                        });
+                    </script>
                 @endif
             </div>
-        </header>
+        </header> --}}
+        @include('partials.header')
     </div>
-
-
-    
-    {{-- <!-- Navigation -->
-    <nav class="bg-white/80 dark:bg-white-800/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                
-                <div class="flex items-center space-x-2">
-                    <span class="text-xl font-bold gradient-text">Bayambang Bills Forum</span>
-                </div>
-            </div>
-        </div>
-    </nav> --}}
 
     <!-- Hero Section -->
     <section class="relative overflow-hidden">
@@ -246,7 +232,6 @@
     <!-- Stats Section -->
     <section class="py-8 dark:bg-gray-800 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Changed grid-cols-1 to grid-cols-2 -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <div class="text-center animate-fade-in">
                     <div class="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">
@@ -291,167 +276,6 @@
                     Discover the most engaging and impactful bills in our community
                 </p>
             </div>
-
-            <!-- Your existing bill cards code goes here -->
-            {{-- @if(!$combinedBill)
-            <div class="flex flex-col lg:flex-row gap-8 mt-20"> --}}
-                <!-- Most Liked Bill Card -->
-                 {{-- @include('bills.hot-bill-card', ['hotBill' => $hotBill]) --}}
-                {{-- <div class="flex-1 animate-fade-in-up" style="animation-delay: 0.2s;">
-                    <div class="w-full max-w-2xl mx-auto h-full"> 
-                        <div class="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 
-                                    hover:shadow-2xl transition-all duration-500 overflow-hidden card-hover 
-                                    flex flex-col h-full"> <!-- make equal height -->
-
-                            <!-- HOT Badge -->
-                            <div class="absolute top-4 right-4 z-10">
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-orange-500 text-white shadow-md animate-pulse">
-                                    <span class="mr-1">🔥</span>
-                                    HOT
-                                </span>
-                            </div>
-
-                            @if($hotBill && $hotBill->likes_count > 0)
-                                <!-- Card Header -->
-                                <div class="px-6 pt-6 pb-4">
-                                    <h3 class="text-lg font-semibold text-black-900 dark:text-black mb-2">
-                                        Most Liked Bill
-                                    </h3>
-                                    <h4 class="text-xl font-bold text-black-800 dark:text-gray-800 mb-2">
-                                        {{ $hotBill->title }}
-                                    </h4>
-                                </div>
-
-                                <!-- Card Body -->
-                                @if(str_word_count($hotBill->title) <= 10)
-                                <div class="px-6 pb-4 flex-1"> <!-- flex-1 fills available space -->
-                                    <p class="text-gray-600 dark:text-black-300 line-clamp-3 leading-relaxed">
-                                        {{ Str::limit($hotBill->content, 150) }}
-                                    </p>
-                                </div>
-                                @endif
-
-                                <!-- Card Footer -->
-                                <div class="px-6 py-4 bg-gradient-to-r from-red-50 to-orange-50 dark:from-gray-700/50 dark:to-gray-700/50 
-                                            border-t border-gray-100 dark:border-gray-600 mt-auto"> <!-- mt-auto pushes footer down -->
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center gap-2">
-                                            <div class="w-8 h-8 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
-                                                <svg class="w-4 h-4 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
-                                                </svg>
-                                            </div>
-                                            <span class="text-sm font-medium text-gray-700 dark:text-gray-800">
-                                                {{ $hotBill->likes_count }}
-                                                {{ $hotBill->likes_count == 1 ? 'like' : 'likes' }}
-                                            </span>
-                                        </div>
-                                        <a href="{{ route('bills.show', $hotBill->id) }}" 
-                                        class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-all duration-300 hover:shadow-lg">
-                                            View Details →
-                                        </a>
-                                    </div>
-                                </div>
-                            @else
-                                <!-- Empty State -->
-                                <div class="flex flex-col items-center justify-center text-center px-6 py-12 flex-1">
-                                    <div class="w-16 h-16 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700 mb-4">
-                                        <svg class="w-8 h-8 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625A1.125 1.125 0 004.5 3.75v16.5A1.125 1.125 0 005.625 21h12.75a1.125 1.125 0 001.125-1.125V11.25a9 9 0 00-9-9z"/>
-                                        </svg>
-                                    </div>
-                                    <h3 class="text-lg font-semibold text-gray-800 dark:text-black-200">
-                                        No Bill Available
-                                    </h3>
-                                    <p class="mt-2 text-sm text-gray-600 dark:text-gray-800">
-                                        There’s currently no most liked bill. Once a bill gets likes, it will show up here.
-                                    </p>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                </div> --}}
-                {{-- End of hotBills --}}
-                
-                <!-- Most Commented Bill Card -->
-                {{-- @include('bills.most-commented-bill-card', ['mostCommentedBill' => $mostCommentedBill]) --}}
-                {{-- <div class="flex-1 animate-fade-in-up" style="animation-delay: 0.4s;">
-                    <div class="w-full max-w-2xl mx-auto h-full"> 
-                        <div class="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 
-                                    hover:shadow-2xl transition-all duration-500 overflow-hidden card-hover 
-                                    flex flex-col h-full"> <!-- equal height -->
-
-                            <!-- TRENDING Badge -->
-                            <div class="absolute top-4 right-4 z-10">
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-500 text-white shadow-md animate-pulse">
-                                    <span class="mr-1">💬</span>
-                                    TRENDING
-                                </span>
-                            </div>
-
-                            @if($mostCommentedBill && $mostCommentedBill->comments_count > 0)
-                                <!-- Card Header -->
-                                <div class="px-6 pt-6 pb-4">
-                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-800 mb-2">
-                                        Most Commented Bill
-                                    </h3>
-                                    <h4 class="text-xl font-bold text-gray-800 dark:text-gray-700 mb-2">
-                                        {{ $mostCommentedBill->title }}
-                                    </h4>
-                                </div>
-
-                                <!-- Card Body -->
-                                @if(str_word_count($mostCommentedBill->title) <= 10)
-                                <div class="px-6 pb-4 flex-1"> <!-- flex-1 fills space -->
-                                    <p class="text-gray-600 dark:text-gray-800 line-clamp-3 leading-relaxed">
-                                        {{ Str::limit($mostCommentedBill->content, 150) }}
-                                    </p>
-                                </div>
-                                @endif
-
-                                <!-- Card Footer -->
-                                <div class="px-6 py-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-700/50 dark:to-gray-700/50 
-                                            border-t border-gray-100 dark:border-gray-600 mt-auto">
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center gap-2">
-                                            <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
-                                                <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625A1.125 1.125 0 004.5 3.75v16.5A1.125 1.125 0 005.625 21h12.75a1.125 1.125 0 001.125-1.125V11.25a9 9 0 00-9-9z"/>
-                                                </svg>
-                                            </div>
-                                            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
-                                                {{ $mostCommentedBill->comments_count }}
-                                                {{ $mostCommentedBill->comments_count == 1 ? 'comment' : 'comments' }}
-                                            </span>
-                                        </div>
-                                        <a href="{{ route('bills.show', $mostCommentedBill->id) }}" 
-                                        class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-all duration-300 hover:shadow-lg">
-                                            View Details →
-                                        </a>
-                                    </div>
-                                </div>
-                            @else
-                                <!-- Empty State -->
-                                <div class="flex flex-col items-center justify-center text-center px-6 py-12 flex-1">
-                                    <div class="w-16 h-16 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700 mb-4">
-                                        <svg class="w-8 h-8 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h6m-6 4h10M5 6a2 2 0 00-2 2v8a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2H5z"/>
-                                        </svg>
-                                    </div>
-                                    <h3 class="text-lg font-semibold text-gray-800 dark:text-black-200">
-                                        No Bill Available
-                                    </h3>
-                                    <p class="mt-2 text-sm text-gray-600 dark:text-black-400">
-                                        There’s currently no most commented bill. Once a bill gets comments, it will show up here.
-                                    </p>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                </div> --}}
-                {{-- End of Most Commented Bill --}}
-            {{-- </div>
-            @endif --}}
 
             <div class="flex flex-col lg:flex-row gap-8 mt-20">
                 @if($combinedBill)
@@ -590,20 +414,8 @@
                         hover:shadow-xl hover:-translate-y-1 inline-block">
                     Be Involved now!
                 </a>
-
-                {{-- <button class="glass-effect text-white px-8 py-3 rounded-full font-semibold hover:bg-white/20 transition-all duration-300">
-                    Watch Demo
-                </button> --}}
             </div>
         </div>
     </section>
-        @if (Route::has('login'))
-            <div class="h-14.5 hidden lg:block"></div>
-        @endif
-
-  {{-- <footer class="bg-white dark:bg-[#0a0a0a] border-t border-gray-200 dark:border-gray-800 text-center text-gray-600 dark:text-gray-400 text-sm py-4 mt-auto">
-        <a href="{{ route('privacy.policy') }}" class="hover:underline hover:text-blue-600 dark:hover:text-blue-400">Privacy Policy</a> |
-        <a href="{{ route('data.deletion') }}" class="hover:underline hover:text-blue-600 dark:hover:text-blue-400">Data Deletion Request</a>
-    </footer> --}}
 </body>
 </html>

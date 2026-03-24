@@ -29,24 +29,25 @@
     @endif
 
     {{-- Committee Table --}}
-    <table class="w-full border-collapse">
-        <thead>
-            <tr class="text-gray-100 dark:text-gray-50 bg-neutral-700 dark:bg-slate-900">
-                <th class="px-4 py-2 text-left">#</th>
-                <th class="px-4 py-2 text-left">Name</th>
-                <th class="px-4 py-2 text-center">Actions</th>
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="p-4">#</th>
+                <th scope="col" class="p-4">Name</th>
+                <th scope="col" class="px-6 py-3 text-center">Actions</th>
             </tr>
         </thead>
         <tbody>
             @forelse ($committees as $committee)
-                <tr class="border-t bg-neutral-300 dark:bg-slate-700">
+                <tr
+                    class="bg-white text-gray-900 dark:text-gray-50 border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td class="px-4 py-2">{{ $loop->iteration }}</td>
                     <td class="px-4 py-2">{{ $committee->name }}</td>
                     <td class="px-4 py-2 text-center">
                         <flux:button icon="pencil-square" wire:click="editCommittee({{ $committee->id }})"
                             class="!bg-transparent !border-none !shadow-none !text-blue-800 dark:!text-white hover:!text-blue-800 hover:underline dark:hover:!text-blue-400 p-0 m-0 text-sm font-medium flex items-center gap-1 ring-0 focus:outline-none"
                             variant="ghost">
-                              <span class="hidden md:block lg:block">Edit</span>
+                            <span class="hidden md:block lg:block">Edit</span>
                         </flux:button>
                         <flux:button icon="trash" wire:click="confirmDelete({{ $committee->id }})"
                             class="!bg-transparent !border-none !shadow-none !text-red-800 dark:!text-white 
@@ -85,10 +86,8 @@
                 <flux:heading size="lg">Edit Committee</flux:heading>
 
                 <div class="mt-4">
-                    <flux:input type="text" 
-                                wire:model.defer="editName" 
-                                placeholder="Committee name" 
-                                class="w-full" />
+                    <flux:input type="text" wire:model.defer="editName" placeholder="Committee name"
+                        class="w-full" />
                     @error('name')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
