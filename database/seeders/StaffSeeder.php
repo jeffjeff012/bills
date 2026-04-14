@@ -1,7 +1,6 @@
 <?php
 
 namespace Database\Seeders;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Enums\UserRole;
 use App\Models\User;
@@ -14,7 +13,7 @@ class StaffSeeder extends Seeder
      */
     public function run(): void
     {
-       User::create([
+       User::updateOrCreate([
             "name" => "Staff User",
             "email" => "staff@gmail.com",
             "role" => UserRole::SbStaff,
